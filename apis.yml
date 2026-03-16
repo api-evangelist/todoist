@@ -1,33 +1,50 @@
 aid: todoist
 name: Todoist
 description: >-
-  This is the official documentation for Todoist Sync API. A reference to the
-  functionality our public API provides with detailed description of each API
-  ...
+  Todoist provides APIs for task management integration. The official Todoist
+  Sync API and REST API give programmatic access to tasks, projects, labels,
+  and more.
 type: Index
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - API
+  - Tasks
+  - Productivity
+  - To-Do
 created: '2025-01-08'
-modified: '2025-01-08'
+modified: '2026-03-16'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
   - aid: todoist:todoist
-    name: Todoist
+    name: Todoist API
     description: >-
-      This is the official documentation for Todoist Sync API. A reference to
-      the functionality our public API provides with detailed description of
-      each API ...
-    humanURL: https://developer.todoist.com/sync/v8/
+      The official Todoist API providing programmatic access to tasks, projects,
+      labels, and more via REST and Sync APIs.
+    humanURL: https://developer.todoist.com/
+    baseURL: https://api.todoist.com/rest/v2
     tags:
-      - API
+      - Tasks
+      - Productivity
+      - To-Do
     properties:
       - type: Documentation
-        url: https://developer.todoist.com/sync/v8/
+        url: https://developer.todoist.com/rest/v2/
+      - type: Reference
+        url: https://developer.todoist.com/sync/v9/
+      - type: Authentication
+        url: https://developer.todoist.com/guides/#oauth
+common:
+  - type: Website
+    url: https://todoist.com/
+  - type: Documentation
+    url: https://developer.todoist.com/
+  - type: Sign Up
+    url: https://todoist.com/users/showregister
+  - type: Login
+    url: https://todoist.com/auth/login
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
