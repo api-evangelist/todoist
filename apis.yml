@@ -9,8 +9,8 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Tasks
   - Productivity
+  - Tasks
   - To-Do
 created: '2025-01-08'
 modified: '2026-03-16'
@@ -26,8 +26,8 @@ apis:
     humanURL: https://developer.todoist.com/
     baseURL: https://api.todoist.com/rest/v2
     tags:
-      - Tasks
       - Productivity
+      - Tasks
       - To-Do
     properties:
       - type: Documentation
