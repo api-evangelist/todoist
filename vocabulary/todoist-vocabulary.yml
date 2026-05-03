@@ -1,0 +1,116 @@
+name: Todoist Vocabulary
+description: Domain vocabulary for the Todoist task management platform covering core concepts, states, operations, and taxonomy.
+version: '1.0'
+created: '2026-05-03'
+modified: '2026-05-03'
+tags:
+  - Todoist
+  - Productivity
+  - Task Management
+
+terms:
+  - term: Task
+    definition: The core unit of work in Todoist. A task has content, optional due date, priority level, labels, and completion state.
+    aliases: [item, todo]
+    category: Core Entity
+
+  - term: Project
+    definition: A container that groups related tasks. Projects can be organized hierarchically with sub-projects and sections.
+    aliases: [project, list]
+    category: Core Entity
+
+  - term: Section
+    definition: A named grouping of tasks within a project, used to organize tasks into logical sub-categories.
+    aliases: [category, column]
+    category: Core Entity
+
+  - term: Label
+    definition: A tag applied to tasks for cross-project categorization. Labels can be personal or shared within workspaces.
+    aliases: [tag, keyword]
+    category: Core Entity
+
+  - term: Comment
+    definition: A note or attachment on a task or project, supporting team collaboration.
+    aliases: [note]
+    category: Core Entity
+
+  - term: Reminder
+    definition: A notification scheduled to fire at a specific time or location to prompt the user to act on a task.
+    aliases: [notification, alert]
+    category: Core Entity
+
+  - term: Filter
+    definition: A saved query using Todoist filter syntax that dynamically displays matching tasks.
+    category: Core Entity
+
+  - term: Workspace
+    definition: A shared organizational space in Todoist that enables team collaboration across projects and tasks.
+    aliases: [team, organization]
+    category: Core Entity
+
+  - term: Priority
+    definition: A numeric ranking (1-4) indicating task urgency. Priority 4 is the highest (Urgent/Red), 1 is default (Normal).
+    values:
+      - value: 1
+        label: Normal
+      - value: 2
+        label: High
+      - value: 3
+        label: Very High
+      - value: 4
+        label: Urgent
+    category: Attribute
+
+  - term: Due Date
+    definition: The date and optionally time by which a task should be completed. Supports natural language entry and recurring patterns.
+    aliases: [deadline, due]
+    category: Attribute
+
+  - term: Recurring Task
+    definition: A task configured to reappear on a repeating schedule after completion.
+    category: Attribute
+
+  - term: Sync Token
+    definition: An opaque token used by the Sync API to retrieve only data changed since the previous sync. Use '*' for full sync.
+    category: API Concept
+
+  - term: Bearer Token
+    definition: The authentication credential for Todoist API calls, obtained via personal settings or OAuth 2.0 flow.
+    aliases: [API token, access token]
+    category: API Concept
+
+  - term: Quick Add
+    definition: Natural language task creation feature that parses due dates, labels, projects, and priority from free-form text.
+    category: Feature
+
+  - term: Inbox
+    definition: The default project where new tasks are created when no project is specified.
+    category: Core Entity
+
+  - term: View Style
+    definition: The display format for a project - either list view or board view (Kanban-style columns).
+    values:
+      - list
+      - board
+    category: Attribute
+
+operations:
+  - operation: Close Task
+    description: Mark a task as completed without deleting it
+    httpMethod: POST
+    endpoint: /tasks/{id}/close
+
+  - operation: Reopen Task
+    description: Mark a completed task as active again
+    httpMethod: POST
+    endpoint: /tasks/{id}/reopen
+
+  - operation: Move Task
+    description: Transfer a task to a different project or section
+    httpMethod: POST
+    endpoint: /tasks/{id}/move
+
+  - operation: Sync
+    description: Retrieve all changes since last sync or execute batch commands
+    httpMethod: POST
+    endpoint: /sync

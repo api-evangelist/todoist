@@ -1,0 +1,280 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Todoist API"
+  description: "Todoist API v1 providing access to tasks, projects, sections, labels, reminders, comments, workspaces, and sync operations."
+  tags:
+    - Todoist
+    - Productivity
+    - Task Management
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TODOIST_API_TOKEN: TODOIST_API_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: todoist
+      baseUri: https://api.todoist.com/api/v1
+      description: "Todoist REST API for task and project management"
+      authentication:
+        type: bearer
+        token: "{{TODOIST_API_TOKEN}}"
+      resources:
+        - name: tasks
+          path: /tasks
+          description: "Task management operations"
+          operations:
+            - name: list-tasks
+              method: GET
+              description: "List all tasks with optional filters"
+              inputParameters:
+                - name: project_id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by project ID"
+                - name: section_id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by section ID"
+                - name: label
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by label name"
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of results to return"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-task
+              method: POST
+              description: "Create a new task"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  content: "{{tools.content}}"
+                  project_id: "{{tools.project_id}}"
+                  priority: "{{tools.priority}}"
+                  due_string: "{{tools.due_string}}"
+            - name: get-task
+              method: GET
+              description: "Get a task by ID"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Task ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: close-task
+              method: POST
+              description: "Mark a task as completed"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Task ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: projects
+          path: /projects
+          description: "Project management operations"
+          operations:
+            - name: list-projects
+              method: GET
+              description: "List all projects"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-project
+              method: POST
+              description: "Create a new project"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  color: "{{tools.color}}"
+            - name: get-project
+              method: GET
+              description: "Get a project by ID"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Project ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: labels
+          path: /labels
+          description: "Label management operations"
+          operations:
+            - name: list-labels
+              method: GET
+              description: "List all personal labels"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: comments
+          path: /comments
+          description: "Comment management operations"
+          operations:
+            - name: list-comments
+              method: GET
+              description: "List all comments on a task or project"
+              inputParameters:
+                - name: task_id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Task ID to get comments for"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-comment
+              method: POST
+              description: "Create a new comment"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  task_id: "{{tools.task_id}}"
+                  content: "{{tools.content}}"
+        - name: workspaces
+          path: /workspaces
+          description: "Workspace management operations"
+          operations:
+            - name: list-workspaces
+              method: GET
+              description: "List all workspaces"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: todoist-rest
+      resources:
+        - path: /v1/tasks
+          name: tasks
+          description: "Task management"
+          operations:
+            - method: GET
+              name: list-tasks
+              description: "List tasks"
+              call: "todoist.list-tasks"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-task
+              description: "Create task"
+              call: "todoist.create-task"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/projects
+          name: projects
+          description: "Project management"
+          operations:
+            - method: GET
+              name: list-projects
+              description: "List projects"
+              call: "todoist.list-projects"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: todoist-mcp
+      transport: http
+      tools:
+        - name: list-tasks
+          description: "List Todoist tasks with optional project/label filters"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "todoist.list-tasks"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-task
+          description: "Create a new Todoist task"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "todoist.create-task"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: close-task
+          description: "Mark a Todoist task as completed"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "todoist.close-task"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-projects
+          description: "List all Todoist projects"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "todoist.list-projects"
+          outputParameters:
+            - type: object
+              mapping: "$."

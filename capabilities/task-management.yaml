@@ -1,0 +1,261 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Todoist Task Management"
+  description: >-
+    Unified capability for managing tasks, projects, sections, labels, and
+    comments in Todoist. Enables AI agents and workflow automation to create,
+    update, organize, and complete tasks programmatically.
+  tags:
+    - Todoist
+    - Productivity
+    - Task Management
+    - Collaboration
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TODOIST_API_TOKEN: TODOIST_API_TOKEN
+
+capability:
+  consumes:
+    - import: todoist
+      location: ./shared/todoist-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: todoist-task-management-api
+      description: "Unified REST API for Todoist task and project management."
+      resources:
+        - path: /v1/tasks
+          name: tasks
+          description: "Task management operations"
+          operations:
+            - method: GET
+              name: list-tasks
+              description: "List tasks with optional project and label filters"
+              call: "todoist.list-tasks"
+              with:
+                project_id: "rest.project_id"
+                label: "rest.label"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-task
+              description: "Create a new task"
+              call: "todoist.create-task"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/tasks/{id}
+          name: task
+          description: "Single task operations"
+          operations:
+            - method: GET
+              name: get-task
+              description: "Get task by ID"
+              call: "todoist.get-task"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/tasks/{id}/close
+          name: task-close
+          description: "Task completion"
+          operations:
+            - method: POST
+              name: close-task
+              description: "Complete a task"
+              call: "todoist.close-task"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/projects
+          name: projects
+          description: "Project management"
+          operations:
+            - method: GET
+              name: list-projects
+              description: "List all projects"
+              call: "todoist.list-projects"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-project
+              description: "Create a new project"
+              call: "todoist.create-project"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/labels
+          name: labels
+          description: "Label management"
+          operations:
+            - method: GET
+              name: list-labels
+              description: "List all labels"
+              call: "todoist.list-labels"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/comments
+          name: comments
+          description: "Comment management"
+          operations:
+            - method: GET
+              name: list-comments
+              description: "List task comments"
+              call: "todoist.list-comments"
+              with:
+                task_id: "rest.task_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-comment
+              description: "Add a comment to a task"
+              call: "todoist.create-comment"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/workspaces
+          name: workspaces
+          description: "Workspace management"
+          operations:
+            - method: GET
+              name: list-workspaces
+              description: "List all workspaces"
+              call: "todoist.list-workspaces"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9080
+      namespace: todoist-task-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted task management with Todoist."
+      tools:
+        - name: list-tasks
+          description: "List Todoist tasks, optionally filtered by project, label, or filter expression"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "todoist.list-tasks"
+          with:
+            project_id: "tools.project_id"
+            label: "tools.label"
+            filter: "tools.filter"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-task
+          description: "Create a new task in Todoist with content, due date, priority, and labels"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "todoist.create-task"
+          with:
+            content: "tools.content"
+            project_id: "tools.project_id"
+            priority: "tools.priority"
+            due_string: "tools.due_string"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-task
+          description: "Get details of a specific Todoist task by ID"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "todoist.get-task"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: close-task
+          description: "Mark a Todoist task as completed"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "todoist.close-task"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-projects
+          description: "List all Todoist projects"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "todoist.list-projects"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-project
+          description: "Create a new Todoist project"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "todoist.create-project"
+          with:
+            name: "tools.name"
+            color: "tools.color"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-labels
+          description: "List all personal labels in Todoist"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "todoist.list-labels"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-comments
+          description: "List comments on a Todoist task"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "todoist.list-comments"
+          with:
+            task_id: "tools.task_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-comment
+          description: "Add a comment to a Todoist task"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "todoist.create-comment"
+          with:
+            task_id: "tools.task_id"
+            content: "tools.content"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-workspaces
+          description: "List all Todoist workspaces for the authenticated user"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "todoist.list-workspaces"
+          outputParameters:
+            - type: object
+              mapping: "$."

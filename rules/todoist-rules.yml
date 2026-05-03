@@ -1,0 +1,107 @@
+extends: spectral:oas
+rules:
+  # Todoist API uses POST for updates (not PUT/PATCH)
+  todoist-post-for-updates:
+    description: Todoist uses POST for update operations, not PUT/PATCH
+    message: Update operations should use POST method, not PUT or PATCH
+    severity: warn
+    given: "$.paths.*.put"
+    then:
+      function: undefined
+
+  # All operation IDs should use camelCase
+  todoist-operation-id-camelcase:
+    description: OperationIds must use camelCase format
+    message: "{{property}} operationId should be camelCase (e.g., createTask, getProject)"
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  # Paths should use kebab-case
+  todoist-path-kebab-case:
+    description: Path segments must use kebab-case
+    message: "Path segment {{value}} should use kebab-case"
+    severity: warn
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z0-9-{}/]*)+$"
+
+  # All operations must have an operationId
+  todoist-operation-id-required:
+    description: All operations must have an operationId
+    message: Operation is missing an operationId
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: defined
+
+  # All operations must have tags
+  todoist-tags-required:
+    description: All operations must be tagged
+    message: Operation is missing tags
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: defined
+
+  # All operations must have a summary
+  todoist-summary-required:
+    description: All operations must have a summary
+    message: Operation is missing a summary
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: defined
+
+  # Summaries must use Title Case
+  todoist-summary-title-case:
+    description: Operation summaries must use Title Case
+    message: "{{value}} summary should be in Title Case"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9 ()-]*$"
+
+  # Bearer token authentication required
+  todoist-auth-bearer:
+    description: API must use Bearer token authentication
+    message: Security scheme must be bearerAuth type
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      function: defined
+
+  # Responses should include 200 for success
+  todoist-success-response:
+    description: Operations must define a success response
+    message: Operation should define a 200, 201, or 204 success response
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ["200"]
+            - required: ["201"]
+            - required: ["204"]
+
+  # Path parameters must be defined in parameters
+  todoist-path-params-defined:
+    description: Path parameters must be defined in operation parameters
+    message: Path parameter must be defined in parameters array
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete].parameters[?(@.in == 'path')]"
+    then:
+      field: required
+      function: truthy

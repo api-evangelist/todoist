@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/todoist/json-schema/todoist-task-schema.json",
+  "title": "Todoist Task",
+  "description": "A task (item) in Todoist with content, due date, priority, labels, and completion status.",
+  "type": "object",
+  "required": ["id", "content", "is_completed"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique task identifier"
+    },
+    "content": {
+      "type": "string",
+      "description": "Task title/content"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional additional description"
+    },
+    "project_id": {
+      "type": ["string", "null"],
+      "description": "Project ID containing the task"
+    },
+    "section_id": {
+      "type": ["string", "null"],
+      "description": "Section ID within the project"
+    },
+    "parent_id": {
+      "type": ["string", "null"],
+      "description": "Parent task ID for subtasks"
+    },
+    "order": {
+      "type": "integer",
+      "description": "Task display order within its container"
+    },
+    "labels": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Array of label names applied to the task"
+    },
+    "priority": {
+      "type": "integer",
+      "enum": [1, 2, 3, 4],
+      "description": "Priority level: 1=Normal, 2=High, 3=Very High, 4=Urgent"
+    },
+    "due": {
+      "type": ["object", "null"],
+      "description": "Due date information",
+      "properties": {
+        "date": { "type": "string", "description": "Due date in YYYY-MM-DD format" },
+        "is_recurring": { "type": "boolean" },
+        "string": { "type": "string", "description": "Human-readable due date string" },
+        "datetime": { "type": ["string", "null"], "format": "date-time" },
+        "timezone": { "type": ["string", "null"] }
+      }
+    },
+    "deadline": {
+      "type": ["object", "null"],
+      "description": "Hard deadline for the task",
+      "properties": {
+        "date": { "type": "string" },
+        "lang": { "type": "string" }
+      }
+    },
+    "assignee_id": {
+      "type": ["string", "null"],
+      "description": "User ID of assignee"
+    },
+    "assigner_id": {
+      "type": ["string", "null"],
+      "description": "User ID who assigned the task"
+    },
+    "comment_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of comments on the task"
+    },
+    "is_completed": {
+      "type": "boolean",
+      "description": "Whether the task has been completed"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Task creation timestamp in UTC"
+    },
+    "creator_id": {
+      "type": "string",
+      "description": "User ID of the task creator"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Deep link URL to the task in Todoist"
+    }
+  }
+}

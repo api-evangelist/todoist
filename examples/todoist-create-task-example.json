@@ -1,0 +1,50 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.todoist.com/api/v1/tasks",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "content": "Review quarterly report",
+      "description": "Go through Q1 financials and prepare summary",
+      "project_id": "2203306141",
+      "priority": 4,
+      "due_string": "next Monday",
+      "due_lang": "en",
+      "labels": ["work", "important"]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "2995104340",
+      "content": "Review quarterly report",
+      "description": "Go through Q1 financials and prepare summary",
+      "project_id": "2203306141",
+      "section_id": null,
+      "parent_id": null,
+      "order": 2,
+      "labels": ["work", "important"],
+      "priority": 4,
+      "due": {
+        "date": "2026-05-11",
+        "is_recurring": false,
+        "string": "next Monday",
+        "datetime": null,
+        "timezone": null
+      },
+      "assignee_id": null,
+      "assigner_id": null,
+      "comment_count": 0,
+      "is_completed": false,
+      "created_at": "2026-05-03T10:15:00Z",
+      "creator_id": "2671355",
+      "url": "https://app.todoist.com/app/task/2995104340"
+    }
+  }
+}

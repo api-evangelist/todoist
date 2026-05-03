@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/todoist/json-schema/todoist-project-schema.json",
+  "title": "Todoist Project",
+  "description": "A project in Todoist that organizes tasks into a named, structured container.",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique project identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Project display name"
+    },
+    "color": {
+      "type": "string",
+      "description": "Color identifier for the project"
+    },
+    "parent_id": {
+      "type": ["string", "null"],
+      "description": "Parent project ID for nested projects"
+    },
+    "order": {
+      "type": "integer",
+      "description": "Project display order in the sidebar"
+    },
+    "comment_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "is_shared": {
+      "type": "boolean",
+      "description": "Whether the project is shared with collaborators"
+    },
+    "is_favorite": {
+      "type": "boolean",
+      "description": "Whether the project is marked as favorite"
+    },
+    "is_inbox_project": {
+      "type": "boolean",
+      "description": "Whether this is the user's Inbox project"
+    },
+    "is_team_inbox": {
+      "type": "boolean",
+      "description": "Whether this is a team inbox project"
+    },
+    "view_style": {
+      "type": "string",
+      "enum": ["list", "board"],
+      "description": "Default view for the project"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Deep link URL to the project in Todoist"
+    }
+  }
+}

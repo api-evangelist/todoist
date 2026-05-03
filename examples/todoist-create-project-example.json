@@ -1,0 +1,36 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.todoist.com/api/v1/projects",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "Work Projects",
+      "color": "blue",
+      "is_favorite": true,
+      "view_style": "board"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "2203306142",
+      "name": "Work Projects",
+      "color": "blue",
+      "parent_id": null,
+      "order": 5,
+      "comment_count": 0,
+      "is_shared": false,
+      "is_favorite": true,
+      "is_inbox_project": false,
+      "is_team_inbox": false,
+      "view_style": "board",
+      "url": "https://app.todoist.com/app/project/2203306142"
+    }
+  }
+}

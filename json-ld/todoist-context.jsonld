@@ -1,0 +1,56 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "todoist": "https://developer.todoist.com/api/v1/#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Task": "todoist:Task",
+    "Project": "todoist:Project",
+    "Section": "todoist:Section",
+    "Label": "todoist:Label",
+    "Comment": "todoist:Comment",
+    "Workspace": "todoist:Workspace",
+    "id": "@id",
+    "content": "schema:name",
+    "description": "schema:description",
+    "project_id": {
+      "@id": "schema:isPartOf",
+      "@type": "@id"
+    },
+    "labels": "schema:keywords",
+    "priority": "schema:priority",
+    "is_completed": "schema:actionStatus",
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "due": {
+      "@id": "schema:scheduledTime",
+      "@type": "@id"
+    },
+    "due_date": {
+      "@id": "schema:scheduledTime",
+      "@type": "xsd:date"
+    },
+    "assignee_id": {
+      "@id": "schema:agent",
+      "@type": "@id"
+    },
+    "creator_id": {
+      "@id": "schema:author",
+      "@type": "@id"
+    },
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "comment_count": "schema:commentCount",
+    "name": "schema:name",
+    "color": "schema:color",
+    "is_favorite": "todoist:isFavorite",
+    "is_shared": "todoist:isShared",
+    "view_style": "todoist:viewStyle",
+    "email": "schema:email",
+    "full_name": "schema:name",
+    "timezone": "schema:containedInPlace"
+  }
+}
