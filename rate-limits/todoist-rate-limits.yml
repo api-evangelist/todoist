@@ -4,96 +4,52 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Todoist
 providerId: todoist
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Productivity
   - Tasks
-  - To-Do
   - Task Management
   - Collaboration
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Todoist API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: Todoist's developer documentation acknowledges rate limits exist and references a "Request
+  limits" section, but exact per-second/per-minute thresholds are not exposed in the public reference.
+  The OAuth dynamic client registration and metadata document endpoints are explicitly described as rate
+  limited per caller. The API returns standard 429/500/503 status codes. Per-account/per-token limits
+  apply; consult the live docs or response headers for the authoritative numbers.
+sources:
+  - https://developer.todoist.com/api/v1
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
+  serverError: 500
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Todoist API
-      - Todoist REST API v2
-      - Todoist Sync API v9
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Todoist API
-      - Todoist REST API v2
-      - Todoist Sync API v9
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Todoist API
-      - Todoist REST API v2
-      - Todoist Sync API v9
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Todoist API
-      - Todoist REST API v2
-      - Todoist Sync API v9
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Todoist API
-      - Todoist REST API v2
-      - Todoist Sync API v9
+  - name: Sync & REST API request limits
+    scope: account
+    metric: varies
+    limit: see https://developer.todoist.com/api/v1 (Request limits section)
+    notes: Documentation references a Request Limits section; exact RPS/RPM values not published in the
+      public OpenAPI reference. Limits scope to the authenticated user/account.
+  - name: OAuth dynamic client registration
+    scope: caller
+    metric: varies
+    limit: rate limited per caller
+    notes: '/oauth/register rejects too many registrations in a short period; retry later.'
+  - name: OAuth client metadata document fetch
+    scope: caller
+    metric: varies
+    limit: rate limited per caller
+    notes: Too many metadata document fetches in a short period are rejected.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Standard 429 Handling
+    description: A 429 Too Many Requests response indicates the user has sent too many requests in a given
+      amount of time; clients should back off before retrying.
+  - name: Refresh Token Rotation
+    description: Refresh tokens are rotated on every successful refresh, with a 60-second grace window
+      to distinguish legitimate retries from replay attempts.
+  - name: Consult Response Headers
+    description: Because exact thresholds are not published, applications should observe rate-limit headers
+      on responses and treat any 429 as authoritative for their account.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
