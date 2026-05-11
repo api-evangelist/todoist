@@ -122,6 +122,18 @@ common:
     url: https://doist.com/terms-of-service
   - type: Privacy Policy
     url: https://doist.com/privacy-policy
+  - type: Integrations
+    url: https://www.todoist.com/integrations
+integrations:
+  - name: Outlook Mail
+  - name: Task Assist
+  - name: Google Calendar
+  - name: safari
+  - name: Microsoft-Outlook-icon
+  - name: integration-logo-trello
+  - name: Slack
+  - name: integration-logo-jira-1
+  - name: 826px-Microsoft Office Teams (2018–present).svg
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
