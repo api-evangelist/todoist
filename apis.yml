@@ -96,7 +96,7 @@ common:
     url: https://developer.todoist.com/
   - type: Documentation
     url: https://developer.todoist.com/api/v1/
-  - type: Sign Up
+  - type: SignUp
     url: https://todoist.com/users/showregister
   - type: Login
     url: https://todoist.com/auth/login
@@ -112,15 +112,15 @@ common:
     url: https://github.com/Doist/todoist-sdk-typescript
   - type: MCP Server
     url: https://github.com/doist/todoist-ai
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/Doist
   - type: Blog
     url: https://doist.com/blog/
   - type: Pricing
     url: https://todoist.com/pricing
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://doist.com/terms-of-service
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://doist.com/privacy-policy
   - type: Integrations
     url: https://www.todoist.com/integrations
