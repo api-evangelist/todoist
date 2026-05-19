@@ -1,0 +1,152 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Todoist API — Workspaces
+  description: 'Todoist API — Workspaces. 3 operations. Lead operation: List Workspaces. Self-contained Naftiko capability
+    covering one Todoist business surface.'
+  tags:
+  - Todoist
+  - Workspaces
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TODOIST_API_KEY: TODOIST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: todoist-workspaces
+    baseUri: https://api.todoist.com/api/v1
+    description: Todoist API — Workspaces business capability. Self-contained, no shared references.
+    resources:
+    - name: workspaces
+      path: /workspaces
+      operations:
+      - name: listworkspaces
+        method: GET
+        description: List Workspaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workspaces-id
+      path: /workspaces/{id}
+      operations:
+      - name: getworkspace
+        method: GET
+        description: Get Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    - name: workspaces-id-users
+      path: /workspaces/{id}/users
+      operations:
+      - name: listworkspaceusers
+        method: GET
+        description: List Workspace Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TODOIST_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: todoist-workspaces-rest
+    port: 8080
+    description: REST adapter for Todoist API — Workspaces. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/workspaces
+      name: workspaces
+      description: REST surface for workspaces.
+      operations:
+      - method: GET
+        name: listworkspaces
+        description: List Workspaces
+        call: todoist-workspaces.listworkspaces
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workspaces/{id}
+      name: workspaces-id
+      description: REST surface for workspaces-id.
+      operations:
+      - method: GET
+        name: getworkspace
+        description: Get Workspace
+        call: todoist-workspaces.getworkspace
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workspaces/{id}/users
+      name: workspaces-id-users
+      description: REST surface for workspaces-id-users.
+      operations:
+      - method: GET
+        name: listworkspaceusers
+        description: List Workspace Users
+        call: todoist-workspaces.listworkspaceusers
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: todoist-workspaces-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Todoist API — Workspaces. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-workspaces
+      description: List Workspaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: todoist-workspaces.listworkspaces
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-workspace
+      description: Get Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: todoist-workspaces.getworkspace
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-workspace-users
+      description: List Workspace Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: todoist-workspaces.listworkspaceusers
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

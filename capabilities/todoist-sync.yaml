@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Todoist API — Sync
+  description: 'Todoist API — Sync. 1 operations. Lead operation: Sync Resources. Self-contained Naftiko capability covering
+    one Todoist business surface.'
+  tags:
+  - Todoist
+  - Sync
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TODOIST_API_KEY: TODOIST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: todoist-sync
+    baseUri: https://api.todoist.com/api/v1
+    description: Todoist API — Sync business capability. Self-contained, no shared references.
+    resources:
+    - name: sync
+      path: /sync
+      operations:
+      - name: sync
+        method: POST
+        description: Sync Resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TODOIST_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: todoist-sync-rest
+    port: 8080
+    description: REST adapter for Todoist API — Sync. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/sync
+      name: sync
+      description: REST surface for sync.
+      operations:
+      - method: POST
+        name: sync
+        description: Sync Resources
+        call: todoist-sync.sync
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: todoist-sync-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Todoist API — Sync. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: sync-resources
+      description: Sync Resources
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: todoist-sync.sync
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

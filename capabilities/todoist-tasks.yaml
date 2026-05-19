@@ -1,0 +1,444 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Todoist API — Tasks
+  description: 'Todoist API — Tasks. 9 operations. Lead operation: List Tasks. Self-contained Naftiko capability covering
+    one Todoist business surface.'
+  tags:
+  - Todoist
+  - Tasks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TODOIST_API_KEY: TODOIST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: todoist-tasks
+    baseUri: https://api.todoist.com/api/v1
+    description: Todoist API — Tasks business capability. Self-contained, no shared references.
+    resources:
+    - name: tasks
+      path: /tasks
+      operations:
+      - name: listtasks
+        method: GET
+        description: List Tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project_id
+          in: query
+          type: string
+          description: Filter by project ID
+        - name: section_id
+          in: query
+          type: string
+          description: Filter by section ID
+        - name: label
+          in: query
+          type: string
+          description: Filter by label name
+        - name: filter
+          in: query
+          type: string
+          description: Filter expression
+        - name: lang
+          in: query
+          type: string
+          description: Language for filter expression
+        - name: ids
+          in: query
+          type: string
+          description: Comma-separated task IDs
+        - name: limit
+          in: query
+          type: integer
+          description: Number of tasks to return
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor
+      - name: createtask
+        method: POST
+        description: Create Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tasks-quick_add
+      path: /tasks/quick_add
+      operations:
+      - name: quickaddtask
+        method: POST
+        description: Quick Add Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tasks-id
+      path: /tasks/{id}
+      operations:
+      - name: gettask
+        method: GET
+        description: Get Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      - name: updatetask
+        method: POST
+        description: Update Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletetask
+        method: DELETE
+        description: Delete Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    - name: tasks-id-close
+      path: /tasks/{id}/close
+      operations:
+      - name: closetask
+        method: POST
+        description: Close Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    - name: tasks-id-move
+      path: /tasks/{id}/move
+      operations:
+      - name: movetask
+        method: POST
+        description: Move Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tasks-id-reopen
+      path: /tasks/{id}/reopen
+      operations:
+      - name: reopentask
+        method: POST
+        description: Reopen Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TODOIST_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: todoist-tasks-rest
+    port: 8080
+    description: REST adapter for Todoist API — Tasks. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/tasks
+      name: tasks
+      description: REST surface for tasks.
+      operations:
+      - method: GET
+        name: listtasks
+        description: List Tasks
+        call: todoist-tasks.listtasks
+        with:
+          project_id: rest.project_id
+          section_id: rest.section_id
+          label: rest.label
+          filter: rest.filter
+          lang: rest.lang
+          ids: rest.ids
+          limit: rest.limit
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtask
+        description: Create Task
+        call: todoist-tasks.createtask
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tasks/quick-add
+      name: tasks-quick-add
+      description: REST surface for tasks-quick_add.
+      operations:
+      - method: POST
+        name: quickaddtask
+        description: Quick Add Task
+        call: todoist-tasks.quickaddtask
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tasks/{id}
+      name: tasks-id
+      description: REST surface for tasks-id.
+      operations:
+      - method: GET
+        name: gettask
+        description: Get Task
+        call: todoist-tasks.gettask
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatetask
+        description: Update Task
+        call: todoist-tasks.updatetask
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletetask
+        description: Delete Task
+        call: todoist-tasks.deletetask
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tasks/{id}/close
+      name: tasks-id-close
+      description: REST surface for tasks-id-close.
+      operations:
+      - method: POST
+        name: closetask
+        description: Close Task
+        call: todoist-tasks.closetask
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tasks/{id}/move
+      name: tasks-id-move
+      description: REST surface for tasks-id-move.
+      operations:
+      - method: POST
+        name: movetask
+        description: Move Task
+        call: todoist-tasks.movetask
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tasks/{id}/reopen
+      name: tasks-id-reopen
+      description: REST surface for tasks-id-reopen.
+      operations:
+      - method: POST
+        name: reopentask
+        description: Reopen Task
+        call: todoist-tasks.reopentask
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: todoist-tasks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Todoist API — Tasks. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-tasks
+      description: List Tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: todoist-tasks.listtasks
+      with:
+        project_id: tools.project_id
+        section_id: tools.section_id
+        label: tools.label
+        filter: tools.filter
+        lang: tools.lang
+        ids: tools.ids
+        limit: tools.limit
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-task
+      description: Create Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: todoist-tasks.createtask
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: quick-add-task
+      description: Quick Add Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: todoist-tasks.quickaddtask
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-task
+      description: Get Task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: todoist-tasks.gettask
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-task
+      description: Update Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: todoist-tasks.updatetask
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-task
+      description: Delete Task
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: todoist-tasks.deletetask
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: close-task
+      description: Close Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: todoist-tasks.closetask
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: move-task
+      description: Move Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: todoist-tasks.movetask
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reopen-task
+      description: Reopen Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: todoist-tasks.reopentask
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

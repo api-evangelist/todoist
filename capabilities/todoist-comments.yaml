@@ -1,0 +1,234 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Todoist API — Comments
+  description: 'Todoist API — Comments. 5 operations. Lead operation: List Comments. Self-contained Naftiko capability covering
+    one Todoist business surface.'
+  tags:
+  - Todoist
+  - Comments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TODOIST_API_KEY: TODOIST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: todoist-comments
+    baseUri: https://api.todoist.com/api/v1
+    description: Todoist API — Comments business capability. Self-contained, no shared references.
+    resources:
+    - name: comments
+      path: /comments
+      operations:
+      - name: listcomments
+        method: GET
+        description: List Comments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: task_id
+          in: query
+          type: string
+        - name: project_id
+          in: query
+          type: string
+      - name: createcomment
+        method: POST
+        description: Create Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: comments-id
+      path: /comments/{id}
+      operations:
+      - name: getcomment
+        method: GET
+        description: Get Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      - name: updatecomment
+        method: POST
+        description: Update Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletecomment
+        method: DELETE
+        description: Delete Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TODOIST_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: todoist-comments-rest
+    port: 8080
+    description: REST adapter for Todoist API — Comments. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/comments
+      name: comments
+      description: REST surface for comments.
+      operations:
+      - method: GET
+        name: listcomments
+        description: List Comments
+        call: todoist-comments.listcomments
+        with:
+          task_id: rest.task_id
+          project_id: rest.project_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcomment
+        description: Create Comment
+        call: todoist-comments.createcomment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/comments/{id}
+      name: comments-id
+      description: REST surface for comments-id.
+      operations:
+      - method: GET
+        name: getcomment
+        description: Get Comment
+        call: todoist-comments.getcomment
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatecomment
+        description: Update Comment
+        call: todoist-comments.updatecomment
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecomment
+        description: Delete Comment
+        call: todoist-comments.deletecomment
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: todoist-comments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Todoist API — Comments. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-comments
+      description: List Comments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: todoist-comments.listcomments
+      with:
+        task_id: tools.task_id
+        project_id: tools.project_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-comment
+      description: Create Comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: todoist-comments.createcomment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-comment
+      description: Get Comment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: todoist-comments.getcomment
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-comment
+      description: Update Comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: todoist-comments.updatecomment
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-comment
+      description: Delete Comment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: todoist-comments.deletecomment
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
