@@ -14,7 +14,7 @@ tags:
   - Task Management
   - Collaboration
 created: '2025-01-08'
-modified: '2026-05-19'
+modified: '2026-05-30'
 url: https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
@@ -35,6 +35,8 @@ apis:
       url: https://developer.todoist.com/api/v1/
     - type: OpenAPI
       url: https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/openapi/todoist-openapi.yml
+    - type: AsyncAPI
+      url: https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/openapi/todoist-asyncapi.yml
     - type: JSONSchema
       url: https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/json-schema/todoist-task-schema.json
     - type: NaftikoCapabilities

@@ -1,0 +1,773 @@
+asyncapi: 2.6.0
+info:
+  title: Todoist Webhooks
+  version: '1.0.0'
+  description: |
+    AsyncAPI 2.6 specification for the Todoist app webhook surface.
+
+    Todoist apps can subscribe to webhook events that notify a registered
+    callback URL each time a user (or a collaborator on a shared project)
+    modifies a resource. Webhooks are configured per app in the
+    [App Management Console](https://app.todoist.com/app/settings/integrations/app-management)
+    and are activated for a given user when that user completes the OAuth
+    flow of the app that declares the webhook.
+
+    Each event is delivered as an HTTP POST request to the callback URL with
+    a JSON body. Todoist signs the payload with an HMAC-SHA256 signature
+    using the app's `client_secret` and exposes it through the
+    `X-Todoist-Hmac-SHA256` header (base64 encoded). A unique
+    `X-Todoist-Delivery-ID` header identifies each notification and is reused
+    when a failed delivery is retried.
+
+    Source: https://developer.todoist.com/sync/v9/#webhooks
+  contact:
+    name: Todoist Developer Support
+    url: https://developer.todoist.com/
+  license:
+    name: Todoist API Terms
+    url: https://doist.com/terms-of-service
+  x-todoist:
+    webhook-version: '10'
+    docs: https://developer.todoist.com/sync/v9/#webhooks
+
+defaultContentType: application/json
+
+servers:
+  callback:
+    url: '{callback_host}'
+    protocol: https
+    description: |
+      The subscriber's HTTPS callback URL, as configured in the Todoist
+      App Management Console. Todoist only allows HTTPS URLs and disallows
+      explicit ports.
+    variables:
+      callback_host:
+        description: The fully qualified HTTPS host configured to receive Todoist webhook deliveries.
+        default: https://your.integration.example.com
+
+channels:
+  /payload:
+    description: |
+      The single callback endpoint registered for the Todoist app. Todoist
+      POSTs every subscribed event to this endpoint. The subscriber must
+      respond with HTTP 200; any other response is treated as a failed
+      delivery and retried after 15 minutes, up to three attempts.
+    bindings:
+      http:
+        type: request
+        method: POST
+    subscribe:
+      summary: Receive a Todoist webhook event notification.
+      operationId: receiveTodoistEvent
+      bindings:
+        http:
+          type: request
+          method: POST
+      message:
+        oneOf:
+          - $ref: '#/components/messages/ItemAdded'
+          - $ref: '#/components/messages/ItemUpdated'
+          - $ref: '#/components/messages/ItemDeleted'
+          - $ref: '#/components/messages/ItemCompleted'
+          - $ref: '#/components/messages/ItemUncompleted'
+          - $ref: '#/components/messages/NoteAdded'
+          - $ref: '#/components/messages/NoteUpdated'
+          - $ref: '#/components/messages/NoteDeleted'
+          - $ref: '#/components/messages/ProjectAdded'
+          - $ref: '#/components/messages/ProjectUpdated'
+          - $ref: '#/components/messages/ProjectDeleted'
+          - $ref: '#/components/messages/ProjectArchived'
+          - $ref: '#/components/messages/ProjectUnarchived'
+          - $ref: '#/components/messages/SectionAdded'
+          - $ref: '#/components/messages/SectionUpdated'
+          - $ref: '#/components/messages/SectionDeleted'
+          - $ref: '#/components/messages/SectionArchived'
+          - $ref: '#/components/messages/SectionUnarchived'
+          - $ref: '#/components/messages/ReminderFired'
+
+components:
+  messageTraits:
+    TodoistWebhookHeaders:
+      headers:
+        type: object
+        required:
+          - User-Agent
+          - Content-Type
+          - X-Todoist-Hmac-SHA256
+          - X-Todoist-Delivery-ID
+        properties:
+          User-Agent:
+            type: string
+            description: Always set to `Todoist-Webhooks`.
+            const: Todoist-Webhooks
+          Content-Type:
+            type: string
+            description: Always `application/json`.
+            const: application/json
+          X-Todoist-Hmac-SHA256:
+            type: string
+            description: |
+              Base64-encoded HMAC-SHA256 of the raw request body, generated
+              with the app's `client_secret` as the key. Subscribers must
+              recompute this value and compare in constant time to verify
+              the request originated from Todoist.
+            example: UEEq9si3Vf9yRSrLthbpazbb69kP9+CZQ7fXmVyjhPs=
+          X-Todoist-Delivery-ID:
+            type: string
+            description: |
+              Unique identifier for the delivery. Reused when Todoist retries
+              a failed delivery (up to 3 attempts, 15 minutes apart).
+
+  messages:
+    ItemAdded:
+      name: ItemAdded
+      title: item:added
+      summary: A task was added.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: item:added
+              event_data:
+                $ref: '#/components/schemas/Task'
+
+    ItemUpdated:
+      name: ItemUpdated
+      title: item:updated
+      summary: A task was updated.
+      description: |
+        For events issued by the user directly, `event_data_extra` includes
+        `old_item` (the prior Task) and `update_intent`, which is one of
+        `item_updated`, `item_completed`, `item_uncompleted`.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: item:updated
+              event_data:
+                $ref: '#/components/schemas/Task'
+              event_data_extra:
+                $ref: '#/components/schemas/ItemUpdatedExtra'
+
+    ItemDeleted:
+      name: ItemDeleted
+      title: item:deleted
+      summary: A task was deleted.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: item:deleted
+              event_data:
+                $ref: '#/components/schemas/Task'
+
+    ItemCompleted:
+      name: ItemCompleted
+      title: item:completed
+      summary: A task was completed.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: item:completed
+              event_data:
+                $ref: '#/components/schemas/Task'
+
+    ItemUncompleted:
+      name: ItemUncompleted
+      title: item:uncompleted
+      summary: A task was uncompleted.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: item:uncompleted
+              event_data:
+                $ref: '#/components/schemas/Task'
+
+    NoteAdded:
+      name: NoteAdded
+      title: note:added
+      summary: A comment was added.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: note:added
+              event_data:
+                $ref: '#/components/schemas/Comment'
+
+    NoteUpdated:
+      name: NoteUpdated
+      title: note:updated
+      summary: A comment was updated.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: note:updated
+              event_data:
+                $ref: '#/components/schemas/Comment'
+
+    NoteDeleted:
+      name: NoteDeleted
+      title: note:deleted
+      summary: A comment was deleted.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: note:deleted
+              event_data:
+                $ref: '#/components/schemas/Comment'
+
+    ProjectAdded:
+      name: ProjectAdded
+      title: project:added
+      summary: A project was added.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: project:added
+              event_data:
+                $ref: '#/components/schemas/Project'
+
+    ProjectUpdated:
+      name: ProjectUpdated
+      title: project:updated
+      summary: A project was updated.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: project:updated
+              event_data:
+                $ref: '#/components/schemas/Project'
+
+    ProjectDeleted:
+      name: ProjectDeleted
+      title: project:deleted
+      summary: A project was deleted.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: project:deleted
+              event_data:
+                $ref: '#/components/schemas/Project'
+
+    ProjectArchived:
+      name: ProjectArchived
+      title: project:archived
+      summary: A project was archived.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: project:archived
+              event_data:
+                $ref: '#/components/schemas/Project'
+
+    ProjectUnarchived:
+      name: ProjectUnarchived
+      title: project:unarchived
+      summary: A project was unarchived.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: project:unarchived
+              event_data:
+                $ref: '#/components/schemas/Project'
+
+    SectionAdded:
+      name: SectionAdded
+      title: section:added
+      summary: A section was added.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: section:added
+              event_data:
+                $ref: '#/components/schemas/Section'
+
+    SectionUpdated:
+      name: SectionUpdated
+      title: section:updated
+      summary: A section was updated.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: section:updated
+              event_data:
+                $ref: '#/components/schemas/Section'
+
+    SectionDeleted:
+      name: SectionDeleted
+      title: section:deleted
+      summary: A section was deleted.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: section:deleted
+              event_data:
+                $ref: '#/components/schemas/Section'
+
+    SectionArchived:
+      name: SectionArchived
+      title: section:archived
+      summary: A section was archived.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: section:archived
+              event_data:
+                $ref: '#/components/schemas/Section'
+
+    SectionUnarchived:
+      name: SectionUnarchived
+      title: section:unarchived
+      summary: A section was unarchived.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: section:unarchived
+              event_data:
+                $ref: '#/components/schemas/Section'
+
+    ReminderFired:
+      name: ReminderFired
+      title: reminder:fired
+      summary: A reminder has fired.
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/TodoistWebhookHeaders'
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/WebhookEnvelope'
+          - type: object
+            properties:
+              event_name:
+                const: reminder:fired
+              event_data:
+                $ref: '#/components/schemas/Reminder'
+
+  schemas:
+    WebhookEnvelope:
+      type: object
+      description: |
+        Common envelope fields shared by every Todoist webhook event
+        notification. Documented at
+        https://developer.todoist.com/sync/v9/#webhooks.
+      required:
+        - event_name
+        - user_id
+        - event_data
+        - initiator
+        - triggered_at
+        - version
+      properties:
+        event_name:
+          type: string
+          description: The event name for the webhook (e.g. `item:added`).
+          enum:
+            - item:added
+            - item:updated
+            - item:deleted
+            - item:completed
+            - item:uncompleted
+            - note:added
+            - note:updated
+            - note:deleted
+            - project:added
+            - project:updated
+            - project:deleted
+            - project:archived
+            - project:unarchived
+            - section:added
+            - section:updated
+            - section:deleted
+            - section:archived
+            - section:unarchived
+            - reminder:fired
+        user_id:
+          type: string
+          description: The ID of the user that is the destination for the event.
+          example: '2671355'
+        event_data:
+          type: object
+          description: |
+            An object representing the modified entity that triggered the
+            event. The concrete shape depends on `event_name` (see the
+            per-event message definitions).
+        version:
+          type: string
+          description: |
+            The version number of the webhook configured in the App
+            Management Console.
+          example: '10'
+        initiator:
+          $ref: '#/components/schemas/Collaborator'
+        triggered_at:
+          type: string
+          format: date-time
+          description: The date and time when the event was triggered.
+          example: '2025-02-10T10:39:38.000000Z'
+        event_data_extra:
+          type: object
+          description: |
+            Optional object that can include meta information for certain
+            events (currently `item:updated`).
+
+    Collaborator:
+      type: object
+      description: |
+        Represents the user that triggered the event. May be the same user
+        as `user_id` or a collaborator from a shared project.
+      properties:
+        id:
+          type: string
+          example: '2671355'
+        email:
+          type: string
+          format: email
+          example: alice@example.com
+        full_name:
+          type: string
+          example: Alice
+        image_id:
+          type: ['string', 'null']
+          example: ad38375bdb094286af59f1eab36d8f20
+        is_premium:
+          type: boolean
+
+    ItemUpdatedExtra:
+      type: object
+      description: |
+        `event_data_extra` payload for `item:updated`. Present when the
+        update was issued by the user directly. Useful to distinguish
+        manually postponed updates from recurring-task completions.
+      properties:
+        old_item:
+          $ref: '#/components/schemas/Task'
+        update_intent:
+          type: string
+          enum:
+            - item_updated
+            - item_completed
+            - item_uncompleted
+
+    Task:
+      type: object
+      description: |
+        The Todoist Task (item) shape as delivered in webhook `event_data`.
+        Mirrors the example payload published in the Sync v9 documentation.
+      properties:
+        id:
+          type: string
+          example: 6XR4GqQQCW6Gv9h4
+        user_id:
+          type: string
+        project_id:
+          type: ['string', 'null']
+        section_id:
+          type: ['string', 'null']
+        parent_id:
+          type: ['string', 'null']
+        added_by_uid:
+          type: ['string', 'null']
+        assigned_by_uid:
+          type: ['string', 'null']
+        responsible_uid:
+          type: ['string', 'null']
+        content:
+          type: string
+        description:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        priority:
+          type: integer
+          enum: [1, 2, 3, 4]
+        child_order:
+          type: integer
+        checked:
+          type: boolean
+        is_deleted:
+          type: boolean
+        collapsed:
+          type: boolean
+        due:
+          type: ['object', 'null']
+          properties:
+            date:
+              type: string
+            timezone:
+              type: ['string', 'null']
+            string:
+              type: string
+            lang:
+              type: string
+            is_recurring:
+              type: boolean
+        deadline:
+          type: ['object', 'null']
+          properties:
+            date:
+              type: string
+            lang:
+              type: string
+        added_at:
+          type: ['string', 'null']
+          format: date-time
+        completed_at:
+          type: ['string', 'null']
+          format: date-time
+        url:
+          type: string
+          format: uri
+
+    Project:
+      type: object
+      description: |
+        The Todoist Project shape as delivered in webhook `event_data`.
+        See https://developer.todoist.com/sync/v9/#projects.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        parent_id:
+          type: ['string', 'null']
+        child_order:
+          type: integer
+        collapsed:
+          type: boolean
+        shared:
+          type: boolean
+        is_deleted:
+          type: boolean
+        is_archived:
+          type: boolean
+        is_favorite:
+          type: boolean
+        sync_id:
+          type: ['string', 'null']
+        inbox_project:
+          type: boolean
+        view_style:
+          type: string
+        url:
+          type: string
+          format: uri
+
+    Section:
+      type: object
+      description: |
+        The Todoist Section shape as delivered in webhook `event_data`.
+        See https://developer.todoist.com/sync/v9/#sections.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        project_id:
+          type: string
+        section_order:
+          type: integer
+        collapsed:
+          type: boolean
+        user_id:
+          type: string
+        sync_id:
+          type: ['string', 'null']
+        is_deleted:
+          type: boolean
+        is_archived:
+          type: boolean
+        archived_at:
+          type: ['string', 'null']
+          format: date-time
+        added_at:
+          type: ['string', 'null']
+          format: date-time
+
+    Comment:
+      type: object
+      description: |
+        The Todoist Comment (note) shape as delivered in webhook
+        `event_data`. See https://developer.todoist.com/sync/v9/#comments.
+      properties:
+        id:
+          type: string
+        posted_uid:
+          type: string
+        item_id:
+          type: ['string', 'null']
+        project_id:
+          type: ['string', 'null']
+        content:
+          type: string
+        file_attachment:
+          type: ['object', 'null']
+        uids_to_notify:
+          type: ['array', 'null']
+          items:
+            type: string
+        reactions:
+          type: ['object', 'null']
+        is_deleted:
+          type: boolean
+        posted_at:
+          type: ['string', 'null']
+          format: date-time
+
+    Reminder:
+      type: object
+      description: |
+        The Todoist Reminder shape delivered with `reminder:fired`.
+        See https://developer.todoist.com/sync/v9/#reminders.
+      properties:
+        id:
+          type: string
+        notify_uid:
+          type: string
+        item_id:
+          type: string
+        type:
+          type: string
+          enum:
+            - relative
+            - absolute
+            - location
+        due:
+          type: ['object', 'null']
+          properties:
+            date:
+              type: string
+            timezone:
+              type: ['string', 'null']
+            string:
+              type: string
+            lang:
+              type: string
+            is_recurring:
+              type: boolean
+        mm_offset:
+          type: ['integer', 'null']
+        name:
+          type: ['string', 'null']
+        loc_lat:
+          type: ['string', 'null']
+        loc_long:
+          type: ['string', 'null']
+        loc_trigger:
+          type: ['string', 'null']
+          enum:
+            - on_enter
+            - on_leave
+            - null
+        radius:
+          type: ['integer', 'null']
+        is_deleted:
+          type: boolean
