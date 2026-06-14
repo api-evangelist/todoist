@@ -1,0 +1,635 @@
+# Todoist Conceptual GraphQL Schema
+# Derived from the Todoist REST API v2, Unified API v1, and Sync API v9.
+# No native GraphQL endpoint exists; this schema models the documented resource
+# types for tooling, catalog enrichment, and code-generation purposes.
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar DateTime
+scalar Date
+scalar URL
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+"""Task priority level (1 = normal, 4 = urgent)."""
+enum Priority {
+  NORMAL
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+"""Colour swatch used for projects and labels."""
+enum Color {
+  BERRY_RED
+  RED
+  ORANGE
+  YELLOW
+  OLIVE_GREEN
+  LIME_GREEN
+  GREEN
+  MINT_GREEN
+  TEAL
+  SKY_BLUE
+  LIGHT_BLUE
+  BLUE
+  GRAPE
+  VIOLET
+  LAVENDER
+  MAGENTA
+  SALMON
+  CHARCOAL
+  GREY
+  TAUPE
+}
+
+"""How a project is displayed."""
+enum ViewStyle {
+  LIST
+  BOARD
+}
+
+"""Unit for task duration."""
+enum DurationUnit {
+  MINUTE
+  DAY
+}
+
+"""Karma trend direction."""
+enum KarmaTrend {
+  UP
+  DOWN
+  NONE
+}
+
+"""Type of activity event."""
+enum EventType {
+  ADDED
+  UPDATED
+  DELETED
+  COMPLETED
+  UNCOMPLETED
+  ARCHIVED
+  UNARCHIVED
+  SHARED
+  LEFT
+  ACCEPTED
+  REJECTED
+}
+
+"""Object type that an activity event targets."""
+enum ObjectType {
+  ITEM
+  PROJECT
+  SECTION
+  NOTE
+  FILTER
+}
+
+"""Role of a collaborator on a shared project."""
+enum CollaboratorRole {
+  OWNER
+  ADMIN
+  MEMBER
+  VIEWER
+}
+
+"""Invitation status for a collaborator."""
+enum InvitationStatus {
+  ACCEPTED
+  PENDING
+}
+
+"""Subscription plan tier."""
+enum SubscriptionPlan {
+  FREE
+  PRO
+  BUSINESS
+}
+
+# ---------------------------------------------------------------------------
+# Supporting types
+# ---------------------------------------------------------------------------
+
+"""A due-date descriptor, which may represent a full date or a datetime."""
+type DueDate {
+  string: String!
+  date: Date
+  datetime: DateTime
+  timezone: String
+  isRecurring: Boolean!
+  lang: String
+}
+
+"""A time-box duration attached to a task."""
+type Duration {
+  amount: Int!
+  unit: DurationUnit!
+}
+
+"""A binary file attached to a task or comment."""
+type Attachment {
+  fileName: String
+  fileType: String
+  fileUrl: URL
+  fileSize: Int
+  resourceType: String
+  uploadState: String
+  imageWidth: Int
+  imageHeight: Int
+  localPath: String
+}
+
+"""Karma score breakdown and trend."""
+type Karma {
+  score: Int!
+  trend: KarmaTrend!
+  dailyGoal: Int
+  weeklyGoal: Int
+}
+
+"""Productivity statistics for a user."""
+type Stats {
+  completedCount: Int!
+  completedToday: Int!
+  completedWeek: Int!
+  karmaScore: Int!
+  karmaTrend: KarmaTrend!
+  days: [DayStats!]!
+  weeklyGoal: Int
+  dailyGoal: Int
+}
+
+"""Task completion counts for a single day."""
+type DayStats {
+  date: Date!
+  totalCompleted: Int!
+}
+
+# ---------------------------------------------------------------------------
+# Core resource types
+# ---------------------------------------------------------------------------
+
+"""A Todoist user account."""
+type User {
+  id: ID!
+  email: String!
+  fullName: String!
+  avatarBig: URL
+  avatarMedium: URL
+  avatarSmall: URL
+  premiumUntil: DateTime
+  joinedAt: DateTime
+  lang: String
+  timezone: String
+  karma: Int
+  karmaTrend: KarmaTrend
+  inboxProjectId: ID
+  teamInbox: ID
+  isDeleted: Boolean!
+  isBusiness: Boolean!
+  token: String
+}
+
+"""A workspace (team account) that groups projects and members."""
+type Workspace {
+  id: ID!
+  name: String!
+  logoUrl: URL
+  memberCount: Int
+  createdAt: DateTime
+  plan: SubscriptionPlan
+  inboxProjectId: ID
+}
+
+"""A team member inside a workspace."""
+type TeamMember {
+  id: ID!
+  userId: ID!
+  workspaceId: ID!
+  email: String!
+  fullName: String!
+  avatarUrl: URL
+  role: CollaboratorRole!
+  joinedAt: DateTime
+}
+
+"""A project that contains sections and tasks."""
+type Project {
+  id: ID!
+  name: String!
+  color: Color!
+  parentId: ID
+  order: Int!
+  commentCount: Int!
+  isShared: Boolean!
+  isFavorite: Boolean!
+  isInboxProject: Boolean!
+  isTeamInbox: Boolean!
+  viewStyle: ViewStyle!
+  url: URL!
+  description: String
+  workspaceId: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  collaborators: [Collaborator!]
+  sections: [Section!]
+  tasks: [Task!]
+}
+
+"""Ordering override for a project within a parent or root view."""
+type ProjectOrder {
+  id: ID!
+  childOrder: Int!
+}
+
+"""A section that groups tasks within a project."""
+type Section {
+  id: ID!
+  name: String!
+  projectId: ID!
+  order: Int!
+  createdAt: DateTime
+  tasks: [Task!]
+}
+
+"""A personal or shared label."""
+type Label {
+  id: ID!
+  name: String!
+  color: Color!
+  order: Int!
+  isFavorite: Boolean!
+}
+
+"""A task (to-do item)."""
+type Task {
+  id: ID!
+  content: String!
+  description: String
+  projectId: ID!
+  sectionId: ID
+  parentId: ID
+  order: Int!
+  labels: [String!]!
+  priority: Priority!
+  due: DueDate
+  duration: Duration
+  url: URL!
+  commentCount: Int!
+  createdAt: DateTime!
+  creatorId: ID!
+  assigneeId: ID
+  assignerId: ID
+  isCompleted: Boolean!
+  completedAt: DateTime
+  syncId: ID
+  project: Project
+  section: Section
+  subtasks: [Task!]
+  comments: [Comment!]
+  reminders: [Reminder!]
+}
+
+"""Ordering override for an item within its parent context."""
+type ItemOrder {
+  id: ID!
+  childOrder: Int!
+  sectionId: ID
+  collapsedChildCount: Int
+}
+
+"""A comment on a task or project."""
+type Comment {
+  id: ID!
+  taskId: ID
+  projectId: ID
+  content: String!
+  postedAt: DateTime!
+  attachment: Attachment
+}
+
+"""A note (legacy comment on a project via Sync API)."""
+type Note {
+  id: ID!
+  projectId: ID
+  itemId: ID
+  content: String!
+  postedAt: DateTime!
+  attachment: Attachment
+  uidsToNotify: [ID!]
+}
+
+"""A time-based or location-based reminder for a task."""
+type Reminder {
+  id: ID!
+  taskId: ID!
+  notify_uid: ID
+  type: String!
+  due: DueDate
+  mmOffset: Int
+  name: String
+  locLat: Float
+  locLong: Float
+  locTrigger: String
+  radius: Int
+  isDeleted: Boolean!
+}
+
+"""A saved search filter."""
+type Filter {
+  id: ID!
+  name: String!
+  query: String!
+  color: Color!
+  order: Int!
+  isFavorite: Boolean!
+}
+
+"""A person who has been invited to collaborate on a project."""
+type Collaborator {
+  id: ID!
+  email: String!
+  fullName: String!
+  timezone: String
+  image_id: ID
+  status: InvitationStatus!
+  role: CollaboratorRole
+}
+
+"""User's active subscription details."""
+type Subscription {
+  plan: SubscriptionPlan!
+  isPremium: Boolean!
+  expiresAt: DateTime
+  autoRenew: Boolean
+  paymentMethod: String
+}
+
+"""A single activity-log entry."""
+type Activity {
+  id: ID!
+  objectType: ObjectType!
+  objectId: ID!
+  eventType: EventType!
+  eventDate: DateTime!
+  parentProjectId: ID
+  parentItemId: ID
+  initiatorId: ID
+  extraData: String
+}
+
+"""An event emitted by the webhook system."""
+type Event {
+  type: String!
+  userId: ID!
+  eventData: String!
+  triggeredAt: DateTime!
+  initiatorId: ID
+}
+
+"""An archived task."""
+type Archive {
+  id: ID!
+  content: String!
+  projectId: ID!
+  sectionId: ID
+  completedAt: DateTime!
+  labels: [String!]!
+  priority: Priority!
+  due: DueDate
+}
+
+# ---------------------------------------------------------------------------
+# Input types
+# ---------------------------------------------------------------------------
+
+input CreateTaskInput {
+  content: String!
+  description: String
+  projectId: ID
+  sectionId: ID
+  parentId: ID
+  order: Int
+  labels: [String!]
+  priority: Priority
+  dueString: String
+  dueDate: Date
+  dueDatetime: DateTime
+  dueLang: String
+  assigneeId: ID
+  duration: Int
+  durationUnit: DurationUnit
+}
+
+input UpdateTaskInput {
+  content: String
+  description: String
+  labels: [String!]
+  priority: Priority
+  dueString: String
+  dueDate: Date
+  dueDatetime: DateTime
+  dueLang: String
+  assigneeId: ID
+  duration: Int
+  durationUnit: DurationUnit
+}
+
+input CreateProjectInput {
+  name: String!
+  parentId: ID
+  color: Color
+  isFavorite: Boolean
+  viewStyle: ViewStyle
+}
+
+input UpdateProjectInput {
+  name: String
+  color: Color
+  isFavorite: Boolean
+  viewStyle: ViewStyle
+}
+
+input CreateSectionInput {
+  name: String!
+  projectId: ID!
+  order: Int
+}
+
+input UpdateSectionInput {
+  name: String!
+}
+
+input CreateLabelInput {
+  name: String!
+  order: Int
+  color: Color
+  isFavorite: Boolean
+}
+
+input UpdateLabelInput {
+  name: String
+  order: Int
+  color: Color
+  isFavorite: Boolean
+}
+
+input CreateCommentInput {
+  taskId: ID
+  projectId: ID
+  content: String!
+  attachment: AttachmentInput
+}
+
+input UpdateCommentInput {
+  content: String!
+}
+
+input AttachmentInput {
+  resourceType: String
+  fileName: String
+  fileType: String
+  fileUrl: URL
+}
+
+input CreateReminderInput {
+  taskId: ID!
+  type: String!
+  dueString: String
+  dueDate: Date
+  dueDatetime: DateTime
+  mmOffset: Int
+}
+
+input CreateFilterInput {
+  name: String!
+  query: String!
+  color: Color
+  order: Int
+  isFavorite: Boolean
+}
+
+input UpdateFilterInput {
+  name: String
+  query: String
+  color: Color
+  order: Int
+  isFavorite: Boolean
+}
+
+# ---------------------------------------------------------------------------
+# Root types
+# ---------------------------------------------------------------------------
+
+type Query {
+  # Tasks
+  task(id: ID!): Task
+  tasks(projectId: ID, sectionId: ID, labelName: String, filter: String, lang: String, ids: [ID!]): [Task!]!
+  completedTasks(projectId: ID, since: DateTime, until: DateTime, limit: Int, cursor: String): [Task!]!
+
+  # Projects
+  project(id: ID!): Project
+  projects: [Project!]!
+  collaborators(projectId: ID!): [Collaborator!]!
+
+  # Sections
+  section(id: ID!): Section
+  sections(projectId: ID): [Section!]!
+
+  # Labels
+  label(id: ID!): Label
+  labels: [Label!]!
+  sharedLabels(omitPersonal: Boolean): [String!]!
+
+  # Comments
+  comment(id: ID!): Comment
+  comments(taskId: ID, projectId: ID): [Comment!]!
+
+  # Reminders
+  reminder(id: ID!): Reminder
+  reminders(taskId: ID): [Reminder!]!
+
+  # Filters
+  filter(id: ID!): Filter
+  filters: [Filter!]!
+
+  # User
+  currentUser: User!
+
+  # Stats & Karma
+  stats: Stats!
+  karma: Karma!
+
+  # Activity log
+  activity(
+    objectType: ObjectType
+    objectId: ID
+    eventType: EventType
+    since: DateTime
+    until: DateTime
+    limit: Int
+    page: Int
+    initiatorId: ID
+    parentProjectId: ID
+  ): [Activity!]!
+
+  # Workspace
+  workspace(id: ID!): Workspace
+  workspaces: [Workspace!]!
+  teamMembers(workspaceId: ID!): [TeamMember!]!
+
+  # Archived items
+  archivedTasks(projectId: ID, since: DateTime, until: DateTime, limit: Int): [Archive!]!
+}
+
+type Mutation {
+  # Tasks
+  createTask(input: CreateTaskInput!): Task!
+  updateTask(id: ID!, input: UpdateTaskInput!): Task!
+  deleteTask(id: ID!): Boolean!
+  closeTask(id: ID!): Boolean!
+  reopenTask(id: ID!): Boolean!
+  moveTask(id: ID!, projectId: ID, sectionId: ID, parentId: ID): Task!
+
+  # Projects
+  createProject(input: CreateProjectInput!): Project!
+  updateProject(id: ID!, input: UpdateProjectInput!): Project!
+  deleteProject(id: ID!): Boolean!
+  archiveProject(id: ID!): Boolean!
+  unarchiveProject(id: ID!): Boolean!
+  shareProject(id: ID!, email: String!, role: CollaboratorRole): Boolean!
+  removeCollaborator(projectId: ID!, userId: ID!): Boolean!
+
+  # Sections
+  createSection(input: CreateSectionInput!): Section!
+  updateSection(id: ID!, input: UpdateSectionInput!): Section!
+  deleteSection(id: ID!): Boolean!
+  archiveSection(id: ID!): Boolean!
+  unarchiveSection(id: ID!): Boolean!
+
+  # Labels
+  createLabel(input: CreateLabelInput!): Label!
+  updateLabel(id: ID!, input: UpdateLabelInput!): Label!
+  deleteLabel(id: ID!): Boolean!
+  renameSharedLabel(name: String!, newName: String!): Boolean!
+  removeSharedLabel(name: String!): Boolean!
+
+  # Comments
+  createComment(input: CreateCommentInput!): Comment!
+  updateComment(id: ID!, input: UpdateCommentInput!): Comment!
+  deleteComment(id: ID!): Boolean!
+
+  # Reminders
+  createReminder(input: CreateReminderInput!): Reminder!
+  deleteReminder(id: ID!): Boolean!
+
+  # Filters
+  createFilter(input: CreateFilterInput!): Filter!
+  updateFilter(id: ID!, input: UpdateFilterInput!): Filter!
+  deleteFilter(id: ID!): Boolean!
+}
