@@ -1,0 +1,845 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Todoist API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/tasks",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by project ID"
+              },
+              {
+                "name": "section_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by section ID"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label name"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression"
+              },
+              {
+                "name": "lang",
+                "value": "",
+                "type": "query",
+                "description": "Language for filter expression"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated task IDs"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of tasks to return"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor"
+              }
+            ]
+          },
+          "docs": "Returns a list of tasks filtered by project, section, label, or other criteria."
+        },
+        {
+          "info": {
+            "name": "Create Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/tasks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new task in Todoist."
+        },
+        {
+          "info": {
+            "name": "Get Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single task by its ID."
+        },
+        {
+          "info": {
+            "name": "Update Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a task with new properties."
+        },
+        {
+          "info": {
+            "name": "Delete Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.todoist.com/api/v1/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a task permanently."
+        },
+        {
+          "info": {
+            "name": "Close Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/tasks/:id/close",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Marks a task as completed."
+        },
+        {
+          "info": {
+            "name": "Reopen Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/tasks/:id/reopen",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Marks a previously completed task as uncompleted."
+        },
+        {
+          "info": {
+            "name": "Move Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/tasks/:id/move",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Moves a task to a different project or section."
+        },
+        {
+          "info": {
+            "name": "Quick Add Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/tasks/quick_add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a task using natural language processing."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/projects"
+          },
+          "docs": "Returns all active projects for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/projects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new project."
+        },
+        {
+          "info": {
+            "name": "Get Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single project by ID."
+        },
+        {
+          "info": {
+            "name": "Update Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a project's properties."
+        },
+        {
+          "info": {
+            "name": "Delete Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.todoist.com/api/v1/projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a project and all its tasks."
+        },
+        {
+          "info": {
+            "name": "Archive Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/projects/:id/archive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Archives a project."
+        },
+        {
+          "info": {
+            "name": "List Project Collaborators",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/projects/:id/collaborators",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all collaborators on a shared project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Sections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/sections",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all sections optionally filtered by project."
+        },
+        {
+          "info": {
+            "name": "Create Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/sections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new section in a project."
+        },
+        {
+          "info": {
+            "name": "Get Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/sections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single section by ID."
+        },
+        {
+          "info": {
+            "name": "Update Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/sections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a section's properties."
+        },
+        {
+          "info": {
+            "name": "Delete Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.todoist.com/api/v1/sections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a section and moves its tasks to the project root."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/labels"
+          },
+          "docs": "Returns all personal labels for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/labels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new personal label."
+        },
+        {
+          "info": {
+            "name": "Get Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single label by ID."
+        },
+        {
+          "info": {
+            "name": "Update Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a label's properties."
+        },
+        {
+          "info": {
+            "name": "Delete Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.todoist.com/api/v1/labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a label permanently."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/comments",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all comments on a task or project."
+        },
+        {
+          "info": {
+            "name": "Create Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/comments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new comment on a task or project."
+        },
+        {
+          "info": {
+            "name": "Get Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/comments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single comment by ID."
+        },
+        {
+          "info": {
+            "name": "Update Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/comments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a comment's content."
+        },
+        {
+          "info": {
+            "name": "Delete Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.todoist.com/api/v1/comments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a comment permanently."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reminders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Reminders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/reminders"
+          },
+          "docs": "Returns all reminders for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create Reminder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/reminders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new reminder for a task."
+        },
+        {
+          "info": {
+            "name": "Get Reminder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/reminders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single reminder by ID."
+        },
+        {
+          "info": {
+            "name": "Delete Reminder",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.todoist.com/api/v1/reminders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a reminder permanently."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Workspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/workspaces"
+          },
+          "docs": "Returns all workspaces the authenticated user belongs to."
+        },
+        {
+          "info": {
+            "name": "Get Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/workspaces/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific workspace."
+        },
+        {
+          "info": {
+            "name": "List Workspace Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/workspaces/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all users in a workspace."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/user"
+          },
+          "docs": "Returns information about the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get User Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/user/stats"
+          },
+          "docs": "Returns productivity statistics for the authenticated user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sync Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/sync",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "sync_token",
+                  "value": ""
+                },
+                {
+                  "name": "resource_types",
+                  "value": ""
+                },
+                {
+                  "name": "commands",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Primary sync endpoint for batch read/write operations. Retrieve resources by specifying resource_types or execute commands for write operations. Supports incremental synchronization via sync_token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
