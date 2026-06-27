@@ -85,11 +85,11 @@ common:
   url: https://www.linkedin.com/company/doist
 - type: Website
   url: https://todoist.com/
-- type: Developer Portal
+- type: DeveloperPortal
   url: https://developer.todoist.com/
 - type: Documentation
   url: https://developer.todoist.com/api/v1/
-- type: SignUp
+- type: Signup
   url: https://todoist.com/users/showregister
 - type: Login
   url: https://todoist.com/auth/login

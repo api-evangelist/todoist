@@ -2,20 +2,13 @@
   "repo": "todoist",
   "feeds": [
     {
-      "source": "https://www.todoist.com/inspiration",
-      "feed_url": "https://www.todoist.com/inspiration",
-      "title": "",
+      "source": "https://doist.com/blog/",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
-    },
-    {
-      "source": "https://github.com/Doist",
-      "feed_url": "https://github.com/Doist",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     }
   ],
-  "fetched": "2026-06-14T20:42:17Z",
-  "post_count": 0
+  "fetched": "2026-06-27T13:15:39Z",
+  "post_count": 0,
+  "agent_pulled": "2026-06-27"
 }
