@@ -1,0 +1,12 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://www.todoist.com/security
+url: https://www.todoist.com/security
+certifications:
+- GDPR
+evidence:
+- source: https://www.todoist.com/security
+  keywords:
+  - trust center
+  - gdpr

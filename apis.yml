@@ -81,6 +81,14 @@ apis:
   - type: Reference
     url: https://developer.todoist.com/sync/v9/
 common:
+- type: TrustCenter
+  url: security/todoist-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/todoist-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/todoist-domain-security.yml
+- type: Authentication
+  url: authentication/todoist-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/doist
 - type: Website

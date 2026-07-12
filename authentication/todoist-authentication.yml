@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/todoist-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Personal API token or OAuth 2.0 access token
+  sources:
+  - openapi/todoist-openapi.yml
