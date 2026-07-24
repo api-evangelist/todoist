@@ -1,0 +1,226 @@
+openapi: 3.1.0
+info:
+  title: Todoist Comments Projects API
+  description: The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.
+  version: '1.0'
+  contact:
+    name: Todoist Developer Support
+    url: https://developer.todoist.com/
+  termsOfService: https://doist.com/terms-of-service
+  license:
+    name: Todoist API Terms
+    url: https://developer.todoist.com/
+servers:
+- url: https://api.todoist.com/api/v1
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Projects
+  description: Project management operations
+paths:
+  /projects:
+    get:
+      operationId: listProjects
+      summary: List Projects
+      description: Returns all active projects for the authenticated user.
+      tags:
+      - Projects
+      responses:
+        '200':
+          description: List of projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+    post:
+      operationId: createProject
+      summary: Create Project
+      description: Creates a new project.
+      tags:
+      - Projects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectRequest'
+      responses:
+        '200':
+          description: Created project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+  /projects/{id}:
+    get:
+      operationId: getProject
+      summary: Get Project
+      description: Returns a single project by ID.
+      tags:
+      - Projects
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Project details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+    post:
+      operationId: updateProject
+      summary: Update Project
+      description: Updates a project's properties.
+      tags:
+      - Projects
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectRequest'
+      responses:
+        '200':
+          description: Updated project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+    delete:
+      operationId: deleteProject
+      summary: Delete Project
+      description: Deletes a project and all its tasks.
+      tags:
+      - Projects
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Project deleted
+  /projects/{id}/archive:
+    post:
+      operationId: archiveProject
+      summary: Archive Project
+      description: Archives a project.
+      tags:
+      - Projects
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Project archived
+  /projects/{id}/collaborators:
+    get:
+      operationId: listProjectCollaborators
+      summary: List Project Collaborators
+      description: Returns all collaborators on a shared project.
+      tags:
+      - Projects
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of collaborators
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Collaborator'
+components:
+  schemas:
+    Collaborator:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+    UpdateProjectRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+        is_favorite:
+          type: boolean
+        view_style:
+          type: string
+    CreateProjectRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        parent_id:
+          type: string
+        color:
+          type: string
+        is_favorite:
+          type: boolean
+        view_style:
+          type: string
+          enum:
+          - list
+          - board
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        parent_id:
+          type: string
+        order:
+          type: integer
+        comment_count:
+          type: integer
+        is_shared:
+          type: boolean
+        is_favorite:
+          type: boolean
+        is_inbox_project:
+          type: boolean
+        is_team_inbox:
+          type: boolean
+        view_style:
+          type: string
+        url:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal API token or OAuth 2.0 access token

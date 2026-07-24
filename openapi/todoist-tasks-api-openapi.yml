@@ -1,0 +1,397 @@
+openapi: 3.1.0
+info:
+  title: Todoist Comments Tasks API
+  description: The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.
+  version: '1.0'
+  contact:
+    name: Todoist Developer Support
+    url: https://developer.todoist.com/
+  termsOfService: https://doist.com/terms-of-service
+  license:
+    name: Todoist API Terms
+    url: https://developer.todoist.com/
+servers:
+- url: https://api.todoist.com/api/v1
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Tasks
+  description: Task (item) management operations
+paths:
+  /tasks:
+    get:
+      operationId: listTasks
+      summary: List Tasks
+      description: Returns a list of tasks filtered by project, section, label, or other criteria.
+      tags:
+      - Tasks
+      parameters:
+      - name: project_id
+        in: query
+        schema:
+          type: string
+        description: Filter by project ID
+      - name: section_id
+        in: query
+        schema:
+          type: string
+        description: Filter by section ID
+      - name: label
+        in: query
+        schema:
+          type: string
+        description: Filter by label name
+      - name: filter
+        in: query
+        schema:
+          type: string
+        description: Filter expression
+      - name: lang
+        in: query
+        schema:
+          type: string
+        description: Language for filter expression
+      - name: ids
+        in: query
+        schema:
+          type: string
+        description: Comma-separated task IDs
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Number of tasks to return
+      - name: cursor
+        in: query
+        schema:
+          type: string
+        description: Pagination cursor
+      responses:
+        '200':
+          description: List of tasks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+                  next_cursor:
+                    type: string
+    post:
+      operationId: createTask
+      summary: Create Task
+      description: Creates a new task in Todoist.
+      tags:
+      - Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskRequest'
+      responses:
+        '200':
+          description: Created task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+  /tasks/{id}:
+    get:
+      operationId: getTask
+      summary: Get Task
+      description: Returns a single task by its ID.
+      tags:
+      - Tasks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Task details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+    post:
+      operationId: updateTask
+      summary: Update Task
+      description: Updates a task with new properties.
+      tags:
+      - Tasks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskRequest'
+      responses:
+        '200':
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+    delete:
+      operationId: deleteTask
+      summary: Delete Task
+      description: Deletes a task permanently.
+      tags:
+      - Tasks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Task deleted
+  /tasks/{id}/close:
+    post:
+      operationId: closeTask
+      summary: Close Task
+      description: Marks a task as completed.
+      tags:
+      - Tasks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Task closed
+  /tasks/{id}/reopen:
+    post:
+      operationId: reopenTask
+      summary: Reopen Task
+      description: Marks a previously completed task as uncompleted.
+      tags:
+      - Tasks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Task reopened
+  /tasks/{id}/move:
+    post:
+      operationId: moveTask
+      summary: Move Task
+      description: Moves a task to a different project or section.
+      tags:
+      - Tasks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: string
+                section_id:
+                  type: string
+                parent_id:
+                  type: string
+      responses:
+        '200':
+          description: Task moved
+  /tasks/quick_add:
+    post:
+      operationId: quickAddTask
+      summary: Quick Add Task
+      description: Creates a task using natural language processing.
+      tags:
+      - Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - text
+              properties:
+                text:
+                  type: string
+                  description: Natural language task text
+                note:
+                  type: string
+                reminder:
+                  type: string
+                auto_reminder:
+                  type: boolean
+      responses:
+        '200':
+          description: Created task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+components:
+  schemas:
+    UpdateTaskRequest:
+      type: object
+      properties:
+        content:
+          type: string
+        description:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        priority:
+          type: integer
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+        due_string:
+          type: string
+        due_date:
+          type: string
+        due_datetime:
+          type: string
+        assignee_id:
+          type: string
+    Due:
+      type: object
+      properties:
+        date:
+          type: string
+        is_recurring:
+          type: boolean
+        string:
+          type: string
+        datetime:
+          type: string
+          format: date-time
+        timezone:
+          type: string
+    CreateTaskRequest:
+      type: object
+      required:
+      - content
+      properties:
+        content:
+          type: string
+        description:
+          type: string
+        project_id:
+          type: string
+        section_id:
+          type: string
+        parent_id:
+          type: string
+        order:
+          type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        priority:
+          type: integer
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+        due_string:
+          type: string
+        due_date:
+          type: string
+        due_datetime:
+          type: string
+        due_lang:
+          type: string
+        assignee_id:
+          type: string
+        auto_reminder:
+          type: boolean
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+          description: Task content/title
+        description:
+          type: string
+        project_id:
+          type: string
+        section_id:
+          type: string
+        parent_id:
+          type: string
+        order:
+          type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        priority:
+          type: integer
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+        due:
+          $ref: '#/components/schemas/Due'
+        deadline:
+          $ref: '#/components/schemas/Deadline'
+        assignee_id:
+          type: string
+        assigner_id:
+          type: string
+        comment_count:
+          type: integer
+        is_completed:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        creator_id:
+          type: string
+        url:
+          type: string
+    Deadline:
+      type: object
+      properties:
+        date:
+          type: string
+        lang:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal API token or OAuth 2.0 access token

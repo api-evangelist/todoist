@@ -1,0 +1,166 @@
+openapi: 3.1.0
+info:
+  title: Todoist Comments API
+  description: The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.
+  version: '1.0'
+  contact:
+    name: Todoist Developer Support
+    url: https://developer.todoist.com/
+  termsOfService: https://doist.com/terms-of-service
+  license:
+    name: Todoist API Terms
+    url: https://developer.todoist.com/
+servers:
+- url: https://api.todoist.com/api/v1
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Comments
+  description: Comment and note operations
+paths:
+  /comments:
+    get:
+      operationId: listComments
+      summary: List Comments
+      description: Returns all comments on a task or project.
+      tags:
+      - Comments
+      parameters:
+      - name: task_id
+        in: query
+        schema:
+          type: string
+      - name: project_id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+    post:
+      operationId: createComment
+      summary: Create Comment
+      description: Creates a new comment on a task or project.
+      tags:
+      - Comments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommentRequest'
+      responses:
+        '200':
+          description: Created comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+  /comments/{id}:
+    get:
+      operationId: getComment
+      summary: Get Comment
+      description: Returns a single comment by ID.
+      tags:
+      - Comments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Comment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+    post:
+      operationId: updateComment
+      summary: Update Comment
+      description: Updates a comment's content.
+      tags:
+      - Comments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - content
+              properties:
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Updated comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+    delete:
+      operationId: deleteComment
+      summary: Delete Comment
+      description: Deletes a comment permanently.
+      tags:
+      - Comments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Comment deleted
+components:
+  schemas:
+    CreateCommentRequest:
+      type: object
+      required:
+      - content
+      properties:
+        task_id:
+          type: string
+        project_id:
+          type: string
+        content:
+          type: string
+        attachment:
+          type: object
+    Comment:
+      type: object
+      properties:
+        id:
+          type: string
+        task_id:
+          type: string
+        project_id:
+          type: string
+        posted_at:
+          type: string
+          format: date-time
+        content:
+          type: string
+        attachment:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal API token or OAuth 2.0 access token

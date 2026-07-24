@@ -1,0 +1,112 @@
+openapi: 3.1.0
+info:
+  title: Todoist Comments Workspaces API
+  description: The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.
+  version: '1.0'
+  contact:
+    name: Todoist Developer Support
+    url: https://developer.todoist.com/
+  termsOfService: https://doist.com/terms-of-service
+  license:
+    name: Todoist API Terms
+    url: https://developer.todoist.com/
+servers:
+- url: https://api.todoist.com/api/v1
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Workspaces
+  description: Workspace management operations
+paths:
+  /workspaces:
+    get:
+      operationId: listWorkspaces
+      summary: List Workspaces
+      description: Returns all workspaces the authenticated user belongs to.
+      tags:
+      - Workspaces
+      responses:
+        '200':
+          description: List of workspaces
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workspace'
+  /workspaces/{id}:
+    get:
+      operationId: getWorkspace
+      summary: Get Workspace
+      description: Returns details of a specific workspace.
+      tags:
+      - Workspaces
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Workspace details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+  /workspaces/{id}/users:
+    get:
+      operationId: listWorkspaceUsers
+      summary: List Workspace Users
+      description: Returns all users in a workspace.
+      tags:
+      - Workspaces
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of workspace members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        full_name:
+          type: string
+        premium_until:
+          type: string
+        timezone:
+          type: string
+        avatar_medium:
+          type: string
+    Workspace:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        logo:
+          type: string
+        role:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal API token or OAuth 2.0 access token

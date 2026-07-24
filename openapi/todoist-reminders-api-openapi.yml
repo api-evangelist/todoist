@@ -1,0 +1,147 @@
+openapi: 3.1.0
+info:
+  title: Todoist Comments Reminders API
+  description: The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.
+  version: '1.0'
+  contact:
+    name: Todoist Developer Support
+    url: https://developer.todoist.com/
+  termsOfService: https://doist.com/terms-of-service
+  license:
+    name: Todoist API Terms
+    url: https://developer.todoist.com/
+servers:
+- url: https://api.todoist.com/api/v1
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Reminders
+  description: Reminder management operations
+paths:
+  /reminders:
+    get:
+      operationId: listReminders
+      summary: List Reminders
+      description: Returns all reminders for the authenticated user.
+      tags:
+      - Reminders
+      responses:
+        '200':
+          description: List of reminders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reminder'
+    post:
+      operationId: createReminder
+      summary: Create Reminder
+      description: Creates a new reminder for a task.
+      tags:
+      - Reminders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReminderRequest'
+      responses:
+        '200':
+          description: Created reminder
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reminder'
+  /reminders/{id}:
+    get:
+      operationId: getReminder
+      summary: Get Reminder
+      description: Returns a single reminder by ID.
+      tags:
+      - Reminders
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Reminder details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reminder'
+    delete:
+      operationId: deleteReminder
+      summary: Delete Reminder
+      description: Deletes a reminder permanently.
+      tags:
+      - Reminders
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Reminder deleted
+components:
+  schemas:
+    Due:
+      type: object
+      properties:
+        date:
+          type: string
+        is_recurring:
+          type: boolean
+        string:
+          type: string
+        datetime:
+          type: string
+          format: date-time
+        timezone:
+          type: string
+    Reminder:
+      type: object
+      properties:
+        id:
+          type: string
+        task_id:
+          type: string
+        type:
+          type: string
+          enum:
+          - absolute
+          - relative
+        due:
+          $ref: '#/components/schemas/Due'
+        mm_offset:
+          type: integer
+    CreateReminderRequest:
+      type: object
+      required:
+      - task_id
+      - type
+      properties:
+        task_id:
+          type: string
+        type:
+          type: string
+          enum:
+          - absolute
+          - relative
+        due_string:
+          type: string
+        due_datetime:
+          type: string
+        mm_offset:
+          type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal API token or OAuth 2.0 access token

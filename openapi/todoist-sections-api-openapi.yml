@@ -1,0 +1,154 @@
+openapi: 3.1.0
+info:
+  title: Todoist Comments Sections API
+  description: The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.
+  version: '1.0'
+  contact:
+    name: Todoist Developer Support
+    url: https://developer.todoist.com/
+  termsOfService: https://doist.com/terms-of-service
+  license:
+    name: Todoist API Terms
+    url: https://developer.todoist.com/
+servers:
+- url: https://api.todoist.com/api/v1
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Sections
+  description: Section management operations
+paths:
+  /sections:
+    get:
+      operationId: listSections
+      summary: List Sections
+      description: Returns all sections optionally filtered by project.
+      tags:
+      - Sections
+      parameters:
+      - name: project_id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of sections
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Section'
+    post:
+      operationId: createSection
+      summary: Create Section
+      description: Creates a new section in a project.
+      tags:
+      - Sections
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSectionRequest'
+      responses:
+        '200':
+          description: Created section
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+  /sections/{id}:
+    get:
+      operationId: getSection
+      summary: Get Section
+      description: Returns a single section by ID.
+      tags:
+      - Sections
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Section details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+    post:
+      operationId: updateSection
+      summary: Update Section
+      description: Updates a section's properties.
+      tags:
+      - Sections
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Updated section
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+    delete:
+      operationId: deleteSection
+      summary: Delete Section
+      description: Deletes a section and moves its tasks to the project root.
+      tags:
+      - Sections
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Section deleted
+components:
+  schemas:
+    CreateSectionRequest:
+      type: object
+      required:
+      - project_id
+      - name
+      properties:
+        project_id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+    Section:
+      type: object
+      properties:
+        id:
+          type: string
+        project_id:
+          type: string
+        order:
+          type: integer
+        name:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal API token or OAuth 2.0 access token

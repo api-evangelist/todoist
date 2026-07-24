@@ -1,0 +1,82 @@
+openapi: 3.1.0
+info:
+  title: Todoist Comments User API
+  description: The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.
+  version: '1.0'
+  contact:
+    name: Todoist Developer Support
+    url: https://developer.todoist.com/
+  termsOfService: https://doist.com/terms-of-service
+  license:
+    name: Todoist API Terms
+    url: https://developer.todoist.com/
+servers:
+- url: https://api.todoist.com/api/v1
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: User
+  description: User account and settings operations
+paths:
+  /user:
+    get:
+      operationId: getUser
+      summary: Get User
+      description: Returns information about the authenticated user.
+      tags:
+      - User
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /user/stats:
+    get:
+      operationId: getUserStats
+      summary: Get User Stats
+      description: Returns productivity statistics for the authenticated user.
+      tags:
+      - User
+      responses:
+        '200':
+          description: User productivity statistics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  goals:
+                    type: object
+                  days_items:
+                    type: array
+                    items:
+                      type: object
+                  week_items:
+                    type: array
+                    items:
+                      type: object
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        full_name:
+          type: string
+        premium_until:
+          type: string
+        timezone:
+          type: string
+        avatar_medium:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal API token or OAuth 2.0 access token

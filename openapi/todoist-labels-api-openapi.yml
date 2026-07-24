@@ -1,0 +1,158 @@
+openapi: 3.1.0
+info:
+  title: Todoist Comments Labels API
+  description: The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.
+  version: '1.0'
+  contact:
+    name: Todoist Developer Support
+    url: https://developer.todoist.com/
+  termsOfService: https://doist.com/terms-of-service
+  license:
+    name: Todoist API Terms
+    url: https://developer.todoist.com/
+servers:
+- url: https://api.todoist.com/api/v1
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Labels
+  description: Label management operations
+paths:
+  /labels:
+    get:
+      operationId: listLabels
+      summary: List Labels
+      description: Returns all personal labels for the authenticated user.
+      tags:
+      - Labels
+      responses:
+        '200':
+          description: List of labels
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Label'
+    post:
+      operationId: createLabel
+      summary: Create Label
+      description: Creates a new personal label.
+      tags:
+      - Labels
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLabelRequest'
+      responses:
+        '200':
+          description: Created label
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+  /labels/{id}:
+    get:
+      operationId: getLabel
+      summary: Get Label
+      description: Returns a single label by ID.
+      tags:
+      - Labels
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Label details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+    post:
+      operationId: updateLabel
+      summary: Update Label
+      description: Updates a label's properties.
+      tags:
+      - Labels
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                color:
+                  type: string
+                order:
+                  type: integer
+                is_favorite:
+                  type: boolean
+      responses:
+        '200':
+          description: Updated label
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+    delete:
+      operationId: deleteLabel
+      summary: Delete Label
+      description: Deletes a label permanently.
+      tags:
+      - Labels
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Label deleted
+components:
+  schemas:
+    CreateLabelRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        order:
+          type: integer
+        color:
+          type: string
+        is_favorite:
+          type: boolean
+    Label:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        order:
+          type: integer
+        is_favorite:
+          type: boolean
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal API token or OAuth 2.0 access token
