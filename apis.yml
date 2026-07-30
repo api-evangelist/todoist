@@ -5,9 +5,22 @@ description: Todoist is a productivity platform providing task management APIs f
   offering programmatic access to tasks, projects, sections, labels, reminders, comments,
   workspaces, and webhooks. SDKs are available in Python and TypeScript.
 type: Index
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/todoist.png
 tags:
 - Productivity
 - Tasks
@@ -19,42 +32,12 @@ modified: '2026-05-30'
 url: https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-- aid: todoist:todoist-api
-  name: Todoist API
-  description: The Todoist API v1 provides programmatic access to Todoist task management,
-    projects, sections, labels, reminders, comments, workspaces, and more. Supports
-    OAuth 2.0 and personal API tokens for authentication. Includes incremental sync
-    via the /sync endpoint for efficient client-server data synchronization.
-  humanURL: https://developer.todoist.com/api/v1/
-  baseURL: https://api.todoist.com/api/v1
-  tags:
-  - Productivity
-  - Tasks
-  - Projects
-  - Task Management
-  properties:
-  - type: Documentation
-    url: https://developer.todoist.com/api/v1/
-  - type: OpenAPI
-    url: https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/openapi/todoist-openapi.yml
-  - type: AsyncAPI
-    url: https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/openapi/todoist-asyncapi.yml
-  - type: JSONSchema
-    url: https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/json-schema/todoist-task-schema.json
-  - type: SpectralRules
-    url: https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/rules/todoist-rules.yml
-  - type: Vocabulary
-    url: https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
-  - url: graphql/todoist-graphql.md
-    type: GraphQL
-  contact:
-  - FN: Todoist Developer Support
-    url: https://developer.todoist.com/
 - aid: todoist:todoist-rest-api
   name: Todoist REST API v2
-  description: The Todoist REST API v2 is the legacy recommended API for external
-    integrations, providing access to tasks, projects, sections, labels, comments,
-    and filters. Uses Bearer token authentication with OAuth 2.0 support.
+  description: >-
+    The Todoist REST API v2 is the legacy recommended API for external integrations, providing access
+    to tasks, projects, sections, labels, comments, and filters. Uses Bearer token authentication with
+    OAuth 2.0 support.
   humanURL: https://developer.todoist.com/rest/v2/
   baseURL: https://api.todoist.com/rest/v2
   tags:
@@ -66,9 +49,10 @@ apis:
     url: https://developer.todoist.com/rest/v2/
 - aid: todoist:todoist-sync-api
   name: Todoist Sync API v9
-  description: The Todoist Sync API is designed for clients maintaining a local representation
-    of user data, allowing incremental synchronization of projects, tasks, labels,
-    filters, and reminders. Supports batch commands for efficient updates.
+  description: >-
+    The Todoist Sync API is designed for clients maintaining a local representation of user data, allowing
+    incremental synchronization of projects, tasks, labels, filters, and reminders. Supports batch commands
+    for efficient updates.
   humanURL: https://developer.todoist.com/sync/v9/
   baseURL: https://api.todoist.com/sync/v9
   tags:
@@ -80,7 +64,243 @@ apis:
     url: https://developer.todoist.com/sync/v9/
   - type: Reference
     url: https://developer.todoist.com/sync/v9/
+- aid: todoist:todoist-comments-api
+  name: Todoist Comments API
+  description: Comment and note operations
+  humanURL: https://developer.todoist.com/api/v1/
+  baseURL: https://api.todoist.com/api/v1
+  tags:
+  - Comments
+  properties:
+  - type: OpenAPI
+    url: openapi/todoist-comments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.todoist.com/api/v1/
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/openapi/todoist-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/json-schema/todoist-task-schema.json
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/rules/todoist-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
+  - type: GraphQL
+    url: graphql/todoist-graphql.md
+- aid: todoist:todoist-labels-api
+  name: Todoist Labels API
+  description: Label management operations
+  humanURL: https://developer.todoist.com/api/v1/
+  baseURL: https://api.todoist.com/api/v1
+  tags:
+  - Labels
+  properties:
+  - type: OpenAPI
+    url: openapi/todoist-labels-api-openapi.yml
+  - type: Documentation
+    url: https://developer.todoist.com/api/v1/
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/openapi/todoist-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/json-schema/todoist-task-schema.json
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/rules/todoist-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
+  - type: GraphQL
+    url: graphql/todoist-graphql.md
+- aid: todoist:todoist-projects-api
+  name: Todoist Projects API
+  description: Project management operations
+  humanURL: https://developer.todoist.com/api/v1/
+  baseURL: https://api.todoist.com/api/v1
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/todoist-projects-api-openapi.yml
+  - type: Documentation
+    url: https://developer.todoist.com/api/v1/
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/openapi/todoist-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/json-schema/todoist-task-schema.json
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/rules/todoist-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
+  - type: GraphQL
+    url: graphql/todoist-graphql.md
+- aid: todoist:todoist-reminders-api
+  name: Todoist Reminders API
+  description: Reminder management operations
+  humanURL: https://developer.todoist.com/api/v1/
+  baseURL: https://api.todoist.com/api/v1
+  tags:
+  - Reminders
+  properties:
+  - type: OpenAPI
+    url: openapi/todoist-reminders-api-openapi.yml
+  - type: Documentation
+    url: https://developer.todoist.com/api/v1/
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/openapi/todoist-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/json-schema/todoist-task-schema.json
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/rules/todoist-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
+  - type: GraphQL
+    url: graphql/todoist-graphql.md
+- aid: todoist:todoist-sections-api
+  name: Todoist Sections API
+  description: Section management operations
+  humanURL: https://developer.todoist.com/api/v1/
+  baseURL: https://api.todoist.com/api/v1
+  tags:
+  - Sections
+  properties:
+  - type: OpenAPI
+    url: openapi/todoist-sections-api-openapi.yml
+  - type: Documentation
+    url: https://developer.todoist.com/api/v1/
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/openapi/todoist-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/json-schema/todoist-task-schema.json
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/rules/todoist-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
+  - type: GraphQL
+    url: graphql/todoist-graphql.md
+- aid: todoist:todoist-sync-api
+  name: Todoist Sync API
+  description: Incremental sync operations
+  humanURL: https://developer.todoist.com/api/v1/
+  baseURL: https://api.todoist.com/api/v1
+  tags:
+  - Sync
+  properties:
+  - type: OpenAPI
+    url: openapi/todoist-sync-api-openapi.yml
+  - type: Documentation
+    url: https://developer.todoist.com/api/v1/
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/openapi/todoist-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/json-schema/todoist-task-schema.json
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/rules/todoist-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
+  - type: GraphQL
+    url: graphql/todoist-graphql.md
+- aid: todoist:todoist-tasks-api
+  name: Todoist Tasks API
+  description: Task (item) management operations
+  humanURL: https://developer.todoist.com/api/v1/
+  baseURL: https://api.todoist.com/api/v1
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/todoist-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.todoist.com/api/v1/
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/openapi/todoist-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/json-schema/todoist-task-schema.json
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/rules/todoist-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
+  - type: GraphQL
+    url: graphql/todoist-graphql.md
+- aid: todoist:todoist-user-api
+  name: Todoist User API
+  description: User account and settings operations
+  humanURL: https://developer.todoist.com/api/v1/
+  baseURL: https://api.todoist.com/api/v1
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/todoist-user-api-openapi.yml
+  - type: Documentation
+    url: https://developer.todoist.com/api/v1/
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/openapi/todoist-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/json-schema/todoist-task-schema.json
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/rules/todoist-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
+  - type: GraphQL
+    url: graphql/todoist-graphql.md
+- aid: todoist:todoist-workspaces-api
+  name: Todoist Workspaces API
+  description: Workspace management operations
+  humanURL: https://developer.todoist.com/api/v1/
+  baseURL: https://api.todoist.com/api/v1
+  tags:
+  - Workspaces
+  properties:
+  - type: OpenAPI
+    url: openapi/todoist-workspaces-api-openapi.yml
+  - type: Documentation
+    url: https://developer.todoist.com/api/v1/
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/openapi/todoist-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/json-schema/todoist-task-schema.json
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/rules/todoist-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
+  - type: GraphQL
+    url: graphql/todoist-graphql.md
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/todoist/overview
 - type: AgenticAccess
   url: agentic-access/todoist-agentic-access.yml
 - type: TrustCenter
