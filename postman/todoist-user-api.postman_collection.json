@@ -1,0 +1,196 @@
+{
+  "info": {
+    "_postman_id": "7f584d4d-0b93-41be-86fa-417fcb885ea0",
+    "name": "Todoist Comments User API",
+    "description": "The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.\n\nContact Support:\n Name: Todoist Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:16:41.000Z",
+    "updatedAt": "2026-07-28T03:16:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7f584d4d-0b93-41be-86fa-417fcb885ea0"
+  },
+  "item": [
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "stats",
+          "item": [
+            {
+              "name": "Get User Stats",
+              "id": "2931eb06-7e22-4e25-a849-86c9d9c6fca1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/user/stats",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "user",
+                    "stats"
+                  ]
+                },
+                "description": "Returns productivity statistics for the authenticated user."
+              },
+              "response": [
+                {
+                  "id": "2f3d4e93-3df5-4d29-ade5-09feeee82131",
+                  "name": "User productivity statistics",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/stats",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "stats"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"goals\": {}\n}",
+                  "createdAt": "2026-07-28T03:16:41.000Z",
+                  "updatedAt": "2026-07-28T03:16:41.000Z",
+                  "uid": "35240-2f3d4e93-3df5-4d29-ade5-09feeee82131"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:41.000Z",
+              "updatedAt": "2026-07-28T03:16:41.000Z",
+              "uid": "35240-2931eb06-7e22-4e25-a849-86c9d9c6fca1"
+            }
+          ],
+          "id": "8cd22e95-85ae-428c-91e8-8b89a07f865c",
+          "createdAt": "2026-07-28T03:16:41.000Z",
+          "updatedAt": "2026-07-28T03:16:41.000Z",
+          "uid": "35240-8cd22e95-85ae-428c-91e8-8b89a07f865c"
+        },
+        {
+          "name": "Get User",
+          "id": "4eafacbc-7fec-4dd0-9a8d-9de839354d35",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/user",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user"
+              ]
+            },
+            "description": "Returns information about the authenticated user."
+          },
+          "response": [
+            {
+              "id": "f292dac6-40c9-46d5-82fe-939a2a6049c4",
+              "name": "User details",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/user",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "user"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"full_name\": \"<string>\",\n  \"premium_until\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"avatar_medium\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:16:41.000Z",
+              "updatedAt": "2026-07-28T03:16:41.000Z",
+              "uid": "35240-f292dac6-40c9-46d5-82fe-939a2a6049c4"
+            }
+          ],
+          "createdAt": "2026-07-28T03:16:41.000Z",
+          "updatedAt": "2026-07-28T03:16:41.000Z",
+          "uid": "35240-4eafacbc-7fec-4dd0-9a8d-9de839354d35"
+        }
+      ],
+      "id": "d742079d-003f-45ce-87d3-60a1c37de86e",
+      "createdAt": "2026-07-28T03:16:41.000Z",
+      "updatedAt": "2026-07-28T03:16:41.000Z",
+      "uid": "35240-d742079d-003f-45ce-87d3-60a1c37de86e"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.todoist.com/api/v1"
+    }
+  ]
+}

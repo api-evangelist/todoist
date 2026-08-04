@@ -1,0 +1,30 @@
+{
+  "provider": "todoist",
+  "sources": [
+    "todoist-comments-api-openapi.yml",
+    "todoist-labels-api-openapi.yml",
+    "todoist-projects-api-openapi.yml",
+    "todoist-reminders-api-openapi.yml",
+    "todoist-sections-api-openapi.yml",
+    "todoist-sync-api-openapi.yml",
+    "todoist-tasks-api-openapi.yml",
+    "todoist-user-api-openapi.yml",
+    "todoist-workspaces-api-openapi.yml"
+  ],
+  "outputs": [
+    "todoist-comments-api-openapi.yml",
+    "todoist-labels-api-openapi.yml",
+    "todoist-projects-api-openapi.yml",
+    "todoist-reminders-api-openapi.yml",
+    "todoist-sections-api-openapi.yml",
+    "todoist-sync-api-openapi.yml",
+    "todoist-tasks-api-openapi.yml",
+    "todoist-user-api-openapi.yml",
+    "todoist-workspaces-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

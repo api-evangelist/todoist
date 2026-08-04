@@ -1,0 +1,684 @@
+{
+  "info": {
+    "_postman_id": "64b6ec7f-9e11-465c-bf90-c8d48a8edb8a",
+    "name": "Todoist Comments Projects API",
+    "description": "The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.\n\nContact Support:\n Name: Todoist Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:15:35.000Z",
+    "updatedAt": "2026-07-28T03:15:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-64b6ec7f-9e11-465c-bf90-c8d48a8edb8a"
+  },
+  "item": [
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "archive",
+              "item": [
+                {
+                  "name": "Archive Project",
+                  "id": "9731614e-815a-47ec-b0e6-7cfeb0bcccbd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id/archive",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id",
+                        "archive"
+                      ],
+                      "variable": [
+                        {
+                          "id": "667ca87d-8f5b-4111-84a5-c70b2aa463e9",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Archives a project."
+                  },
+                  "response": [
+                    {
+                      "id": "309f27c2-81a7-4282-8b7d-19979fc42fc6",
+                      "name": "Project archived",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:id/archive",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":id",
+                            "archive"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:15:36.000Z",
+                      "updatedAt": "2026-07-28T03:15:36.000Z",
+                      "uid": "35240-309f27c2-81a7-4282-8b7d-19979fc42fc6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:15:36.000Z",
+                  "updatedAt": "2026-07-28T03:15:36.000Z",
+                  "uid": "35240-9731614e-815a-47ec-b0e6-7cfeb0bcccbd"
+                }
+              ],
+              "id": "539b22e0-6b4a-4f46-96a7-5be73b82278e",
+              "createdAt": "2026-07-28T03:15:36.000Z",
+              "updatedAt": "2026-07-28T03:15:36.000Z",
+              "uid": "35240-539b22e0-6b4a-4f46-96a7-5be73b82278e"
+            },
+            {
+              "name": "collaborators",
+              "item": [
+                {
+                  "name": "List Project Collaborators",
+                  "id": "70ffdb24-ae8a-4a98-ad45-a7ea842e9d5c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id/collaborators",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id",
+                        "collaborators"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a1672633-e801-40c8-a08f-c5c904597509",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Returns all collaborators on a shared project."
+                  },
+                  "response": [
+                    {
+                      "id": "4d6a7447-0097-440b-9a40-45930714f442",
+                      "name": "List of collaborators",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:id/collaborators",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":id",
+                            "collaborators"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"email\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T03:15:36.000Z",
+                      "updatedAt": "2026-07-28T03:15:36.000Z",
+                      "uid": "35240-4d6a7447-0097-440b-9a40-45930714f442"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:15:36.000Z",
+                  "updatedAt": "2026-07-28T03:15:36.000Z",
+                  "uid": "35240-70ffdb24-ae8a-4a98-ad45-a7ea842e9d5c"
+                }
+              ],
+              "id": "ff24d005-c611-4b89-ac7d-35c3adced3bd",
+              "createdAt": "2026-07-28T03:15:36.000Z",
+              "updatedAt": "2026-07-28T03:15:36.000Z",
+              "uid": "35240-ff24d005-c611-4b89-ac7d-35c3adced3bd"
+            },
+            {
+              "name": "Get Project",
+              "id": "8c345d0d-9e67-4f69-be68-9d865f29d613",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/projects/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2d39a260-6d0b-42cb-a866-55626af75451",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns a single project by ID."
+              },
+              "response": [
+                {
+                  "id": "ee85fff6-a888-4a65-a97d-fe273e9e9509",
+                  "name": "Project details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"parent_id\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"comment_count\": \"<integer>\",\n  \"is_shared\": \"<boolean>\",\n  \"is_favorite\": \"<boolean>\",\n  \"is_inbox_project\": \"<boolean>\",\n  \"is_team_inbox\": \"<boolean>\",\n  \"view_style\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:15:36.000Z",
+                  "updatedAt": "2026-07-28T03:15:36.000Z",
+                  "uid": "35240-ee85fff6-a888-4a65-a97d-fe273e9e9509"
+                }
+              ],
+              "createdAt": "2026-07-28T03:15:36.000Z",
+              "updatedAt": "2026-07-28T03:15:36.000Z",
+              "uid": "35240-8c345d0d-9e67-4f69-be68-9d865f29d613"
+            },
+            {
+              "name": "Update Project",
+              "id": "b553ff5f-2f51-4952-9771-4c0d3d343c65",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"is_favorite\": \"<boolean>\",\n  \"view_style\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/projects/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "37ed2f32-63e3-4236-afdf-4a1f93737d53",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Updates a project's properties."
+              },
+              "response": [
+                {
+                  "id": "264c8804-fb39-4387-a97b-34fb08541b5a",
+                  "name": "Updated project",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"is_favorite\": \"<boolean>\",\n  \"view_style\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"parent_id\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"comment_count\": \"<integer>\",\n  \"is_shared\": \"<boolean>\",\n  \"is_favorite\": \"<boolean>\",\n  \"is_inbox_project\": \"<boolean>\",\n  \"is_team_inbox\": \"<boolean>\",\n  \"view_style\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:15:36.000Z",
+                  "updatedAt": "2026-07-28T03:15:36.000Z",
+                  "uid": "35240-264c8804-fb39-4387-a97b-34fb08541b5a"
+                }
+              ],
+              "createdAt": "2026-07-28T03:15:36.000Z",
+              "updatedAt": "2026-07-28T03:15:36.000Z",
+              "uid": "35240-b553ff5f-2f51-4952-9771-4c0d3d343c65"
+            },
+            {
+              "name": "Delete Project",
+              "id": "4499c7ad-28e8-41f6-b1ed-243fd054af26",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/projects/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "5b67aa84-2c7d-40e1-ab2d-3895c00b58c5",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Deletes a project and all its tasks."
+              },
+              "response": [
+                {
+                  "id": "820f4791-b363-4800-b52c-607cb4b79ad3",
+                  "name": "Project deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:15:36.000Z",
+                  "updatedAt": "2026-07-28T03:15:36.000Z",
+                  "uid": "35240-820f4791-b363-4800-b52c-607cb4b79ad3"
+                }
+              ],
+              "createdAt": "2026-07-28T03:15:36.000Z",
+              "updatedAt": "2026-07-28T03:15:36.000Z",
+              "uid": "35240-4499c7ad-28e8-41f6-b1ed-243fd054af26"
+            }
+          ],
+          "id": "8ec3a573-890f-4f1f-9b3f-b444d6e7979a",
+          "createdAt": "2026-07-28T03:15:36.000Z",
+          "updatedAt": "2026-07-28T03:15:36.000Z",
+          "uid": "35240-8ec3a573-890f-4f1f-9b3f-b444d6e7979a"
+        },
+        {
+          "name": "List Projects",
+          "id": "b113eb3d-f669-4359-a44b-c47c0065ffe2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/projects",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "projects"
+              ]
+            },
+            "description": "Returns all active projects for the authenticated user."
+          },
+          "response": [
+            {
+              "id": "f769b263-96cb-4c64-a26b-289c1e218ddd",
+              "name": "List of projects",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/projects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"order\": \"<integer>\",\n    \"comment_count\": \"<integer>\",\n    \"is_shared\": \"<boolean>\",\n    \"is_favorite\": \"<boolean>\",\n    \"is_inbox_project\": \"<boolean>\",\n    \"is_team_inbox\": \"<boolean>\",\n    \"view_style\": \"<string>\",\n    \"url\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"order\": \"<integer>\",\n    \"comment_count\": \"<integer>\",\n    \"is_shared\": \"<boolean>\",\n    \"is_favorite\": \"<boolean>\",\n    \"is_inbox_project\": \"<boolean>\",\n    \"is_team_inbox\": \"<boolean>\",\n    \"view_style\": \"<string>\",\n    \"url\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-07-28T03:15:36.000Z",
+              "updatedAt": "2026-07-28T03:15:36.000Z",
+              "uid": "35240-f769b263-96cb-4c64-a26b-289c1e218ddd"
+            }
+          ],
+          "createdAt": "2026-07-28T03:15:36.000Z",
+          "updatedAt": "2026-07-28T03:15:36.000Z",
+          "uid": "35240-b113eb3d-f669-4359-a44b-c47c0065ffe2"
+        },
+        {
+          "name": "Create Project",
+          "id": "954e55ce-df91-4788-ac4d-23b4bea7523c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"parent_id\": \"<string>\",\n  \"color\": \"<string>\",\n  \"is_favorite\": \"<boolean>\",\n  \"view_style\": \"list\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/projects",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "projects"
+              ]
+            },
+            "description": "Creates a new project."
+          },
+          "response": [
+            {
+              "id": "8cb63a1d-5594-4637-a9f9-2f0a186b29a6",
+              "name": "Created project",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"parent_id\": \"<string>\",\n  \"color\": \"<string>\",\n  \"is_favorite\": \"<boolean>\",\n  \"view_style\": \"list\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/projects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"parent_id\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"comment_count\": \"<integer>\",\n  \"is_shared\": \"<boolean>\",\n  \"is_favorite\": \"<boolean>\",\n  \"is_inbox_project\": \"<boolean>\",\n  \"is_team_inbox\": \"<boolean>\",\n  \"view_style\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:15:36.000Z",
+              "updatedAt": "2026-07-28T03:15:36.000Z",
+              "uid": "35240-8cb63a1d-5594-4637-a9f9-2f0a186b29a6"
+            }
+          ],
+          "createdAt": "2026-07-28T03:15:36.000Z",
+          "updatedAt": "2026-07-28T03:15:36.000Z",
+          "uid": "35240-954e55ce-df91-4788-ac4d-23b4bea7523c"
+        }
+      ],
+      "id": "de6a0455-7a90-4d14-9221-8f84425ab775",
+      "createdAt": "2026-07-28T03:15:36.000Z",
+      "updatedAt": "2026-07-28T03:15:36.000Z",
+      "uid": "35240-de6a0455-7a90-4d14-9221-8f84425ab775"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.todoist.com/api/v1"
+    }
+  ]
+}

@@ -1,0 +1,1269 @@
+openapi: 3.1.0
+info:
+  title: Todoist API
+  description: >-
+    The Todoist API v1 provides programmatic access to task management, projects,
+    sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0
+    and personal API tokens. Includes incremental sync via the /sync endpoint.
+  version: '1.0'
+  contact:
+    name: Todoist Developer Support
+    url: https://developer.todoist.com/
+  termsOfService: https://doist.com/terms-of-service
+  license:
+    name: Todoist API Terms
+    url: https://developer.todoist.com/
+servers:
+  - url: https://api.todoist.com/api/v1
+    description: Production
+security:
+  - bearerAuth: []
+tags:
+  - name: Tasks
+    description: Task (item) management operations
+  - name: Projects
+    description: Project management operations
+  - name: Sections
+    description: Section management operations
+  - name: Labels
+    description: Label management operations
+  - name: Comments
+    description: Comment and note operations
+  - name: Reminders
+    description: Reminder management operations
+  - name: Filters
+    description: Filter management operations
+  - name: Workspaces
+    description: Workspace management operations
+  - name: User
+    description: User account and settings operations
+  - name: Sync
+    description: Incremental sync operations
+paths:
+  /tasks:
+    get:
+      operationId: listTasks
+      summary: List Tasks
+      description: Returns a list of tasks filtered by project, section, label, or other criteria.
+      tags:
+        - Tasks
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: string
+          description: Filter by project ID
+        - name: section_id
+          in: query
+          schema:
+            type: string
+          description: Filter by section ID
+        - name: label
+          in: query
+          schema:
+            type: string
+          description: Filter by label name
+        - name: filter
+          in: query
+          schema:
+            type: string
+          description: Filter expression
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: Language for filter expression
+        - name: ids
+          in: query
+          schema:
+            type: string
+          description: Comma-separated task IDs
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: Number of tasks to return
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          description: Pagination cursor
+      responses:
+        '200':
+          description: List of tasks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+                  next_cursor:
+                    type: string
+    post:
+      operationId: createTask
+      summary: Create Task
+      description: Creates a new task in Todoist.
+      tags:
+        - Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskRequest'
+      responses:
+        '200':
+          description: Created task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+  /tasks/{id}:
+    get:
+      operationId: getTask
+      summary: Get Task
+      description: Returns a single task by its ID.
+      tags:
+        - Tasks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Task details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+    post:
+      operationId: updateTask
+      summary: Update Task
+      description: Updates a task with new properties.
+      tags:
+        - Tasks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskRequest'
+      responses:
+        '200':
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+    delete:
+      operationId: deleteTask
+      summary: Delete Task
+      description: Deletes a task permanently.
+      tags:
+        - Tasks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Task deleted
+  /tasks/{id}/close:
+    post:
+      operationId: closeTask
+      summary: Close Task
+      description: Marks a task as completed.
+      tags:
+        - Tasks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Task closed
+  /tasks/{id}/reopen:
+    post:
+      operationId: reopenTask
+      summary: Reopen Task
+      description: Marks a previously completed task as uncompleted.
+      tags:
+        - Tasks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Task reopened
+  /tasks/{id}/move:
+    post:
+      operationId: moveTask
+      summary: Move Task
+      description: Moves a task to a different project or section.
+      tags:
+        - Tasks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: string
+                section_id:
+                  type: string
+                parent_id:
+                  type: string
+      responses:
+        '200':
+          description: Task moved
+  /tasks/quick_add:
+    post:
+      operationId: quickAddTask
+      summary: Quick Add Task
+      description: Creates a task using natural language processing.
+      tags:
+        - Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+                  description: Natural language task text
+                note:
+                  type: string
+                reminder:
+                  type: string
+                auto_reminder:
+                  type: boolean
+      responses:
+        '200':
+          description: Created task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+  /projects:
+    get:
+      operationId: listProjects
+      summary: List Projects
+      description: Returns all active projects for the authenticated user.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: List of projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+    post:
+      operationId: createProject
+      summary: Create Project
+      description: Creates a new project.
+      tags:
+        - Projects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectRequest'
+      responses:
+        '200':
+          description: Created project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+  /projects/{id}:
+    get:
+      operationId: getProject
+      summary: Get Project
+      description: Returns a single project by ID.
+      tags:
+        - Projects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+    post:
+      operationId: updateProject
+      summary: Update Project
+      description: Updates a project's properties.
+      tags:
+        - Projects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectRequest'
+      responses:
+        '200':
+          description: Updated project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+    delete:
+      operationId: deleteProject
+      summary: Delete Project
+      description: Deletes a project and all its tasks.
+      tags:
+        - Projects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Project deleted
+  /projects/{id}/archive:
+    post:
+      operationId: archiveProject
+      summary: Archive Project
+      description: Archives a project.
+      tags:
+        - Projects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Project archived
+  /projects/{id}/collaborators:
+    get:
+      operationId: listProjectCollaborators
+      summary: List Project Collaborators
+      description: Returns all collaborators on a shared project.
+      tags:
+        - Projects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of collaborators
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Collaborator'
+  /sections:
+    get:
+      operationId: listSections
+      summary: List Sections
+      description: Returns all sections optionally filtered by project.
+      tags:
+        - Sections
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of sections
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Section'
+    post:
+      operationId: createSection
+      summary: Create Section
+      description: Creates a new section in a project.
+      tags:
+        - Sections
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSectionRequest'
+      responses:
+        '200':
+          description: Created section
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+  /sections/{id}:
+    get:
+      operationId: getSection
+      summary: Get Section
+      description: Returns a single section by ID.
+      tags:
+        - Sections
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Section details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+    post:
+      operationId: updateSection
+      summary: Update Section
+      description: Updates a section's properties.
+      tags:
+        - Sections
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Updated section
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+    delete:
+      operationId: deleteSection
+      summary: Delete Section
+      description: Deletes a section and moves its tasks to the project root.
+      tags:
+        - Sections
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Section deleted
+  /labels:
+    get:
+      operationId: listLabels
+      summary: List Labels
+      description: Returns all personal labels for the authenticated user.
+      tags:
+        - Labels
+      responses:
+        '200':
+          description: List of labels
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Label'
+    post:
+      operationId: createLabel
+      summary: Create Label
+      description: Creates a new personal label.
+      tags:
+        - Labels
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLabelRequest'
+      responses:
+        '200':
+          description: Created label
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+  /labels/{id}:
+    get:
+      operationId: getLabel
+      summary: Get Label
+      description: Returns a single label by ID.
+      tags:
+        - Labels
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Label details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+    post:
+      operationId: updateLabel
+      summary: Update Label
+      description: Updates a label's properties.
+      tags:
+        - Labels
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                color:
+                  type: string
+                order:
+                  type: integer
+                is_favorite:
+                  type: boolean
+      responses:
+        '200':
+          description: Updated label
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+    delete:
+      operationId: deleteLabel
+      summary: Delete Label
+      description: Deletes a label permanently.
+      tags:
+        - Labels
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Label deleted
+  /comments:
+    get:
+      operationId: listComments
+      summary: List Comments
+      description: Returns all comments on a task or project.
+      tags:
+        - Comments
+      parameters:
+        - name: task_id
+          in: query
+          schema:
+            type: string
+        - name: project_id
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+    post:
+      operationId: createComment
+      summary: Create Comment
+      description: Creates a new comment on a task or project.
+      tags:
+        - Comments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommentRequest'
+      responses:
+        '200':
+          description: Created comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+  /comments/{id}:
+    get:
+      operationId: getComment
+      summary: Get Comment
+      description: Returns a single comment by ID.
+      tags:
+        - Comments
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Comment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+    post:
+      operationId: updateComment
+      summary: Update Comment
+      description: Updates a comment's content.
+      tags:
+        - Comments
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+              properties:
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Updated comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+    delete:
+      operationId: deleteComment
+      summary: Delete Comment
+      description: Deletes a comment permanently.
+      tags:
+        - Comments
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Comment deleted
+  /reminders:
+    get:
+      operationId: listReminders
+      summary: List Reminders
+      description: Returns all reminders for the authenticated user.
+      tags:
+        - Reminders
+      responses:
+        '200':
+          description: List of reminders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reminder'
+    post:
+      operationId: createReminder
+      summary: Create Reminder
+      description: Creates a new reminder for a task.
+      tags:
+        - Reminders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReminderRequest'
+      responses:
+        '200':
+          description: Created reminder
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reminder'
+  /reminders/{id}:
+    get:
+      operationId: getReminder
+      summary: Get Reminder
+      description: Returns a single reminder by ID.
+      tags:
+        - Reminders
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Reminder details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reminder'
+    delete:
+      operationId: deleteReminder
+      summary: Delete Reminder
+      description: Deletes a reminder permanently.
+      tags:
+        - Reminders
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Reminder deleted
+  /workspaces:
+    get:
+      operationId: listWorkspaces
+      summary: List Workspaces
+      description: Returns all workspaces the authenticated user belongs to.
+      tags:
+        - Workspaces
+      responses:
+        '200':
+          description: List of workspaces
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workspace'
+  /workspaces/{id}:
+    get:
+      operationId: getWorkspace
+      summary: Get Workspace
+      description: Returns details of a specific workspace.
+      tags:
+        - Workspaces
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Workspace details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+  /workspaces/{id}/users:
+    get:
+      operationId: listWorkspaceUsers
+      summary: List Workspace Users
+      description: Returns all users in a workspace.
+      tags:
+        - Workspaces
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of workspace members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  /user:
+    get:
+      operationId: getUser
+      summary: Get User
+      description: Returns information about the authenticated user.
+      tags:
+        - User
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /user/stats:
+    get:
+      operationId: getUserStats
+      summary: Get User Stats
+      description: Returns productivity statistics for the authenticated user.
+      tags:
+        - User
+      responses:
+        '200':
+          description: User productivity statistics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  goals:
+                    type: object
+                  days_items:
+                    type: array
+                    items:
+                      type: object
+                  week_items:
+                    type: array
+                    items:
+                      type: object
+  /sync:
+    post:
+      operationId: sync
+      summary: Sync Resources
+      description: >-
+        Primary sync endpoint for batch read/write operations. Retrieve resources
+        by specifying resource_types or execute commands for write operations.
+        Supports incremental synchronization via sync_token.
+      tags:
+        - Sync
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - sync_token
+                - resource_types
+              properties:
+                sync_token:
+                  type: string
+                  description: Use '*' for full sync or token from previous response
+                resource_types:
+                  type: string
+                  description: JSON array of resource types to retrieve
+                commands:
+                  type: string
+                  description: JSON array of write commands
+      responses:
+        '200':
+          description: Sync response with updated resources
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sync_token:
+                    type: string
+                  full_sync:
+                    type: boolean
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+                  projects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Project'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal API token or OAuth 2.0 access token
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+          description: Task content/title
+        description:
+          type: string
+        project_id:
+          type: string
+        section_id:
+          type: string
+        parent_id:
+          type: string
+        order:
+          type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        priority:
+          type: integer
+          enum: [1, 2, 3, 4]
+        due:
+          $ref: '#/components/schemas/Due'
+        deadline:
+          $ref: '#/components/schemas/Deadline'
+        assignee_id:
+          type: string
+        assigner_id:
+          type: string
+        comment_count:
+          type: integer
+        is_completed:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        creator_id:
+          type: string
+        url:
+          type: string
+    Due:
+      type: object
+      properties:
+        date:
+          type: string
+        is_recurring:
+          type: boolean
+        string:
+          type: string
+        datetime:
+          type: string
+          format: date-time
+        timezone:
+          type: string
+    Deadline:
+      type: object
+      properties:
+        date:
+          type: string
+        lang:
+          type: string
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        parent_id:
+          type: string
+        order:
+          type: integer
+        comment_count:
+          type: integer
+        is_shared:
+          type: boolean
+        is_favorite:
+          type: boolean
+        is_inbox_project:
+          type: boolean
+        is_team_inbox:
+          type: boolean
+        view_style:
+          type: string
+        url:
+          type: string
+    Section:
+      type: object
+      properties:
+        id:
+          type: string
+        project_id:
+          type: string
+        order:
+          type: integer
+        name:
+          type: string
+    Label:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        order:
+          type: integer
+        is_favorite:
+          type: boolean
+    Comment:
+      type: object
+      properties:
+        id:
+          type: string
+        task_id:
+          type: string
+        project_id:
+          type: string
+        posted_at:
+          type: string
+          format: date-time
+        content:
+          type: string
+        attachment:
+          type: object
+    Reminder:
+      type: object
+      properties:
+        id:
+          type: string
+        task_id:
+          type: string
+        type:
+          type: string
+          enum: [absolute, relative]
+        due:
+          $ref: '#/components/schemas/Due'
+        mm_offset:
+          type: integer
+    Workspace:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        logo:
+          type: string
+        role:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        full_name:
+          type: string
+        premium_until:
+          type: string
+        timezone:
+          type: string
+        avatar_medium:
+          type: string
+    Collaborator:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+    CreateTaskRequest:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+        description:
+          type: string
+        project_id:
+          type: string
+        section_id:
+          type: string
+        parent_id:
+          type: string
+        order:
+          type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        priority:
+          type: integer
+          enum: [1, 2, 3, 4]
+        due_string:
+          type: string
+        due_date:
+          type: string
+        due_datetime:
+          type: string
+        due_lang:
+          type: string
+        assignee_id:
+          type: string
+        auto_reminder:
+          type: boolean
+    UpdateTaskRequest:
+      type: object
+      properties:
+        content:
+          type: string
+        description:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        priority:
+          type: integer
+          enum: [1, 2, 3, 4]
+        due_string:
+          type: string
+        due_date:
+          type: string
+        due_datetime:
+          type: string
+        assignee_id:
+          type: string
+    CreateProjectRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        parent_id:
+          type: string
+        color:
+          type: string
+        is_favorite:
+          type: boolean
+        view_style:
+          type: string
+          enum: [list, board]
+    UpdateProjectRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+        is_favorite:
+          type: boolean
+        view_style:
+          type: string
+    CreateSectionRequest:
+      type: object
+      required:
+        - project_id
+        - name
+      properties:
+        project_id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+    CreateLabelRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        order:
+          type: integer
+        color:
+          type: string
+        is_favorite:
+          type: boolean
+    CreateCommentRequest:
+      type: object
+      required:
+        - content
+      properties:
+        task_id:
+          type: string
+        project_id:
+          type: string
+        content:
+          type: string
+        attachment:
+          type: object
+    CreateReminderRequest:
+      type: object
+      required:
+        - task_id
+        - type
+      properties:
+        task_id:
+          type: string
+        type:
+          type: string
+          enum: [absolute, relative]
+        due_string:
+          type: string
+        due_datetime:
+          type: string
+        mm_offset:
+          type: integer

@@ -1,0 +1,520 @@
+{
+  "info": {
+    "_postman_id": "57ec1e55-4617-47d1-b1f9-8c6d4b3f0000",
+    "name": "Todoist Comments API",
+    "description": "The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.\n\nContact Support:\n Name: Todoist Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:14:20.000Z",
+    "updatedAt": "2026-07-28T03:14:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-57ec1e55-4617-47d1-b1f9-8c6d4b3f0000"
+  },
+  "item": [
+    {
+      "name": "comments",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get Comment",
+              "id": "84f2863b-0928-4c9a-a06d-1ffca71aaa68",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/comments/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "4cfee23c-ca51-4567-b820-1bddae900aaf",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns a single comment by ID."
+              },
+              "response": [
+                {
+                  "id": "ac0df575-7932-468e-bcb3-1770453a48c1",
+                  "name": "Comment details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"task_id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"posted_at\": \"<dateTime>\",\n  \"content\": \"<string>\",\n  \"attachment\": {}\n}",
+                  "createdAt": "2026-07-28T03:14:21.000Z",
+                  "updatedAt": "2026-07-28T03:14:21.000Z",
+                  "uid": "35240-ac0df575-7932-468e-bcb3-1770453a48c1"
+                }
+              ],
+              "createdAt": "2026-07-28T03:14:21.000Z",
+              "updatedAt": "2026-07-28T03:14:21.000Z",
+              "uid": "35240-84f2863b-0928-4c9a-a06d-1ffca71aaa68"
+            },
+            {
+              "name": "Update Comment",
+              "id": "bbe549e7-3a34-4545-ad41-2ae5c4d43b73",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/comments/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "609d9e6a-3948-42c8-9589-21b725853143",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Updates a comment's content."
+              },
+              "response": [
+                {
+                  "id": "c7017b8d-e36a-47c1-92cb-c0123a60be56",
+                  "name": "Updated comment",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"content\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"task_id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"posted_at\": \"<dateTime>\",\n  \"content\": \"<string>\",\n  \"attachment\": {}\n}",
+                  "createdAt": "2026-07-28T03:14:21.000Z",
+                  "updatedAt": "2026-07-28T03:14:21.000Z",
+                  "uid": "35240-c7017b8d-e36a-47c1-92cb-c0123a60be56"
+                }
+              ],
+              "createdAt": "2026-07-28T03:14:21.000Z",
+              "updatedAt": "2026-07-28T03:14:21.000Z",
+              "uid": "35240-bbe549e7-3a34-4545-ad41-2ae5c4d43b73"
+            },
+            {
+              "name": "Delete Comment",
+              "id": "fcabb01d-9db9-4b5c-9383-4e24ec843cfe",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/comments/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "55fe1ea2-afb8-450b-b282-c79baa4d2c51",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Deletes a comment permanently."
+              },
+              "response": [
+                {
+                  "id": "21689e99-367b-4fc4-aaaf-c57faebdd763",
+                  "name": "Comment deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:14:21.000Z",
+                  "updatedAt": "2026-07-28T03:14:21.000Z",
+                  "uid": "35240-21689e99-367b-4fc4-aaaf-c57faebdd763"
+                }
+              ],
+              "createdAt": "2026-07-28T03:14:21.000Z",
+              "updatedAt": "2026-07-28T03:14:21.000Z",
+              "uid": "35240-fcabb01d-9db9-4b5c-9383-4e24ec843cfe"
+            }
+          ],
+          "id": "fe5f37a6-88e3-4bdc-a082-6e066302de79",
+          "createdAt": "2026-07-28T03:14:21.000Z",
+          "updatedAt": "2026-07-28T03:14:21.000Z",
+          "uid": "35240-fe5f37a6-88e3-4bdc-a082-6e066302de79"
+        },
+        {
+          "name": "List Comments",
+          "id": "1adb2033-f94d-4495-b769-03e22331d77d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/comments?task_id=<string>&project_id=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments"
+              ],
+              "query": [
+                {
+                  "key": "task_id",
+                  "value": "<string>"
+                },
+                {
+                  "key": "project_id",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns all comments on a task or project."
+          },
+          "response": [
+            {
+              "id": "60110806-552b-4b0e-90fa-10285c6e78f8",
+              "name": "List of comments",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/comments?task_id=<string>&project_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments"
+                  ],
+                  "query": [
+                    {
+                      "key": "task_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"task_id\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"posted_at\": \"<dateTime>\",\n    \"content\": \"<string>\",\n    \"attachment\": {}\n  },\n  {\n    \"id\": \"<string>\",\n    \"task_id\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"posted_at\": \"<dateTime>\",\n    \"content\": \"<string>\",\n    \"attachment\": {}\n  }\n]",
+              "createdAt": "2026-07-28T03:14:21.000Z",
+              "updatedAt": "2026-07-28T03:14:21.000Z",
+              "uid": "35240-60110806-552b-4b0e-90fa-10285c6e78f8"
+            }
+          ],
+          "createdAt": "2026-07-28T03:14:21.000Z",
+          "updatedAt": "2026-07-28T03:14:21.000Z",
+          "uid": "35240-1adb2033-f94d-4495-b769-03e22331d77d"
+        },
+        {
+          "name": "Create Comment",
+          "id": "6041d253-5fa6-4856-afb1-d8c460fae77e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"<string>\",\n  \"task_id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"attachment\": {}\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments"
+              ]
+            },
+            "description": "Creates a new comment on a task or project."
+          },
+          "response": [
+            {
+              "id": "fc9f7de4-79af-4848-a556-14a75b0a1759",
+              "name": "Created comment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"task_id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"attachment\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/comments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"task_id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"posted_at\": \"<dateTime>\",\n  \"content\": \"<string>\",\n  \"attachment\": {}\n}",
+              "createdAt": "2026-07-28T03:14:21.000Z",
+              "updatedAt": "2026-07-28T03:14:21.000Z",
+              "uid": "35240-fc9f7de4-79af-4848-a556-14a75b0a1759"
+            }
+          ],
+          "createdAt": "2026-07-28T03:14:21.000Z",
+          "updatedAt": "2026-07-28T03:14:21.000Z",
+          "uid": "35240-6041d253-5fa6-4856-afb1-d8c460fae77e"
+        }
+      ],
+      "id": "79e34cc0-260a-4ec9-b1c7-4f6e754bfb1e",
+      "createdAt": "2026-07-28T03:14:21.000Z",
+      "updatedAt": "2026-07-28T03:14:21.000Z",
+      "uid": "35240-79e34cc0-260a-4ec9-b1c7-4f6e754bfb1e"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.todoist.com/api/v1"
+    }
+  ]
+}

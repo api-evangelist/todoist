@@ -1,0 +1,980 @@
+{
+  "info": {
+    "_postman_id": "da8b7030-97dc-4d6e-be30-f0c1de7c9e6b",
+    "name": "Todoist Comments Tasks API",
+    "description": "The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.\n\nContact Support:\n Name: Todoist Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:16:40.000Z",
+    "updatedAt": "2026-07-28T03:16:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-da8b7030-97dc-4d6e-be30-f0c1de7c9e6b"
+  },
+  "item": [
+    {
+      "name": "tasks",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "close",
+              "item": [
+                {
+                  "name": "Close Task",
+                  "id": "c9cc30bc-fc5f-49a2-9299-864f3727a21d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/tasks/:id/close",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tasks",
+                        ":id",
+                        "close"
+                      ],
+                      "variable": [
+                        {
+                          "id": "785e1289-fae2-46be-8df7-932a17550316",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Marks a task as completed."
+                  },
+                  "response": [
+                    {
+                      "id": "623176a6-c9df-4154-a67a-b393a7e2b02c",
+                      "name": "Task closed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tasks/:id/close",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tasks",
+                            ":id",
+                            "close"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:16:40.000Z",
+                      "updatedAt": "2026-07-28T03:16:40.000Z",
+                      "uid": "35240-623176a6-c9df-4154-a67a-b393a7e2b02c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:16:40.000Z",
+                  "updatedAt": "2026-07-28T03:16:40.000Z",
+                  "uid": "35240-c9cc30bc-fc5f-49a2-9299-864f3727a21d"
+                }
+              ],
+              "id": "fac1b36a-359c-4a39-80b6-a79f80b3fbfc",
+              "createdAt": "2026-07-28T03:16:40.000Z",
+              "updatedAt": "2026-07-28T03:16:40.000Z",
+              "uid": "35240-fac1b36a-359c-4a39-80b6-a79f80b3fbfc"
+            },
+            {
+              "name": "reopen",
+              "item": [
+                {
+                  "name": "Reopen Task",
+                  "id": "60a9a531-b3f3-4965-87cd-907c4cf9acbb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/tasks/:id/reopen",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tasks",
+                        ":id",
+                        "reopen"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4a9c6963-263e-474d-a768-9ba13f9ef376",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Marks a previously completed task as uncompleted."
+                  },
+                  "response": [
+                    {
+                      "id": "87b24741-9745-406b-b607-89be4e8a0532",
+                      "name": "Task reopened",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tasks/:id/reopen",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tasks",
+                            ":id",
+                            "reopen"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:16:40.000Z",
+                      "updatedAt": "2026-07-28T03:16:40.000Z",
+                      "uid": "35240-87b24741-9745-406b-b607-89be4e8a0532"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:16:40.000Z",
+                  "updatedAt": "2026-07-28T03:16:40.000Z",
+                  "uid": "35240-60a9a531-b3f3-4965-87cd-907c4cf9acbb"
+                }
+              ],
+              "id": "e4ab870a-5cc7-4d49-baae-74588abcb117",
+              "createdAt": "2026-07-28T03:16:40.000Z",
+              "updatedAt": "2026-07-28T03:16:40.000Z",
+              "uid": "35240-e4ab870a-5cc7-4d49-baae-74588abcb117"
+            },
+            {
+              "name": "move",
+              "item": [
+                {
+                  "name": "Move Task",
+                  "id": "e80b205b-482e-46f7-b99e-76f1f40e397f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"project_id\": \"<string>\",\n  \"section_id\": \"<string>\",\n  \"parent_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/tasks/:id/move",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tasks",
+                        ":id",
+                        "move"
+                      ],
+                      "variable": [
+                        {
+                          "id": "631c7299-c2e1-458b-9a64-d9c36e82a560",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Moves a task to a different project or section."
+                  },
+                  "response": [
+                    {
+                      "id": "c2ab3f2b-992a-43a8-9a35-8da4a461671b",
+                      "name": "Task moved",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"project_id\": \"<string>\",\n  \"section_id\": \"<string>\",\n  \"parent_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/tasks/:id/move",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tasks",
+                            ":id",
+                            "move"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:16:40.000Z",
+                      "updatedAt": "2026-07-28T03:16:40.000Z",
+                      "uid": "35240-c2ab3f2b-992a-43a8-9a35-8da4a461671b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:16:40.000Z",
+                  "updatedAt": "2026-07-28T03:16:40.000Z",
+                  "uid": "35240-e80b205b-482e-46f7-b99e-76f1f40e397f"
+                }
+              ],
+              "id": "15465dc9-db83-4e51-be42-82b2f749fbc6",
+              "createdAt": "2026-07-28T03:16:40.000Z",
+              "updatedAt": "2026-07-28T03:16:40.000Z",
+              "uid": "35240-15465dc9-db83-4e51-be42-82b2f749fbc6"
+            },
+            {
+              "name": "Get Task",
+              "id": "70097e1c-17f4-4d3c-b616-b0be71a7ee65",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tasks/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tasks",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b8fab314-b3f0-4540-ac5f-1bd9e13ba8a0",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns a single task by its ID."
+              },
+              "response": [
+                {
+                  "id": "1066aff8-8d08-4a72-ad9c-c05c24c7600f",
+                  "name": "Task details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tasks/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tasks",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"content\": \"<string>\",\n  \"description\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"section_id\": \"<string>\",\n  \"parent_id\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 2,\n  \"due\": {\n    \"date\": \"<string>\",\n    \"is_recurring\": \"<boolean>\",\n    \"string\": \"<string>\",\n    \"datetime\": \"<dateTime>\",\n    \"timezone\": \"<string>\"\n  },\n  \"deadline\": {\n    \"date\": \"<string>\",\n    \"lang\": \"<string>\"\n  },\n  \"assignee_id\": \"<string>\",\n  \"assigner_id\": \"<string>\",\n  \"comment_count\": \"<integer>\",\n  \"is_completed\": \"<boolean>\",\n  \"created_at\": \"<dateTime>\",\n  \"creator_id\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:16:40.000Z",
+                  "updatedAt": "2026-07-28T03:16:40.000Z",
+                  "uid": "35240-1066aff8-8d08-4a72-ad9c-c05c24c7600f"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:40.000Z",
+              "updatedAt": "2026-07-28T03:16:40.000Z",
+              "uid": "35240-70097e1c-17f4-4d3c-b616-b0be71a7ee65"
+            },
+            {
+              "name": "Update Task",
+              "id": "ab4ae9c2-eacb-4f58-b4bc-deff44d3375b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"description\": \"<string>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 2,\n  \"due_string\": \"<string>\",\n  \"due_date\": \"<string>\",\n  \"due_datetime\": \"<string>\",\n  \"assignee_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tasks/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tasks",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ec4711f0-bf5f-4ffd-8939-9cf66b63f2d9",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Updates a task with new properties."
+              },
+              "response": [
+                {
+                  "id": "6365e8d5-da67-4e1f-ac2a-6f27deb34e87",
+                  "name": "Updated task",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"content\": \"<string>\",\n  \"description\": \"<string>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 2,\n  \"due_string\": \"<string>\",\n  \"due_date\": \"<string>\",\n  \"due_datetime\": \"<string>\",\n  \"assignee_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/tasks/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tasks",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"content\": \"<string>\",\n  \"description\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"section_id\": \"<string>\",\n  \"parent_id\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 2,\n  \"due\": {\n    \"date\": \"<string>\",\n    \"is_recurring\": \"<boolean>\",\n    \"string\": \"<string>\",\n    \"datetime\": \"<dateTime>\",\n    \"timezone\": \"<string>\"\n  },\n  \"deadline\": {\n    \"date\": \"<string>\",\n    \"lang\": \"<string>\"\n  },\n  \"assignee_id\": \"<string>\",\n  \"assigner_id\": \"<string>\",\n  \"comment_count\": \"<integer>\",\n  \"is_completed\": \"<boolean>\",\n  \"created_at\": \"<dateTime>\",\n  \"creator_id\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:16:40.000Z",
+                  "updatedAt": "2026-07-28T03:16:40.000Z",
+                  "uid": "35240-6365e8d5-da67-4e1f-ac2a-6f27deb34e87"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:40.000Z",
+              "updatedAt": "2026-07-28T03:16:40.000Z",
+              "uid": "35240-ab4ae9c2-eacb-4f58-b4bc-deff44d3375b"
+            },
+            {
+              "name": "Delete Task",
+              "id": "e5c270e3-6fba-4fe6-9c0e-f145a7948f71",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/tasks/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tasks",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "0c1934f4-f6ed-4f6a-bf10-e9e6b8a80335",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Deletes a task permanently."
+              },
+              "response": [
+                {
+                  "id": "bbc587c5-a651-4cdc-aa78-1e0d089f14bb",
+                  "name": "Task deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tasks/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tasks",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:40.000Z",
+                  "updatedAt": "2026-07-28T03:16:40.000Z",
+                  "uid": "35240-bbc587c5-a651-4cdc-aa78-1e0d089f14bb"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:40.000Z",
+              "updatedAt": "2026-07-28T03:16:40.000Z",
+              "uid": "35240-e5c270e3-6fba-4fe6-9c0e-f145a7948f71"
+            }
+          ],
+          "id": "a3d8318e-fd82-4517-b44b-d47fe2703704",
+          "createdAt": "2026-07-28T03:16:40.000Z",
+          "updatedAt": "2026-07-28T03:16:40.000Z",
+          "uid": "35240-a3d8318e-fd82-4517-b44b-d47fe2703704"
+        },
+        {
+          "name": "quick_add",
+          "item": [
+            {
+              "name": "Quick Add Task",
+              "id": "b5689491-7821-4747-8ed6-ec1db493847e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"note\": \"<string>\",\n  \"reminder\": \"<string>\",\n  \"auto_reminder\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tasks/quick_add",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tasks",
+                    "quick_add"
+                  ]
+                },
+                "description": "Creates a task using natural language processing."
+              },
+              "response": [
+                {
+                  "id": "c88b51c2-411c-40ef-8fec-74942edfd437",
+                  "name": "Created task",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\",\n  \"note\": \"<string>\",\n  \"reminder\": \"<string>\",\n  \"auto_reminder\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/tasks/quick_add",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tasks",
+                        "quick_add"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"content\": \"<string>\",\n  \"description\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"section_id\": \"<string>\",\n  \"parent_id\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 2,\n  \"due\": {\n    \"date\": \"<string>\",\n    \"is_recurring\": \"<boolean>\",\n    \"string\": \"<string>\",\n    \"datetime\": \"<dateTime>\",\n    \"timezone\": \"<string>\"\n  },\n  \"deadline\": {\n    \"date\": \"<string>\",\n    \"lang\": \"<string>\"\n  },\n  \"assignee_id\": \"<string>\",\n  \"assigner_id\": \"<string>\",\n  \"comment_count\": \"<integer>\",\n  \"is_completed\": \"<boolean>\",\n  \"created_at\": \"<dateTime>\",\n  \"creator_id\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:16:40.000Z",
+                  "updatedAt": "2026-07-28T03:16:40.000Z",
+                  "uid": "35240-c88b51c2-411c-40ef-8fec-74942edfd437"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:40.000Z",
+              "updatedAt": "2026-07-28T03:16:40.000Z",
+              "uid": "35240-b5689491-7821-4747-8ed6-ec1db493847e"
+            }
+          ],
+          "id": "a06bc4a5-4f3f-49fc-aa64-4429663689c6",
+          "createdAt": "2026-07-28T03:16:40.000Z",
+          "updatedAt": "2026-07-28T03:16:40.000Z",
+          "uid": "35240-a06bc4a5-4f3f-49fc-aa64-4429663689c6"
+        },
+        {
+          "name": "List Tasks",
+          "id": "18788ec3-e804-4313-a572-20035295044a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tasks?project_id=<string>&section_id=<string>&label=<string>&filter=<string>&lang=<string>&ids=<string>&limit=<integer>&cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tasks"
+              ],
+              "query": [
+                {
+                  "description": "Filter by project ID",
+                  "key": "project_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by section ID",
+                  "key": "section_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by label name",
+                  "key": "label",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter expression",
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Language for filter expression",
+                  "key": "lang",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Comma-separated task IDs",
+                  "key": "ids",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Number of tasks to return",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Pagination cursor",
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a list of tasks filtered by project, section, label, or other criteria."
+          },
+          "response": [
+            {
+              "id": "57a616ed-c2f5-4a2e-8940-f627e839b6e1",
+              "name": "List of tasks",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tasks?project_id=<string>&section_id=<string>&label=<string>&filter=<string>&lang=<string>&ids=<string>&limit=<integer>&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tasks"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by project ID",
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by section ID",
+                      "key": "section_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by label name",
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter expression",
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Language for filter expression",
+                      "key": "lang",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated task IDs",
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of tasks to return",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination cursor",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"<string>\",\n      \"content\": \"<string>\",\n      \"description\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"section_id\": \"<string>\",\n      \"parent_id\": \"<string>\",\n      \"order\": \"<integer>\",\n      \"labels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"priority\": 2,\n      \"due\": {\n        \"date\": \"<string>\",\n        \"is_recurring\": \"<boolean>\",\n        \"string\": \"<string>\",\n        \"datetime\": \"<dateTime>\",\n        \"timezone\": \"<string>\"\n      },\n      \"deadline\": {\n        \"date\": \"<string>\",\n        \"lang\": \"<string>\"\n      },\n      \"assignee_id\": \"<string>\",\n      \"assigner_id\": \"<string>\",\n      \"comment_count\": \"<integer>\",\n      \"is_completed\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"creator_id\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"content\": \"<string>\",\n      \"description\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"section_id\": \"<string>\",\n      \"parent_id\": \"<string>\",\n      \"order\": \"<integer>\",\n      \"labels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"priority\": 2,\n      \"due\": {\n        \"date\": \"<string>\",\n        \"is_recurring\": \"<boolean>\",\n        \"string\": \"<string>\",\n        \"datetime\": \"<dateTime>\",\n        \"timezone\": \"<string>\"\n      },\n      \"deadline\": {\n        \"date\": \"<string>\",\n        \"lang\": \"<string>\"\n      },\n      \"assignee_id\": \"<string>\",\n      \"assigner_id\": \"<string>\",\n      \"comment_count\": \"<integer>\",\n      \"is_completed\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"creator_id\": \"<string>\",\n      \"url\": \"<string>\"\n    }\n  ],\n  \"next_cursor\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:16:40.000Z",
+              "updatedAt": "2026-07-28T03:16:40.000Z",
+              "uid": "35240-57a616ed-c2f5-4a2e-8940-f627e839b6e1"
+            }
+          ],
+          "createdAt": "2026-07-28T03:16:40.000Z",
+          "updatedAt": "2026-07-28T03:16:40.000Z",
+          "uid": "35240-18788ec3-e804-4313-a572-20035295044a"
+        },
+        {
+          "name": "Create Task",
+          "id": "b4c13db8-514a-43c2-8b3f-457f978d97e0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"<string>\",\n  \"description\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"section_id\": \"<string>\",\n  \"parent_id\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 4,\n  \"due_string\": \"<string>\",\n  \"due_date\": \"<string>\",\n  \"due_datetime\": \"<string>\",\n  \"due_lang\": \"<string>\",\n  \"assignee_id\": \"<string>\",\n  \"auto_reminder\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tasks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tasks"
+              ]
+            },
+            "description": "Creates a new task in Todoist."
+          },
+          "response": [
+            {
+              "id": "e538cc8f-d2a4-42b8-8dc5-4a2478c9fe70",
+              "name": "Created task",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"description\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"section_id\": \"<string>\",\n  \"parent_id\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 4,\n  \"due_string\": \"<string>\",\n  \"due_date\": \"<string>\",\n  \"due_datetime\": \"<string>\",\n  \"due_lang\": \"<string>\",\n  \"assignee_id\": \"<string>\",\n  \"auto_reminder\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tasks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tasks"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"content\": \"<string>\",\n  \"description\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"section_id\": \"<string>\",\n  \"parent_id\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"priority\": 2,\n  \"due\": {\n    \"date\": \"<string>\",\n    \"is_recurring\": \"<boolean>\",\n    \"string\": \"<string>\",\n    \"datetime\": \"<dateTime>\",\n    \"timezone\": \"<string>\"\n  },\n  \"deadline\": {\n    \"date\": \"<string>\",\n    \"lang\": \"<string>\"\n  },\n  \"assignee_id\": \"<string>\",\n  \"assigner_id\": \"<string>\",\n  \"comment_count\": \"<integer>\",\n  \"is_completed\": \"<boolean>\",\n  \"created_at\": \"<dateTime>\",\n  \"creator_id\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:16:40.000Z",
+              "updatedAt": "2026-07-28T03:16:40.000Z",
+              "uid": "35240-e538cc8f-d2a4-42b8-8dc5-4a2478c9fe70"
+            }
+          ],
+          "createdAt": "2026-07-28T03:16:40.000Z",
+          "updatedAt": "2026-07-28T03:16:40.000Z",
+          "uid": "35240-b4c13db8-514a-43c2-8b3f-457f978d97e0"
+        }
+      ],
+      "id": "d9fbf6af-bfe5-439f-befe-a0787b662de0",
+      "createdAt": "2026-07-28T03:16:40.000Z",
+      "updatedAt": "2026-07-28T03:16:40.000Z",
+      "uid": "35240-d9fbf6af-bfe5-439f-befe-a0787b662de0"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.todoist.com/api/v1"
+    }
+  ]
+}

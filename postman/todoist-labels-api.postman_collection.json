@@ -1,0 +1,500 @@
+{
+  "info": {
+    "_postman_id": "b29951a2-b419-49ef-8d30-5fce8f9278cc",
+    "name": "Todoist Comments Labels API",
+    "description": "The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.\n\nContact Support:\n Name: Todoist Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:14:29.000Z",
+    "updatedAt": "2026-07-28T03:14:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b29951a2-b419-49ef-8d30-5fce8f9278cc"
+  },
+  "item": [
+    {
+      "name": "labels",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get Label",
+              "id": "4083d013-b96e-4e99-8a75-c27d0dedab96",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/labels/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "labels",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "9038c433-c35d-4c36-8597-abe19e225dd9",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns a single label by ID."
+              },
+              "response": [
+                {
+                  "id": "92bee890-4f50-4234-9a5a-624f47e97727",
+                  "name": "Label details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/labels/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "labels",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"is_favorite\": \"<boolean>\"\n}",
+                  "createdAt": "2026-07-28T03:14:30.000Z",
+                  "updatedAt": "2026-07-28T03:14:30.000Z",
+                  "uid": "35240-92bee890-4f50-4234-9a5a-624f47e97727"
+                }
+              ],
+              "createdAt": "2026-07-28T03:14:30.000Z",
+              "updatedAt": "2026-07-28T03:14:30.000Z",
+              "uid": "35240-4083d013-b96e-4e99-8a75-c27d0dedab96"
+            },
+            {
+              "name": "Update Label",
+              "id": "3191b218-97c9-4e5c-81ee-f2b5693ea2d0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"is_favorite\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/labels/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "labels",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "acbc8641-6827-40f1-adf2-266b0e04412a",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Updates a label's properties."
+              },
+              "response": [
+                {
+                  "id": "6b3c8785-7367-4186-899f-061d9acd6617",
+                  "name": "Updated label",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"is_favorite\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/labels/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "labels",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"is_favorite\": \"<boolean>\"\n}",
+                  "createdAt": "2026-07-28T03:14:30.000Z",
+                  "updatedAt": "2026-07-28T03:14:30.000Z",
+                  "uid": "35240-6b3c8785-7367-4186-899f-061d9acd6617"
+                }
+              ],
+              "createdAt": "2026-07-28T03:14:30.000Z",
+              "updatedAt": "2026-07-28T03:14:30.000Z",
+              "uid": "35240-3191b218-97c9-4e5c-81ee-f2b5693ea2d0"
+            },
+            {
+              "name": "Delete Label",
+              "id": "5caaeb88-3880-49c0-a0c5-8d959031ccb2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/labels/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "labels",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c1e90910-e3f1-4541-92e0-f12d729000f5",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Deletes a label permanently."
+              },
+              "response": [
+                {
+                  "id": "15a6ba72-9326-4f67-a04d-2d6e2dae047e",
+                  "name": "Label deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/labels/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "labels",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:14:30.000Z",
+                  "updatedAt": "2026-07-28T03:14:30.000Z",
+                  "uid": "35240-15a6ba72-9326-4f67-a04d-2d6e2dae047e"
+                }
+              ],
+              "createdAt": "2026-07-28T03:14:30.000Z",
+              "updatedAt": "2026-07-28T03:14:30.000Z",
+              "uid": "35240-5caaeb88-3880-49c0-a0c5-8d959031ccb2"
+            }
+          ],
+          "id": "d877799b-fc54-410d-9f19-3de69bef6662",
+          "createdAt": "2026-07-28T03:14:30.000Z",
+          "updatedAt": "2026-07-28T03:14:30.000Z",
+          "uid": "35240-d877799b-fc54-410d-9f19-3de69bef6662"
+        },
+        {
+          "name": "List Labels",
+          "id": "20619e0c-8062-4706-9563-86fd4c94eeea",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/labels",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "labels"
+              ]
+            },
+            "description": "Returns all personal labels for the authenticated user."
+          },
+          "response": [
+            {
+              "id": "af05ddd3-573b-4912-a419-d10ca6be7e4d",
+              "name": "List of labels",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/labels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "labels"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"order\": \"<integer>\",\n    \"is_favorite\": \"<boolean>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"color\": \"<string>\",\n    \"order\": \"<integer>\",\n    \"is_favorite\": \"<boolean>\"\n  }\n]",
+              "createdAt": "2026-07-28T03:14:30.000Z",
+              "updatedAt": "2026-07-28T03:14:30.000Z",
+              "uid": "35240-af05ddd3-573b-4912-a419-d10ca6be7e4d"
+            }
+          ],
+          "createdAt": "2026-07-28T03:14:30.000Z",
+          "updatedAt": "2026-07-28T03:14:30.000Z",
+          "uid": "35240-20619e0c-8062-4706-9563-86fd4c94eeea"
+        },
+        {
+          "name": "Create Label",
+          "id": "3b9ca5d2-3b4c-494d-a1dc-39902c199d1f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"color\": \"<string>\",\n  \"is_favorite\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/labels",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "labels"
+              ]
+            },
+            "description": "Creates a new personal label."
+          },
+          "response": [
+            {
+              "id": "a645f73f-eb06-4f9a-b6d4-0371c2666536",
+              "name": "Created label",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"color\": \"<string>\",\n  \"is_favorite\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/labels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "labels"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"is_favorite\": \"<boolean>\"\n}",
+              "createdAt": "2026-07-28T03:14:30.000Z",
+              "updatedAt": "2026-07-28T03:14:30.000Z",
+              "uid": "35240-a645f73f-eb06-4f9a-b6d4-0371c2666536"
+            }
+          ],
+          "createdAt": "2026-07-28T03:14:30.000Z",
+          "updatedAt": "2026-07-28T03:14:30.000Z",
+          "uid": "35240-3b9ca5d2-3b4c-494d-a1dc-39902c199d1f"
+        }
+      ],
+      "id": "8800baa8-d541-4104-83c0-98fb9567f8ce",
+      "createdAt": "2026-07-28T03:14:30.000Z",
+      "updatedAt": "2026-07-28T03:14:30.000Z",
+      "uid": "35240-8800baa8-d541-4104-83c0-98fb9567f8ce"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.todoist.com/api/v1"
+    }
+  ]
+}

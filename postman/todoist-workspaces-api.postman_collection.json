@@ -1,0 +1,308 @@
+{
+  "info": {
+    "_postman_id": "7975892d-13aa-422d-817e-c0a96509b295",
+    "name": "Todoist Comments Workspaces API",
+    "description": "The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.\n\nContact Support:\n Name: Todoist Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:16:42.000Z",
+    "updatedAt": "2026-07-28T03:16:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7975892d-13aa-422d-817e-c0a96509b295"
+  },
+  "item": [
+    {
+      "name": "workspaces",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "users",
+              "item": [
+                {
+                  "name": "List Workspace Users",
+                  "id": "556fd6e3-6c5e-4c9a-bc82-4200900d635e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workspaces/:id/users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workspaces",
+                        ":id",
+                        "users"
+                      ],
+                      "variable": [
+                        {
+                          "id": "421a46fd-1101-4bc1-bfbb-f8a170e74b36",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Returns all users in a workspace."
+                  },
+                  "response": [
+                    {
+                      "id": "ae80d136-3e47-46a6-8e45-55f7e5d31378",
+                      "name": "List of workspace members",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workspaces/:id/users",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workspaces",
+                            ":id",
+                            "users"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"email\": \"<string>\",\n    \"full_name\": \"<string>\",\n    \"premium_until\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"avatar_medium\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"email\": \"<string>\",\n    \"full_name\": \"<string>\",\n    \"premium_until\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"avatar_medium\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T03:16:42.000Z",
+                      "updatedAt": "2026-07-28T03:16:42.000Z",
+                      "uid": "35240-ae80d136-3e47-46a6-8e45-55f7e5d31378"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:16:42.000Z",
+                  "updatedAt": "2026-07-28T03:16:42.000Z",
+                  "uid": "35240-556fd6e3-6c5e-4c9a-bc82-4200900d635e"
+                }
+              ],
+              "id": "e9a87a1f-7b97-4c1e-90c3-aa9d6d24d078",
+              "createdAt": "2026-07-28T03:16:42.000Z",
+              "updatedAt": "2026-07-28T03:16:42.000Z",
+              "uid": "35240-e9a87a1f-7b97-4c1e-90c3-aa9d6d24d078"
+            },
+            {
+              "name": "Get Workspace",
+              "id": "0490555a-e480-42b7-adac-91f4ca7901d5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/workspaces/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "workspaces",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "4cebb685-4d28-4379-a579-b5e8e4d6e0f7",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns details of a specific workspace."
+              },
+              "response": [
+                {
+                  "id": "97b1bfa6-ffaf-4762-be56-044ca4352e82",
+                  "name": "Workspace details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workspaces/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workspaces",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"logo\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:16:42.000Z",
+                  "updatedAt": "2026-07-28T03:16:42.000Z",
+                  "uid": "35240-97b1bfa6-ffaf-4762-be56-044ca4352e82"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:42.000Z",
+              "updatedAt": "2026-07-28T03:16:42.000Z",
+              "uid": "35240-0490555a-e480-42b7-adac-91f4ca7901d5"
+            }
+          ],
+          "id": "bd070cdf-e0fb-4a15-b683-d757231989a5",
+          "createdAt": "2026-07-28T03:16:42.000Z",
+          "updatedAt": "2026-07-28T03:16:42.000Z",
+          "uid": "35240-bd070cdf-e0fb-4a15-b683-d757231989a5"
+        },
+        {
+          "name": "List Workspaces",
+          "id": "ef6806aa-68d5-4f2c-912c-7d86d50097a8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/workspaces",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "workspaces"
+              ]
+            },
+            "description": "Returns all workspaces the authenticated user belongs to."
+          },
+          "response": [
+            {
+              "id": "f2bfbcf9-b93c-4138-a19e-92e45b61d2ff",
+              "name": "List of workspaces",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/workspaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "workspaces"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"logo\": \"<string>\",\n    \"role\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"logo\": \"<string>\",\n    \"role\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-07-28T03:16:42.000Z",
+              "updatedAt": "2026-07-28T03:16:42.000Z",
+              "uid": "35240-f2bfbcf9-b93c-4138-a19e-92e45b61d2ff"
+            }
+          ],
+          "createdAt": "2026-07-28T03:16:42.000Z",
+          "updatedAt": "2026-07-28T03:16:42.000Z",
+          "uid": "35240-ef6806aa-68d5-4f2c-912c-7d86d50097a8"
+        }
+      ],
+      "id": "0c447d35-67d9-41e5-8e0b-dfe7a1ae02a8",
+      "createdAt": "2026-07-28T03:16:42.000Z",
+      "updatedAt": "2026-07-28T03:16:42.000Z",
+      "uid": "35240-0c447d35-67d9-41e5-8e0b-dfe7a1ae02a8"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.todoist.com/api/v1"
+    }
+  ]
+}

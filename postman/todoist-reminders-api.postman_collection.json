@@ -1,0 +1,384 @@
+{
+  "info": {
+    "_postman_id": "22d587df-d45a-4054-b914-ae5bc1e1dbd8",
+    "name": "Todoist Comments Reminders API",
+    "description": "The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.\n\nContact Support:\n Name: Todoist Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:16:36.000Z",
+    "updatedAt": "2026-07-28T03:16:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-22d587df-d45a-4054-b914-ae5bc1e1dbd8"
+  },
+  "item": [
+    {
+      "name": "reminders",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get Reminder",
+              "id": "9a2bbe32-e470-4916-a501-2a69a00e62ef",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reminders/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reminders",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8fc5df27-6e1c-4bbc-9ccd-effb6ef482d7",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns a single reminder by ID."
+              },
+              "response": [
+                {
+                  "id": "5c296085-d145-4e49-8e78-823f299dd612",
+                  "name": "Reminder details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reminders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reminders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"task_id\": \"<string>\",\n  \"type\": \"absolute\",\n  \"due\": {\n    \"date\": \"<string>\",\n    \"is_recurring\": \"<boolean>\",\n    \"string\": \"<string>\",\n    \"datetime\": \"<dateTime>\",\n    \"timezone\": \"<string>\"\n  },\n  \"mm_offset\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T03:16:37.000Z",
+                  "updatedAt": "2026-07-28T03:16:37.000Z",
+                  "uid": "35240-5c296085-d145-4e49-8e78-823f299dd612"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:37.000Z",
+              "updatedAt": "2026-07-28T03:16:37.000Z",
+              "uid": "35240-9a2bbe32-e470-4916-a501-2a69a00e62ef"
+            },
+            {
+              "name": "Delete Reminder",
+              "id": "2a9c9782-caf0-4e7d-8a64-55c570db5f9b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/reminders/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reminders",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "4b1a9ae1-6138-49ed-8c2b-c798914f8301",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Deletes a reminder permanently."
+              },
+              "response": [
+                {
+                  "id": "e9caa75c-26f7-434c-9d50-e3ac1888b839",
+                  "name": "Reminder deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reminders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reminders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:37.000Z",
+                  "updatedAt": "2026-07-28T03:16:37.000Z",
+                  "uid": "35240-e9caa75c-26f7-434c-9d50-e3ac1888b839"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:37.000Z",
+              "updatedAt": "2026-07-28T03:16:37.000Z",
+              "uid": "35240-2a9c9782-caf0-4e7d-8a64-55c570db5f9b"
+            }
+          ],
+          "id": "5d8f8af8-4ec1-43e8-bce1-6576f1063ef8",
+          "createdAt": "2026-07-28T03:16:36.000Z",
+          "updatedAt": "2026-07-28T03:16:36.000Z",
+          "uid": "35240-5d8f8af8-4ec1-43e8-bce1-6576f1063ef8"
+        },
+        {
+          "name": "List Reminders",
+          "id": "b1fc62fc-0a85-49bd-9910-2132a40ce976",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reminders",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reminders"
+              ]
+            },
+            "description": "Returns all reminders for the authenticated user."
+          },
+          "response": [
+            {
+              "id": "6b63c295-1eca-48bb-9d81-d382add6f397",
+              "name": "List of reminders",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reminders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reminders"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"task_id\": \"<string>\",\n    \"type\": \"absolute\",\n    \"due\": {\n      \"date\": \"<string>\",\n      \"is_recurring\": \"<boolean>\",\n      \"string\": \"<string>\",\n      \"datetime\": \"<dateTime>\",\n      \"timezone\": \"<string>\"\n    },\n    \"mm_offset\": \"<integer>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"task_id\": \"<string>\",\n    \"type\": \"absolute\",\n    \"due\": {\n      \"date\": \"<string>\",\n      \"is_recurring\": \"<boolean>\",\n      \"string\": \"<string>\",\n      \"datetime\": \"<dateTime>\",\n      \"timezone\": \"<string>\"\n    },\n    \"mm_offset\": \"<integer>\"\n  }\n]",
+              "createdAt": "2026-07-28T03:16:37.000Z",
+              "updatedAt": "2026-07-28T03:16:37.000Z",
+              "uid": "35240-6b63c295-1eca-48bb-9d81-d382add6f397"
+            }
+          ],
+          "createdAt": "2026-07-28T03:16:37.000Z",
+          "updatedAt": "2026-07-28T03:16:37.000Z",
+          "uid": "35240-b1fc62fc-0a85-49bd-9910-2132a40ce976"
+        },
+        {
+          "name": "Create Reminder",
+          "id": "9fef28ad-27bb-403c-a1e1-979feb2ec732",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"task_id\": \"<string>\",\n  \"type\": \"absolute\",\n  \"due_string\": \"<string>\",\n  \"due_datetime\": \"<string>\",\n  \"mm_offset\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reminders",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reminders"
+              ]
+            },
+            "description": "Creates a new reminder for a task."
+          },
+          "response": [
+            {
+              "id": "5f330949-18cf-435d-8da8-e4959e5c1e6a",
+              "name": "Created reminder",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"task_id\": \"<string>\",\n  \"type\": \"absolute\",\n  \"due_string\": \"<string>\",\n  \"due_datetime\": \"<string>\",\n  \"mm_offset\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reminders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reminders"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"task_id\": \"<string>\",\n  \"type\": \"absolute\",\n  \"due\": {\n    \"date\": \"<string>\",\n    \"is_recurring\": \"<boolean>\",\n    \"string\": \"<string>\",\n    \"datetime\": \"<dateTime>\",\n    \"timezone\": \"<string>\"\n  },\n  \"mm_offset\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T03:16:37.000Z",
+              "updatedAt": "2026-07-28T03:16:37.000Z",
+              "uid": "35240-5f330949-18cf-435d-8da8-e4959e5c1e6a"
+            }
+          ],
+          "createdAt": "2026-07-28T03:16:37.000Z",
+          "updatedAt": "2026-07-28T03:16:37.000Z",
+          "uid": "35240-9fef28ad-27bb-403c-a1e1-979feb2ec732"
+        }
+      ],
+      "id": "9ed6dca6-394b-493a-8641-4a98580c563b",
+      "createdAt": "2026-07-28T03:16:36.000Z",
+      "updatedAt": "2026-07-28T03:16:36.000Z",
+      "uid": "35240-9ed6dca6-394b-493a-8641-4a98580c563b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.todoist.com/api/v1"
+    }
+  ]
+}

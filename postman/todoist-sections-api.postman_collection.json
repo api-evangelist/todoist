@@ -1,0 +1,512 @@
+{
+  "info": {
+    "_postman_id": "f9f7a5f1-0be0-4c4a-8fc8-b8a2c28f534f",
+    "name": "Todoist Comments Sections API",
+    "description": "The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.\n\nContact Support:\n Name: Todoist Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:16:37.000Z",
+    "updatedAt": "2026-07-28T03:16:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f9f7a5f1-0be0-4c4a-8fc8-b8a2c28f534f"
+  },
+  "item": [
+    {
+      "name": "sections",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get Section",
+              "id": "1e5fe6e9-99f8-4a06-9031-10d6285e017e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/sections/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sections",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "dc7f6840-c243-4518-9315-51f076703860",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns a single section by ID."
+              },
+              "response": [
+                {
+                  "id": "02cb1458-f696-4ca9-a677-5b10c38fb4a8",
+                  "name": "Section details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/sections/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sections",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:16:38.000Z",
+                  "updatedAt": "2026-07-28T03:16:38.000Z",
+                  "uid": "35240-02cb1458-f696-4ca9-a677-5b10c38fb4a8"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:38.000Z",
+              "updatedAt": "2026-07-28T03:16:38.000Z",
+              "uid": "35240-1e5fe6e9-99f8-4a06-9031-10d6285e017e"
+            },
+            {
+              "name": "Update Section",
+              "id": "eadaa101-1568-4a95-a66a-1b886f5aedb8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sections/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sections",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ebd9157a-73ed-48e7-bda2-49abb09bb833",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Updates a section's properties."
+              },
+              "response": [
+                {
+                  "id": "99f9fd3c-f21e-483d-a987-9efd15dae662",
+                  "name": "Updated section",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sections/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sections",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:16:38.000Z",
+                  "updatedAt": "2026-07-28T03:16:38.000Z",
+                  "uid": "35240-99f9fd3c-f21e-483d-a987-9efd15dae662"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:38.000Z",
+              "updatedAt": "2026-07-28T03:16:38.000Z",
+              "uid": "35240-eadaa101-1568-4a95-a66a-1b886f5aedb8"
+            },
+            {
+              "name": "Delete Section",
+              "id": "b326ded1-39ca-4ef2-8691-3b4f3234e072",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sections/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sections",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "860bf350-ea9f-48d2-9324-1ba88e0d60d6",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Deletes a section and moves its tasks to the project root."
+              },
+              "response": [
+                {
+                  "id": "8f4c3c81-f57e-479e-b75b-35e453c30aa7",
+                  "name": "Section deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/sections/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sections",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:38.000Z",
+                  "updatedAt": "2026-07-28T03:16:38.000Z",
+                  "uid": "35240-8f4c3c81-f57e-479e-b75b-35e453c30aa7"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:38.000Z",
+              "updatedAt": "2026-07-28T03:16:38.000Z",
+              "uid": "35240-b326ded1-39ca-4ef2-8691-3b4f3234e072"
+            }
+          ],
+          "id": "84298c86-d08f-4ac2-91dc-6df7173288df",
+          "createdAt": "2026-07-28T03:16:38.000Z",
+          "updatedAt": "2026-07-28T03:16:38.000Z",
+          "uid": "35240-84298c86-d08f-4ac2-91dc-6df7173288df"
+        },
+        {
+          "name": "List Sections",
+          "id": "63aca227-878c-443a-8a9e-8bebc23b39fa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/sections?project_id=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sections"
+              ],
+              "query": [
+                {
+                  "key": "project_id",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns all sections optionally filtered by project."
+          },
+          "response": [
+            {
+              "id": "15bf77c6-91e5-492f-9f93-b16e93e56f8a",
+              "name": "List of sections",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/sections?project_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sections"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"order\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"order\": \"<integer>\",\n    \"name\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-07-28T03:16:38.000Z",
+              "updatedAt": "2026-07-28T03:16:38.000Z",
+              "uid": "35240-15bf77c6-91e5-492f-9f93-b16e93e56f8a"
+            }
+          ],
+          "createdAt": "2026-07-28T03:16:38.000Z",
+          "updatedAt": "2026-07-28T03:16:38.000Z",
+          "uid": "35240-63aca227-878c-443a-8a9e-8bebc23b39fa"
+        },
+        {
+          "name": "Create Section",
+          "id": "20c8223b-7756-4695-b056-b5f98bc74354",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"order\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sections",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sections"
+              ]
+            },
+            "description": "Creates a new section in a project."
+          },
+          "response": [
+            {
+              "id": "7421c7be-7781-490f-b5a6-d6ecf6b6516d",
+              "name": "Created section",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"order\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sections",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sections"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:16:38.000Z",
+              "updatedAt": "2026-07-28T03:16:38.000Z",
+              "uid": "35240-7421c7be-7781-490f-b5a6-d6ecf6b6516d"
+            }
+          ],
+          "createdAt": "2026-07-28T03:16:38.000Z",
+          "updatedAt": "2026-07-28T03:16:38.000Z",
+          "uid": "35240-20c8223b-7756-4695-b056-b5f98bc74354"
+        }
+      ],
+      "id": "6e670f29-2bf3-45ae-b397-66b63e108686",
+      "createdAt": "2026-07-28T03:16:38.000Z",
+      "updatedAt": "2026-07-28T03:16:38.000Z",
+      "uid": "35240-6e670f29-2bf3-45ae-b397-66b63e108686"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.todoist.com/api/v1"
+    }
+  ]
+}
