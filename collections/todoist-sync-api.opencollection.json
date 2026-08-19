@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Todoist Comments Sync API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sync Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/sync",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "sync_token",
+                  "value": ""
+                },
+                {
+                  "name": "resource_types",
+                  "value": ""
+                },
+                {
+                  "name": "commands",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Primary sync endpoint for batch read/write operations. Retrieve resources by specifying resource_types or execute commands for write operations. Supports incremental synchronization via sync_token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

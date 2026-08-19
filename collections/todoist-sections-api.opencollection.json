@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Todoist Comments Sections API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Sections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/sections",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all sections optionally filtered by project."
+        },
+        {
+          "info": {
+            "name": "Create Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/sections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new section in a project."
+        },
+        {
+          "info": {
+            "name": "Get Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.todoist.com/api/v1/sections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single section by ID."
+        },
+        {
+          "info": {
+            "name": "Update Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.todoist.com/api/v1/sections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a section's properties."
+        },
+        {
+          "info": {
+            "name": "Delete Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.todoist.com/api/v1/sections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a section and moves its tasks to the project root."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

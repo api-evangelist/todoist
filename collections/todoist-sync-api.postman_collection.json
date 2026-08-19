@@ -1,0 +1,177 @@
+{
+  "item": [
+    {
+      "id": "50a1c04e-7916-4e0c-ac92-234e504a8153",
+      "name": "Sync",
+      "description": {
+        "content": "Incremental sync operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9aacec2d-0d51-42fc-a3cb-13cd13e38773",
+          "name": "Sync Resources",
+          "request": {
+            "name": "Sync Resources",
+            "description": {
+              "content": "Primary sync endpoint for batch read/write operations. Retrieve resources by specifying resource_types or execute commands for write operations. Supports incremental synchronization via sync_token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sync"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "sync_token",
+                  "value": "<string>",
+                  "description": "(Required) Use '*' for full sync or token from previous response"
+                },
+                {
+                  "disabled": false,
+                  "key": "resource_types",
+                  "value": "<string>",
+                  "description": "(Required) JSON array of resource types to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "commands",
+                  "value": "<string>",
+                  "description": "JSON array of write commands"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c1b84e12-57cd-4121-a2ca-3bd451f6c98f",
+              "name": "Sync response with updated resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Use '*' for full sync or token from previous response",
+                        "type": "text/plain"
+                      },
+                      "key": "sync_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) JSON array of resource types to retrieve",
+                        "type": "text/plain"
+                      },
+                      "key": "resource_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "JSON array of write commands",
+                        "type": "text/plain"
+                      },
+                      "key": "commands",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sync_token\": \"string\",\n  \"full_sync\": true,\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"content\": \"string\",\n      \"description\": \"string\",\n      \"project_id\": \"string\",\n      \"section_id\": \"string\",\n      \"parent_id\": \"string\",\n      \"order\": 4178,\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"priority\": 4,\n      \"due\": {\n        \"date\": \"string\",\n        \"is_recurring\": true,\n        \"string\": \"string\",\n        \"datetime\": \"2000-10-08T07:28:28.377Z\",\n        \"timezone\": \"string\"\n      },\n      \"deadline\": {\n        \"date\": \"string\",\n        \"lang\": \"string\"\n      },\n      \"assignee_id\": \"string\",\n      \"assigner_id\": \"string\",\n      \"comment_count\": 6112,\n      \"is_completed\": false,\n      \"created_at\": \"1979-10-01T11:53:21.471Z\",\n      \"creator_id\": \"string\",\n      \"url\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"content\": \"string\",\n      \"description\": \"string\",\n      \"project_id\": \"string\",\n      \"section_id\": \"string\",\n      \"parent_id\": \"string\",\n      \"order\": 9203,\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"priority\": 3,\n      \"due\": {\n        \"date\": \"string\",\n        \"is_recurring\": true,\n        \"string\": \"string\",\n        \"datetime\": \"1982-07-18T01:11:54.544Z\",\n        \"timezone\": \"string\"\n      },\n      \"deadline\": {\n        \"date\": \"string\",\n        \"lang\": \"string\"\n      },\n      \"assignee_id\": \"string\",\n      \"assigner_id\": \"string\",\n      \"comment_count\": 6645,\n      \"is_completed\": true,\n      \"created_at\": \"1975-11-30T16:19:05.635Z\",\n      \"creator_id\": \"string\",\n      \"url\": \"string\"\n    }\n  ],\n  \"projects\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"color\": \"string\",\n      \"parent_id\": \"string\",\n      \"order\": 2326,\n      \"comment_count\": 8629,\n      \"is_shared\": false,\n      \"is_favorite\": false,\n      \"is_inbox_project\": false,\n      \"is_team_inbox\": false,\n      \"view_style\": \"string\",\n      \"url\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"color\": \"string\",\n      \"parent_id\": \"string\",\n      \"order\": 1186,\n      \"comment_count\": 9554,\n      \"is_shared\": false,\n      \"is_favorite\": false,\n      \"is_inbox_project\": true,\n      \"is_team_inbox\": false,\n      \"view_style\": \"string\",\n      \"url\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.todoist.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "97f8e21d-e3f7-4cf7-9915-e57d545ba41c",
+    "name": "Todoist Comments Sync API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.\n\nContact Support:\n Name: Todoist Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
