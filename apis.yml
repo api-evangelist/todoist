@@ -23,6 +23,12 @@ access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/todoist.png
 tags:
 - Productivity
+- Task
+- To-Do
+- Task Management
+- Collaboration
+tags_raw:
+- Productivity
 - Tasks
 - To-Do
 - Task Management
@@ -42,6 +48,10 @@ apis:
   baseURL: https://api.todoist.com/rest/v2
   tags:
   - Productivity
+  - Task
+  - REST
+  tags_raw:
+  - Productivity
   - Tasks
   - REST
   properties:
@@ -56,6 +66,10 @@ apis:
   humanURL: https://developer.todoist.com/sync/v9/
   baseURL: https://api.todoist.com/sync/v9
   tags:
+  - Sync
+  - Productivity
+  - Task
+  tags_raw:
   - Sync
   - Productivity
   - Tasks
@@ -122,6 +136,8 @@ apis:
   humanURL: https://developer.todoist.com/api/v1/
   baseURL: https://api.todoist.com/api/v1
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -226,6 +242,8 @@ apis:
   humanURL: https://developer.todoist.com/api/v1/
   baseURL: https://api.todoist.com/api/v1
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
