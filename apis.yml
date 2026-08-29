@@ -5,6 +5,18 @@ description: Todoist is a productivity platform providing task management APIs f
   offering programmatic access to tasks, projects, sections, labels, reminders, comments,
   workspaces, and webhooks. SDKs are available in Python and TypeScript.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
