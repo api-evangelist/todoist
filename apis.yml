@@ -309,6 +309,8 @@ apis:
   humanURL: https://developer.todoist.com/api/v1/
   baseURL: https://api.todoist.com/api/v1
   tags:
+  - Workspace
+  tags_raw:
   - Workspaces
   properties:
   - type: OpenAPI
