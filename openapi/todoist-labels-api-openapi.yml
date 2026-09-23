@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Todoist Comments Labels API
+  title: Todoist Labels API
   description: The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.
   version: '1.0'
   contact:
@@ -125,19 +125,6 @@ paths:
           description: Label deleted
 components:
   schemas:
-    CreateLabelRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        order:
-          type: integer
-        color:
-          type: string
-        is_favorite:
-          type: boolean
     Label:
       type: object
       properties:
@@ -149,6 +136,19 @@ components:
           type: string
         order:
           type: integer
+        is_favorite:
+          type: boolean
+    CreateLabelRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        order:
+          type: integer
+        color:
+          type: string
         is_favorite:
           type: boolean
   securitySchemes:

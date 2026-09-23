@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Todoist Comments API
   description: The Todoist API v1 provides programmatic access to task management, projects, sections, labels, reminders, comments, workspaces, and more. Supports OAuth 2.0 and personal API tokens. Includes incremental sync via the /sync endpoint.
@@ -130,19 +130,6 @@ paths:
           description: Comment deleted
 components:
   schemas:
-    CreateCommentRequest:
-      type: object
-      required:
-      - content
-      properties:
-        task_id:
-          type: string
-        project_id:
-          type: string
-        content:
-          type: string
-        attachment:
-          type: object
     Comment:
       type: object
       properties:
@@ -155,6 +142,19 @@ components:
         posted_at:
           type: string
           format: date-time
+        content:
+          type: string
+        attachment:
+          type: object
+    CreateCommentRequest:
+      type: object
+      required:
+      - content
+      properties:
+        task_id:
+          type: string
+        project_id:
+          type: string
         content:
           type: string
         attachment:

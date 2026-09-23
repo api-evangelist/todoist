@@ -1,15 +1,7 @@
 {
   "provider": "todoist",
   "sources": [
-    "todoist-comments-api-openapi.yml",
-    "todoist-labels-api-openapi.yml",
-    "todoist-projects-api-openapi.yml",
-    "todoist-reminders-api-openapi.yml",
-    "todoist-sections-api-openapi.yml",
-    "todoist-sync-api-openapi.yml",
-    "todoist-tasks-api-openapi.yml",
-    "todoist-user-api-openapi.yml",
-    "todoist-workspaces-api-openapi.yml"
+    "_original/todoist-openapi.yml"
   ],
   "outputs": [
     "todoist-comments-api-openapi.yml",
@@ -25,6 +17,20 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "todoist-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "todoist-comments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "todoist-labels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "todoist-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "todoist-reminders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "todoist-sections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "todoist-sync-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "todoist-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "todoist-user-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "todoist-workspaces-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
