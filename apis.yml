@@ -70,7 +70,7 @@ apis:
   properties:
   - type: Documentation
     url: https://developer.todoist.com/rest/v2/
-- aid: todoist:todoist-sync-api
+- aid: todoist:todoist-sync-api-v9
   name: Todoist Sync API v9
   description: >-
     The Todoist Sync API is designed for clients maintaining a local representation of user data, allowing
@@ -115,8 +115,6 @@ apis:
   - type: Vocabulary
     url: >-
       https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
-  - type: GraphQL
-    url: graphql/todoist-graphql.md
 - aid: todoist:todoist-labels-api
   name: Todoist Labels API
   description: Label management operations
@@ -141,8 +139,6 @@ apis:
   - type: Vocabulary
     url: >-
       https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
-  - type: GraphQL
-    url: graphql/todoist-graphql.md
 - aid: todoist:todoist-projects-api
   name: Todoist Projects API
   description: Project management operations
@@ -169,8 +165,6 @@ apis:
   - type: Vocabulary
     url: >-
       https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
-  - type: GraphQL
-    url: graphql/todoist-graphql.md
 - aid: todoist:todoist-reminders-api
   name: Todoist Reminders API
   description: Reminder management operations
@@ -195,8 +189,6 @@ apis:
   - type: Vocabulary
     url: >-
       https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
-  - type: GraphQL
-    url: graphql/todoist-graphql.md
 - aid: todoist:todoist-sections-api
   name: Todoist Sections API
   description: Section management operations
@@ -221,8 +213,6 @@ apis:
   - type: Vocabulary
     url: >-
       https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
-  - type: GraphQL
-    url: graphql/todoist-graphql.md
 - aid: todoist:todoist-sync-api
   name: Todoist Sync API
   description: Incremental sync operations
@@ -247,8 +237,6 @@ apis:
   - type: Vocabulary
     url: >-
       https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
-  - type: GraphQL
-    url: graphql/todoist-graphql.md
 - aid: todoist:todoist-tasks-api
   name: Todoist Tasks API
   description: Task (item) management operations
@@ -275,8 +263,6 @@ apis:
   - type: Vocabulary
     url: >-
       https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
-  - type: GraphQL
-    url: graphql/todoist-graphql.md
 - aid: todoist:todoist-user-api
   name: Todoist User API
   description: User account and settings operations
@@ -301,8 +287,6 @@ apis:
   - type: Vocabulary
     url: >-
       https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
-  - type: GraphQL
-    url: graphql/todoist-graphql.md
 - aid: todoist:todoist-workspaces-api
   name: Todoist Workspaces API
   description: Workspace management operations
@@ -329,8 +313,6 @@ apis:
   - type: Vocabulary
     url: >-
       https://raw.githubusercontent.com/api-evangelist/todoist/refs/heads/main/vocabulary/todoist-vocabulary.yml
-  - type: GraphQL
-    url: graphql/todoist-graphql.md
 common:
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/todoist/overview
