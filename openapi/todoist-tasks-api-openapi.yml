@@ -295,12 +295,31 @@ components:
           type: string
         auto_reminder:
           type: boolean
-    Deadline:
+    UpdateTaskRequest:
       type: object
       properties:
-        date:
+        content:
           type: string
-        lang:
+        description:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        priority:
+          type: integer
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+        due_string:
+          type: string
+        due_date:
+          type: string
+        due_datetime:
+          type: string
+        assignee_id:
           type: string
     Task:
       type: object
@@ -350,32 +369,6 @@ components:
           type: string
         url:
           type: string
-    UpdateTaskRequest:
-      type: object
-      properties:
-        content:
-          type: string
-        description:
-          type: string
-        labels:
-          type: array
-          items:
-            type: string
-        priority:
-          type: integer
-          enum:
-          - 1
-          - 2
-          - 3
-          - 4
-        due_string:
-          type: string
-        due_date:
-          type: string
-        due_datetime:
-          type: string
-        assignee_id:
-          type: string
     Due:
       type: object
       properties:
@@ -389,6 +382,13 @@ components:
           type: string
           format: date-time
         timezone:
+          type: string
+    Deadline:
+      type: object
+      properties:
+        date:
+          type: string
+        lang:
           type: string
   securitySchemes:
     bearerAuth:

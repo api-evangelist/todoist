@@ -154,35 +154,6 @@ paths:
                   $ref: '#/components/schemas/Collaborator'
 components:
   schemas:
-    CreateProjectRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        parent_id:
-          type: string
-        color:
-          type: string
-        is_favorite:
-          type: boolean
-        view_style:
-          type: string
-          enum:
-          - list
-          - board
-    UpdateProjectRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        color:
-          type: string
-        is_favorite:
-          type: boolean
-        view_style:
-          type: string
     Collaborator:
       type: object
       properties:
@@ -219,6 +190,35 @@ components:
           type: string
         url:
           type: string
+    UpdateProjectRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+        is_favorite:
+          type: boolean
+        view_style:
+          type: string
+    CreateProjectRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        parent_id:
+          type: string
+        color:
+          type: string
+        is_favorite:
+          type: boolean
+        view_style:
+          type: string
+          enum:
+          - list
+          - board
   securitySchemes:
     bearerAuth:
       type: http

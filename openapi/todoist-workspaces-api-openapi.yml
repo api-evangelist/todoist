@@ -79,17 +79,6 @@ paths:
                   $ref: '#/components/schemas/User'
 components:
   schemas:
-    Workspace:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        logo:
-          type: string
-        role:
-          type: string
     User:
       type: object
       properties:
@@ -104,6 +93,17 @@ components:
         timezone:
           type: string
         avatar_medium:
+          type: string
+    Workspace:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        logo:
+          type: string
+        role:
           type: string
   securitySchemes:
     bearerAuth:
