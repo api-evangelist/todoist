@@ -124,17 +124,6 @@ paths:
           description: Section deleted
 components:
   schemas:
-    Section:
-      type: object
-      properties:
-        id:
-          type: string
-        project_id:
-          type: string
-        order:
-          type: integer
-        name:
-          type: string
     CreateSectionRequest:
       type: object
       required:
@@ -147,6 +136,17 @@ components:
           type: string
         order:
           type: integer
+    Section:
+      type: object
+      properties:
+        id:
+          type: string
+        project_id:
+          type: string
+        order:
+          type: integer
+        name:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

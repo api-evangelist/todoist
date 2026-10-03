@@ -107,20 +107,6 @@ components:
           $ref: '#/components/schemas/Due'
         mm_offset:
           type: integer
-    Due:
-      type: object
-      properties:
-        date:
-          type: string
-        is_recurring:
-          type: boolean
-        string:
-          type: string
-        datetime:
-          type: string
-          format: date-time
-        timezone:
-          type: string
     CreateReminderRequest:
       type: object
       required:
@@ -140,6 +126,20 @@ components:
           type: string
         mm_offset:
           type: integer
+    Due:
+      type: object
+      properties:
+        date:
+          type: string
+        is_recurring:
+          type: boolean
+        string:
+          type: string
+        datetime:
+          type: string
+          format: date-time
+        timezone:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

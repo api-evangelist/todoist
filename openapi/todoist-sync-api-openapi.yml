@@ -67,6 +67,13 @@ paths:
                       $ref: '#/components/schemas/Project'
 components:
   schemas:
+    Deadline:
+      type: object
+      properties:
+        date:
+          type: string
+        lang:
+          type: string
     Task:
       type: object
       properties:
@@ -115,6 +122,20 @@ components:
           type: string
         url:
           type: string
+    Due:
+      type: object
+      properties:
+        date:
+          type: string
+        is_recurring:
+          type: boolean
+        string:
+          type: string
+        datetime:
+          type: string
+          format: date-time
+        timezone:
+          type: string
     Project:
       type: object
       properties:
@@ -141,27 +162,6 @@ components:
         view_style:
           type: string
         url:
-          type: string
-    Due:
-      type: object
-      properties:
-        date:
-          type: string
-        is_recurring:
-          type: boolean
-        string:
-          type: string
-        datetime:
-          type: string
-          format: date-time
-        timezone:
-          type: string
-    Deadline:
-      type: object
-      properties:
-        date:
-          type: string
-        lang:
           type: string
   securitySchemes:
     bearerAuth:
