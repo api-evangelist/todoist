@@ -125,19 +125,6 @@ paths:
           description: Label deleted
 components:
   schemas:
-    CreateLabelRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        order:
-          type: integer
-        color:
-          type: string
-        is_favorite:
-          type: boolean
     Label:
       type: object
       properties:
@@ -149,6 +136,19 @@ components:
           type: string
         order:
           type: integer
+        is_favorite:
+          type: boolean
+    CreateLabelRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        order:
+          type: integer
+        color:
+          type: string
         is_favorite:
           type: boolean
   securitySchemes:

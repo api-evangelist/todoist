@@ -91,22 +91,6 @@ paths:
           description: Reminder deleted
 components:
   schemas:
-    Reminder:
-      type: object
-      properties:
-        id:
-          type: string
-        task_id:
-          type: string
-        type:
-          type: string
-          enum:
-          - absolute
-          - relative
-        due:
-          $ref: '#/components/schemas/Due'
-        mm_offset:
-          type: integer
     CreateReminderRequest:
       type: object
       required:
@@ -124,6 +108,22 @@ components:
           type: string
         due_datetime:
           type: string
+        mm_offset:
+          type: integer
+    Reminder:
+      type: object
+      properties:
+        id:
+          type: string
+        task_id:
+          type: string
+        type:
+          type: string
+          enum:
+          - absolute
+          - relative
+        due:
+          $ref: '#/components/schemas/Due'
         mm_offset:
           type: integer
     Due:
