@@ -15,3 +15,16 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: todoist-freshbooks-own
+  label: FreshBooks (own)
+  partner: freshbooks
+  partner_name: FreshBooks (own)
+  category: Manage Team
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appstore.freshbooks.com/apps/todoist
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
