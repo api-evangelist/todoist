@@ -51,7 +51,7 @@
     app_slug: todoist
     beta: false
     builder: unknown (not in the directory record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: todoist-n8n
   label: n8n
@@ -79,7 +79,7 @@
     other_nodes:
     - Todoist/v1
     - Todoist/v2
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: todoist-pipedream
   label: Pipedream
@@ -105,5 +105,5 @@
     actions: true
     sources: true
     builder: Pipedream repo (component)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
