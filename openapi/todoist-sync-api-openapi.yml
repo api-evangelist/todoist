@@ -74,32 +74,19 @@ components:
           type: string
         lang:
           type: string
-    Project:
+    Due:
       type: object
       properties:
-        id:
+        date:
           type: string
-        name:
-          type: string
-        color:
-          type: string
-        parent_id:
-          type: string
-        order:
-          type: integer
-        comment_count:
-          type: integer
-        is_shared:
+        is_recurring:
           type: boolean
-        is_favorite:
-          type: boolean
-        is_inbox_project:
-          type: boolean
-        is_team_inbox:
-          type: boolean
-        view_style:
+        string:
           type: string
-        url:
+        datetime:
+          type: string
+          format: date-time
+        timezone:
           type: string
     Task:
       type: object
@@ -149,19 +136,32 @@ components:
           type: string
         url:
           type: string
-    Due:
+    Project:
       type: object
       properties:
-        date:
+        id:
           type: string
-        is_recurring:
+        name:
+          type: string
+        color:
+          type: string
+        parent_id:
+          type: string
+        order:
+          type: integer
+        comment_count:
+          type: integer
+        is_shared:
           type: boolean
-        string:
+        is_favorite:
+          type: boolean
+        is_inbox_project:
+          type: boolean
+        is_team_inbox:
+          type: boolean
+        view_style:
           type: string
-        datetime:
-          type: string
-          format: date-time
-        timezone:
+        url:
           type: string
   securitySchemes:
     bearerAuth:

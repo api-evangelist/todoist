@@ -91,6 +91,36 @@ paths:
           description: Reminder deleted
 components:
   schemas:
+    Due:
+      type: object
+      properties:
+        date:
+          type: string
+        is_recurring:
+          type: boolean
+        string:
+          type: string
+        datetime:
+          type: string
+          format: date-time
+        timezone:
+          type: string
+    Reminder:
+      type: object
+      properties:
+        id:
+          type: string
+        task_id:
+          type: string
+        type:
+          type: string
+          enum:
+          - absolute
+          - relative
+        due:
+          $ref: '#/components/schemas/Due'
+        mm_offset:
+          type: integer
     CreateReminderRequest:
       type: object
       required:
@@ -110,36 +140,6 @@ components:
           type: string
         mm_offset:
           type: integer
-    Reminder:
-      type: object
-      properties:
-        id:
-          type: string
-        task_id:
-          type: string
-        type:
-          type: string
-          enum:
-          - absolute
-          - relative
-        due:
-          $ref: '#/components/schemas/Due'
-        mm_offset:
-          type: integer
-    Due:
-      type: object
-      properties:
-        date:
-          type: string
-        is_recurring:
-          type: boolean
-        string:
-          type: string
-        datetime:
-          type: string
-          format: date-time
-        timezone:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http
