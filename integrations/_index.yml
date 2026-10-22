@@ -15,58 +15,6 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
-- slug: todoist-freshbooks-own
-  label: FreshBooks (own)
-  partner: freshbooks
-  partner_name: FreshBooks (own)
-  category: Manage Team
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://appstore.freshbooks.com/apps/todoist
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
-- slug: todoist-google-workspace-own
-  label: Google Workspace (own)
-  partner: google-workspace
-  partner_name: Google Workspace (own)
-  category: Google Workspace app
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://workspace.google.com/marketplace/app/todoist_for_gmail_planner_calendar/815972520808
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
-- slug: todoist-microsoft-teams-own
-  label: Microsoft Teams (own)
-  partner: microsoft-teams
-  partner_name: Microsoft Teams (own)
-  category: Microsoft Teams app
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://appsource.microsoft.com/en-us/product/office/WA200001974
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
-- slug: todoist-slack-own
-  label: Slack (own)
-  partner: slack
-  partner_name: Slack (own)
-  category: Slack app
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://slack.com/marketplace/A0NSTB8R3-todoist
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: todoist-airbyte
   label: Airbyte
   partner: airbyte
@@ -223,5 +171,117 @@
       to mirror.
     detected_by: sweep-browser-extension-stores.py
     detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
+- slug: todoist-freshbooks-own
+  label: FreshBooks (own)
+  partner: freshbooks
+  partner_name: FreshBooks (own)
+  category: Manage Team
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appstore.freshbooks.com/apps/todoist
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: todoist-google-workspace-own
+  label: Google Workspace (own)
+  partner: google-workspace
+  partner_name: Google Workspace (own)
+  category: Google Workspace app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://workspace.google.com/marketplace/app/todoist_for_gmail_planner_calendar/815972520808
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: todoist-microsoft-teams-own
+  label: Microsoft Teams (own)
+  partner: microsoft-teams
+  partner_name: Microsoft Teams (own)
+  category: Microsoft Teams app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appsource.microsoft.com/en-us/product/office/WA200001974
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: todoist-slack-own
+  label: Slack (own)
+  partner: slack
+  partner_name: Slack (own)
+  category: Slack app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://slack.com/marketplace/A0NSTB8R3-todoist
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: todoist-raycast-raycast-store
+  label: Raycast (raycast-store)
+  partner: raycast
+  partner_name: Raycast (raycast-store)
+  category: Raycast Store extension (first-party)
+  type: marketplace
+  marketplace: raycast-store
+  channel: partner-built
+  evidence: https://www.raycast.com/doist/todoist
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: todoist-obsidian
+  label: Obsidian
+  partner: obsidian
+  partner_name: Obsidian
+  category: Obsidian community plugin
+  type: marketplace
+  marketplace: obsidian-community-plugins
+  channel: community-plugin
+  evidence: https://github.com/ellpeck/ObsidianCustomFrames
+  source: edge
+  relationship: connector-listing
+  contract_reference:
+    register: Obsidian community-plugins.json (obsidianmd/obsidian-releases@793b5211) + plugin repo README / manifest
+      / source
+    spec_file: null
+    role: obsidian-community-plugin:community
+    registered_name: Ell
+    register_id: https://github.com/ellpeck/ObsidianCustomFrames
+    matched_domain: todoist.com
+    matched_by: domain+name-in-listing
+    matched_where: README
+    matched_host: todoist.com
+    builder: community
+    plugins:
+    - obsidian-custom-frames
+    - todoist-sync-plugin
+    - ultimate-todoist-sync
+    - todoist-text
+    - todoist-board
+    - obsidian-todoist-link
+    - todoist-completed-tasks-plugin
+    - todoist-context-bridge
+    - another-simple-todoist-sync
+    - sync-todoist
+    - todoist-review
+    - syncist-todoist-sync
+    - todoist-plug
+    - todoister
+    - semantic-todoist-sync
+    downloads_context: 560692
+    signal_note: 'ONE edge per provider: a community plugin names the provider in its name/description AND carries
+      the provider''s domain or API host in its README or source. Builder is a named community author (not the provider).
+      Plugin and download counts are context, never counted.'
+    detected_by: sweep-obsidian-community-plugins.py
+    detected: '2026-10-22'
   status: not-a-workflow
   arazzo: null

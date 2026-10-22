@@ -22,6 +22,11 @@ checked:
 - https://addons.mozilla.org/api/v5/addons/addon/<slug>/
 - https://addons.mozilla.org/api/v5/addons/search/?type=extension&app=firefox
 - https://chromewebstore.google.com/sitemap
+- raycast/integrations/raycast-integration-edges.yml
+- https://raw.githubusercontent.com/<repo>/HEAD/README.md
+- https://raw.githubusercontent.com/<repo>/HEAD/manifest.json
+- https://raw.githubusercontent.com/obsidianmd/obsidian-releases/793b52114f54b055b760ef47761ec5c93d689804/community-plugin-stats.json
+- https://raw.githubusercontent.com/obsidianmd/obsidian-releases/793b52114f54b055b760ef47761ec5c93d689804/community-plugins.json
 marketplace_apps: []
 edges:
 - partner_name: Atlassian Marketplace
@@ -39,76 +44,6 @@ edges:
   publisher_name: Todoist Inc
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
-- partner_name: FreshBooks (own)
-  partner: freshbooks
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://appstore.freshbooks.com/apps/todoist
-  mirror_of: freshbooks/integrations/freshbooks-integration-edges.yml
-  apps:
-  - Todoist
-  listing_count: 1
-  detected: '2026-10-14'
-  detected_by: mirror-platform-listings.py
-  category: Manage Team
-- partner_name: Google Workspace (own)
-  partner: google-workspace
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://workspace.google.com/marketplace/app/todoist_for_gmail_planner_calendar/815972520808
-  mirror_of: google-workspace/integrations/google-workspace-integration-edges.yml
-  apps:
-  - 'Todoist for Gmail™: Planner & Calendar'
-  listing_count: 1
-  detected: '2026-10-18'
-  detected_by: mirror-platform-listings.py
-  category: Google Workspace app
-- partner_name: Microsoft Teams (own)
-  partner: microsoft-teams
-  partner_match: mirror
-  mirror_match: domain+product
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://appsource.microsoft.com/en-us/product/office/WA200001974
-  mirror_of: microsoft-teams/integrations/microsoft-teams-integration-edges.yml
-  apps:
-  - Todoist
-  listing_count: 1
-  detected: '2026-10-18'
-  detected_by: mirror-platform-listings.py
-  category: Microsoft Teams app
-  publisher_verified:
-  - Microsoft 365 Publisher Attestation
-- partner_name: Slack (own)
-  partner: slack
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://slack.com/marketplace/A0NSTB8R3-todoist
-  mirror_of: slack/integrations/slack-integration-edges.yml
-  apps:
-  - Todoist
-  listing_count: 1
-  detected: '2026-10-18'
-  detected_by: mirror-platform-listings.py
-  category: Slack app
 - partner_name: Airbyte
   partner: airbyte
   partner_match: aggregator
@@ -279,5 +214,157 @@ edges:
     detected: '2026-10-21'
   detected_by: sweep-browser-extension-stores.py
   first_seen: '2026-10-21'
+- partner_name: FreshBooks (own)
+  partner: freshbooks
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appstore.freshbooks.com/apps/todoist
+  mirror_of: freshbooks/integrations/freshbooks-integration-edges.yml
+  apps:
+  - Todoist
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Manage Team
+- partner_name: Google Workspace (own)
+  partner: google-workspace
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://workspace.google.com/marketplace/app/todoist_for_gmail_planner_calendar/815972520808
+  mirror_of: google-workspace/integrations/google-workspace-integration-edges.yml
+  apps:
+  - 'Todoist for Gmail™: Planner & Calendar'
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Google Workspace app
+- partner_name: Microsoft Teams (own)
+  partner: microsoft-teams
+  partner_match: mirror
+  mirror_match: domain+product
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appsource.microsoft.com/en-us/product/office/WA200001974
+  mirror_of: microsoft-teams/integrations/microsoft-teams-integration-edges.yml
+  apps:
+  - Todoist
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Microsoft Teams app
+  publisher_verified:
+  - Microsoft 365 Publisher Attestation
+- partner_name: Slack (own)
+  partner: slack
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://slack.com/marketplace/A0NSTB8R3-todoist
+  mirror_of: slack/integrations/slack-integration-edges.yml
+  apps:
+  - Todoist
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Slack app
+- partner_name: Raycast (raycast-store)
+  partner: raycast
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: raycast-store
+  evidence: https://www.raycast.com/doist/todoist
+  mirror_of: raycast/integrations/raycast-integration-edges.yml
+  apps:
+  - Todoist
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Raycast Store extension (first-party)
+- partner_name: Obsidian
+  partner: obsidian
+  partner_match: aggregator
+  type: marketplace
+  marketplace: obsidian-community-plugins
+  channel: community-plugin
+  relationship: connector-listing
+  direction: third-party
+  evidence: https://github.com/ellpeck/ObsidianCustomFrames
+  app: Custom Frames
+  listing_count: 21
+  category: Obsidian community plugin
+  partner_url: https://obsidian.md/plugins
+  contract_reference:
+    register: Obsidian community-plugins.json (obsidianmd/obsidian-releases@793b5211) + plugin repo README / manifest
+      / source
+    spec_file: null
+    role: obsidian-community-plugin:community
+    registered_name: Ell
+    register_id: https://github.com/ellpeck/ObsidianCustomFrames
+    matched_domain: todoist.com
+    matched_by: domain+name-in-listing
+    matched_where: README
+    matched_host: todoist.com
+    builder: community
+    plugins:
+    - obsidian-custom-frames
+    - todoist-sync-plugin
+    - ultimate-todoist-sync
+    - todoist-text
+    - todoist-board
+    - obsidian-todoist-link
+    - todoist-completed-tasks-plugin
+    - todoist-context-bridge
+    - another-simple-todoist-sync
+    - sync-todoist
+    - todoist-review
+    - syncist-todoist-sync
+    - todoist-plug
+    - todoister
+    - semantic-todoist-sync
+    downloads_context: 560692
+    signal_note: 'ONE edge per provider: a community plugin names the provider in its name/description AND carries
+      the provider''s domain or API host in its README or source. Builder is a named community author (not the provider).
+      Plugin and download counts are context, never counted.'
+    detected_by: sweep-obsidian-community-plugins.py
+    detected: '2026-10-22'
+  detected_by: sweep-obsidian-community-plugins.py
+  first_seen: '2026-10-22'
+  apps:
+  - Custom Frames
+  - Todoist Sync
+  - Ultimate Todoist Sync
+  - Todoist Text
+  - Todoist Board
+  - Todoist Link
+  - Todoist completed tasks
+  - Todoist Context Bridge
+  - Another Simple Todoist Sync
+  - Sync Todoist
+  - Todoist Review
+  - Syncist (Todoist Sync)
+  - Todoist-Plug
+  - Todoister
+  - Semantic Todoist Sync
 source:
 - https://marketplace.atlassian.com/
